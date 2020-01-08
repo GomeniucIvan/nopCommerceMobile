@@ -1,5 +1,6 @@
 ﻿using nopCommerceMobile.Services;
 using nopCommerceMobile.Services.Navigation;
+using Xamarin.Forms;
 
 namespace nopCommerceMobile.ViewModels.Base
 {

@@ -14,7 +14,25 @@
     <!--Add logo and search icon-->
     <views:HomePage>
         <views:HomePage.IconImageSource>
-            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaHome}" Size="22"/>
+            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaBars}"/>
+        </views:HomePage.IconImageSource>
+    </views:HomePage>
+
+    <views:HomePage>
+        <views:HomePage.IconImageSource>
+            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaHome}"/>
+        </views:HomePage.IconImageSource>
+    </views:HomePage>
+
+    <views:HomePage>
+        <views:HomePage.IconImageSource>
+            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaHearth}"/>
+        </views:HomePage.IconImageSource>
+    </views:HomePage>
+
+    <views:HomePage>
+        <views:HomePage.IconImageSource>
+            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaShoppingCart}"/>
         </views:HomePage.IconImageSource>
     </views:HomePage>
 

@@ -13,6 +13,19 @@ namespace nopCommerceMobile.Views
         public NavigationTabbedPage()
         {
             InitializeComponent();
+            CurrentPage = Children[1]; //set default page home page second tab
+        }
+
+        protected override async void OnPropertyChanging(string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+            if (propertyName == nameof(CurrentPage) && CurrentPage != null)
+            {
+                if (CurrentPage.GetType() == typeof(HomePage))
+                {
+                  await HomePage._page.InitializeAsync();
+                }
+            }
         }
     }
 }

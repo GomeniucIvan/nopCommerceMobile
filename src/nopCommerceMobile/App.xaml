@@ -8,11 +8,32 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <x:Double x:Key="SmallFontSize">14</x:Double>
+            <x:Double x:Key="BaseFontSize">16</x:Double>
+            <x:Double x:Key="LargeFontSize">18</x:Double>
+
             <!--Colors-->
             <Color x:Key="PrimaryColor">#1e5474</Color>
             <Color x:Key="NavigationSelectedIconColor">#1e5474</Color>
             <Color x:Key="NavigationIconColor">DimGray</Color>
+            <Color x:Key="TextColor">DimGray</Color>
 
+            <!--Labels-->
+            <Style x:Key="ContainerLabel" TargetType="Label">
+                <Setter Property="Color" Value="{StaticResource TextColor}" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="{StaticResource LargeFontSize}" />
+            </Style>
+
+            <!-- Common -->
+            <Style x:Key="ActivityIndicatorStyle" TargetType="View">
+                <Setter Property="Color" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="IsEnabled" Value="True" />
+                <Setter Property="IsRunning" Value="True" />
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>

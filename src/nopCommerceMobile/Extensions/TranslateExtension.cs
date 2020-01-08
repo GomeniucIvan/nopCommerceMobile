@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Reflection;
 using System.Resources;
 using System.Threading;
 using nopCommerceMobile.Resx;
@@ -35,6 +33,7 @@ namespace nopCommerceMobile.Extensions
             var cultureName = DefaultCultureName;
 
             //TODO get language culture from claim
+            //Based on web settings display resource in case if not exists in current culture
 
 
             Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
@@ -65,7 +64,23 @@ namespace nopCommerceMobile.Extensions
                 _key = key;
             }
 
-            public string Text => _manager.GetString(_key) ?? _key;
+            
+
+            public string Text
+            {
+                get
+                {
+                    try
+                    {
+                       return _manager.GetString(_key) ?? _key;
+                    }
+                    catch (Exception e)
+                    {
+                        //TODO add custom getstring in case if key not exists
+                        return _key;
+                    }
+                }
+            }
         }
     }
 }

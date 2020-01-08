@@ -4,15 +4,36 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
+              xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+              xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
               mc:Ignorable="d"
+              BackgroundColor="{DynamicResource PrimaryColor}"
               x:Class="nopCommerceMobile.Views.HomePage">
 
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView BackgroundColor="White" Margin="0,2,0,0">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ActivityIndicator
+                IsVisible="{Binding IsDataLoaded,Converter={StaticResource InverseBooleanConverter}}"
+                Style="{StaticResource ActivityIndicatorStyle}"/>
+
+            <StackLayout IsVisible="{Binding IsDataLoaded}">
+                <!--Add web slider controller -->
+
+                <!--Categories -->
+                <StackLayout IsVisible="{Binding AnyCategories}">
+                    <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
+
+                </StackLayout>
+
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+
+    </ScrollView>
 
 </views:HomePageXaml>

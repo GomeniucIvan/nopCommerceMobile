@@ -30,6 +30,7 @@ namespace nopCommerceMobile.Helpers
         {
             FontFamily = FontAwesomeFamilyName;
             Glyph = fontAwesomeLabel;
+            Size = 22;
         }
     }
 
@@ -37,6 +38,10 @@ namespace nopCommerceMobile.Helpers
     {
         //ToDo add pro icons
 
+        // icon code must start with \u
         public static string FaHome = "\uf015";
+        public static string FaBars = "\uf0c9";
+        public static string FaHearth = "\uf004";
+        public static string FaShoppingCart = "\uf07a";
     }
 }
