@@ -30,11 +30,15 @@
                 <StackLayout IsVisible="{Binding AnyCategories}">
                     <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
 
-                    <!--//TODO add tap gesture functionality-->
+                    <!--//TODO implement ItemTapped=""-->
                     <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="5">
                         <components:ItemsViewGrid.ItemTemplate>
                             <DataTemplate>
-                                <partial:ItemViewTemplate />
+                                <partial:ItemViewTemplate>
+                                    <View.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Category_OnClick" />
+                                    </View.GestureRecognizers>
+                                    </partial:ItemViewTemplate>
                             </DataTemplate>
                         </components:ItemsViewGrid.ItemTemplate>
                     </components:ItemsViewGrid>

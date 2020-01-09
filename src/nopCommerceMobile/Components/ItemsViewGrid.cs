@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
+using System.Linq;
+using System.Windows.Input;
+using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Components
@@ -8,7 +13,7 @@ namespace nopCommerceMobile.Components
 	{
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsViewGrid), null, BindingMode.Default);
         public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(IEnumerable<object>), typeof(ItemsViewGrid), null, BindingMode.Default, null, OnSourceChanged);
-
+        
         public IEnumerable<object> Source
 		{
 			get => (IEnumerable<object>)GetValue(SourceProperty);
@@ -25,7 +30,7 @@ namespace nopCommerceMobile.Components
 		{
             Children.Clear();
 
-			IEnumerable<object> itemsSource = Source;
+			var itemsSource = Source;
             if (itemsSource == null) return;
             var column = 0;
             var row = 0;
@@ -41,13 +46,12 @@ namespace nopCommerceMobile.Components
 
 		private View CreateItem(object element, int column, int row)
 		{
-            DataTemplateSelector dataTemplateSelector = ItemTemplate as DataTemplateSelector;
-            var obj = ((dataTemplateSelector == null) ? ItemTemplate.CreateContent() : dataTemplateSelector.SelectTemplate(element, null).CreateContent());
-
-            if (!(obj is View view)) return ((ViewCell) obj).View;
+            var obj = ItemTemplate.CreateContent();
+            var view = obj as View;
             view.BindingContext = element;
             SetRow(view, row);
             SetColumn(view, 2 - column - 1);
+
             return view;
         }
 
@@ -64,11 +68,25 @@ namespace nopCommerceMobile.Components
 				notifyCollectionChanged2.CollectionChanged += itemsViewGrid.OnObservableCollectionChanged;
 			}
 			itemsViewGrid.ReloadSource();
-		}
+        }
 
         private void OnObservableCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			ReloadSource();
 		}
+
+        public event EventHandler ItemTapped; // ToDO find a way to access event
+        //public event EventHandler ItemTapped = (e, a) =>
+        //{
+
+        //};
+
+
+        internal virtual void OnItemTapped(EventArgs args)
+        {
+            if (!IsEnabled) // just ensure if is enabled
+                return;
+            ItemTapped?.Invoke(this, args); // call event
+        }
     }
 }

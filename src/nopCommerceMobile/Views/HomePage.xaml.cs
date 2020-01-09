@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using nopCommerceMobile.Helpers;
+using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views
 {
@@ -32,5 +35,15 @@ namespace nopCommerceMobile.Views
                 await ViewModel.InitializeAsync();
             }
         }
+
+        private void Category_OnClick(object sender, EventArgs e)
+        {
+            var view = (View)sender;
+            var category = (CategoryModel)view.BindingContext;
+
+            //just test
+            //ToDo redirect to category page
+        }
     }
+
 }
