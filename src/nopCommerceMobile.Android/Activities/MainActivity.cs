@@ -22,6 +22,8 @@ namespace nopCommerceMobile.Droid.Activities
             base.OnCreate(bundle);
 
             Xamarin.Essentials.Platform.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(null);
+
             Forms.Init(this, bundle);
 
             LoadApplication(new App());

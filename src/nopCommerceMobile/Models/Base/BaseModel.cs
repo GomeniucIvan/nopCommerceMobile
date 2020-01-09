@@ -1,9 +1,11 @@
-﻿namespace nopCommerceMobile.Models.Base
+﻿using nopCommerceMobile.ViewModels.Base;
+
+namespace nopCommerceMobile.Models.Base
 {
     /// <summary>
     /// Base class for model
     /// </summary>
-    public class BaseModel
+    public class BaseModel : ExtendedBindableObject
     {
         /// <summary>
         /// Gets or sets the entity identifier

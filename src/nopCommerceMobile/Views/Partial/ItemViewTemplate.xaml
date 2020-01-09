@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="nopCommerceMobile.Views.Partial.ItemViewTemplate">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--//TODO add image border radius-->
+        <forms:CachedImage Grid.Row="0" Source="{ Binding PictureModel.ImageUrl }" Aspect="AspectFill" />
+
+        <StackLayout Grid.Row="1" Padding="0,8,0,8" Spacing="0">
+            <Label Text="{ Binding Name }" FontSize="15" HorizontalOptions="Center" TextColor="{ DynamicResource BaseTextColor }" />
+        </StackLayout>
+
+        <!--//TODO price variable-->
+
+    </Grid>
+</ContentView>

@@ -6,6 +6,8 @@
               xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
               xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
               xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
+              xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
+              xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
               mc:Ignorable="d"
               BackgroundColor="{DynamicResource PrimaryColor}"
               x:Class="nopCommerceMobile.Views.HomePage">
@@ -18,8 +20,7 @@
 
     <ScrollView BackgroundColor="White" Margin="0,2,0,0">
         <StackLayout VerticalOptions="FillAndExpand">
-            <ActivityIndicator
-                IsVisible="{Binding IsDataLoaded,Converter={StaticResource InverseBooleanConverter}}"
+            <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}"
                 Style="{StaticResource ActivityIndicatorStyle}"/>
 
             <StackLayout IsVisible="{Binding IsDataLoaded}">
@@ -29,8 +30,15 @@
                 <StackLayout IsVisible="{Binding AnyCategories}">
                     <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
 
+                    <!--//TODO add tap gesture functionality-->
+                    <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="5">
+                        <components:ItemsViewGrid.ItemTemplate>
+                            <DataTemplate>
+                                <partial:ItemViewTemplate />
+                            </DataTemplate>
+                        </components:ItemsViewGrid.ItemTemplate>
+                    </components:ItemsViewGrid>
                 </StackLayout>
-
             </StackLayout>
         </StackLayout>
 
