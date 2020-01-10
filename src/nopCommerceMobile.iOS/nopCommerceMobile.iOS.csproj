@@ -138,5 +138,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

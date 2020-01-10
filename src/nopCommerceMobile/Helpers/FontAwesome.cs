@@ -5,30 +5,36 @@ namespace nopCommerceMobile.Helpers
     //https://fontawesome.com/cheatsheet/free/solid
     //version 5.12.0
 
+    public static class FontAwesomeFamilyName
+    {
+        public static string FontFamily =>
+            Device.RuntimePlatform == Device.Android ? "fa-solid-900.ttf#Font Awesome 5 Free Solid" : "fa-solid-900.ttf";
+    }
+
     public class FontAwesomeLabel : Label
     {
-        //Todo add all free type
-        public static readonly string FontAwesomeFileName = "fa-solid-900";
+        public FontAwesomeLabel()
+        {
+            FontFamily = FontAwesomeFamilyName.FontFamily;
+        }
 
         public FontAwesomeLabel(string fontAwesomeLabel = null)
         {
+            FontFamily = FontAwesomeFamilyName.FontFamily;
             Text = fontAwesomeLabel;
         }
     }
 
     public class FontAwesomeFontImage : FontImageSource
     {
-        public static readonly string FontAwesomeFamilyName =
-            Device.RuntimePlatform == Device.Android ? "fa-solid-900.ttf#Font Awesome 5 Free Solid" : "fa-solid-900.ttf";
-
         public FontAwesomeFontImage()
         {
-            FontFamily = FontAwesomeFamilyName;
+            FontFamily = FontAwesomeFamilyName.FontFamily;
         }
 
         public FontAwesomeFontImage(string fontAwesomeLabel = null)
         {
-            FontFamily = FontAwesomeFamilyName;
+            FontFamily = FontAwesomeFamilyName.FontFamily;
             Glyph = fontAwesomeLabel;
             Size = 22;
         }

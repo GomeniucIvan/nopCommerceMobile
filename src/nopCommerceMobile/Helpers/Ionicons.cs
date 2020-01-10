@@ -5,29 +5,36 @@ namespace nopCommerceMobile.Helpers
     //https://ionicons.com/v2/
     //Version 2.0.1
 
+    public static class IoniconsFamilyName
+    {
+        public static string FontFamily =>
+            Device.RuntimePlatform == Device.Android ? "ionicons.ttf#Ionicons" : "ionicons.ttf";
+    }
+
     public class IoniconsLabel : Label
     {
-        public static readonly string FileName = "ionicons";
+        public IoniconsLabel()
+        {
+            FontFamily = FontFamily = IoniconsFamilyName.FontFamily;
+        }
 
         public IoniconsLabel(string fontLabel = null)
         {
+            FontFamily = IoniconsFamilyName.FontFamily;
             Text = fontLabel;
         }
     }
 
     public class IoniconsFontImage : FontImageSource
     {
-        public static readonly string IoniconsFamilyName =
-            Device.RuntimePlatform == Device.Android ? "ionicons.ttf#Ionicons" : "ionicons.ttf";
-
         public IoniconsFontImage()
         {
-            FontFamily = IoniconsFamilyName;
+            FontFamily = FontFamily = IoniconsFamilyName.FontFamily;
         }
 
         public IoniconsFontImage(string fontLabel = null)
         {
-            FontFamily = IoniconsFamilyName;
+            FontFamily = FontFamily = IoniconsFamilyName.FontFamily;
             Glyph = fontLabel;
             Size = 22;
         }
