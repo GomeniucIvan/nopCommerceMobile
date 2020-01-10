@@ -41,11 +41,8 @@
 
             <!-- Common -->
             <Style x:Key="ActivityIndicatorStyle" TargetType="View">
-                <Setter Property="Color" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="IsEnabled" Value="True" />
-                <Setter Property="IsRunning" Value="True" />
             </Style>
 
         </ResourceDictionary>

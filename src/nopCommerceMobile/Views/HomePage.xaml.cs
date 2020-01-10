@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using nopCommerceMobile.Helpers;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
@@ -22,18 +21,12 @@ namespace nopCommerceMobile.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if (!ViewModel.IsDataLoaded)
-            {
-                await ViewModel.InitializeAsync();
-            }
+            await ViewModel.InitializeAsync();
         }
 
         public async Task InitializeAsync(bool initializeData = false)
         {
-            if (!ViewModel.IsDataLoaded || initializeData)
-            {
-                await ViewModel.InitializeAsync();
-            }
+            await ViewModel.InitializeAsync();
         }
 
         private void Category_OnClick(object sender, EventArgs e)

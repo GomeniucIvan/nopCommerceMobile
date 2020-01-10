@@ -20,8 +20,10 @@
 
     <ScrollView BackgroundColor="White" Margin="0,2,0,0">
         <StackLayout VerticalOptions="FillAndExpand">
-            <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}"
-                Style="{StaticResource ActivityIndicatorStyle}"/>
+            <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
+                               Scale="1.2"
+                               Style="{StaticResource ActivityIndicatorStyle}" 
+                               Color="{StaticResource PrimaryColor}" IsRunning="True"/>
 
             <StackLayout IsVisible="{Binding IsDataLoaded}">
                 <!--Add web slider controller -->
