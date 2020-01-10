@@ -20,19 +20,28 @@
 
     <views:HomePage>
         <views:HomePage.IconImageSource>
-            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaHome}"/>
+            <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Home}"/>
+        </views:HomePage.IconImageSource>
+    </views:HomePage>
+
+    <!--compare, find web setting-->
+
+    <views:HomePage>
+        <views:HomePage.IconImageSource>
+            <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Hearth}"/> <!--add wishlist count-->
         </views:HomePage.IconImageSource>
     </views:HomePage>
 
     <views:HomePage>
         <views:HomePage.IconImageSource>
-            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaHearth}"/>
+            <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Cart}"/> <!--add cart count-->
         </views:HomePage.IconImageSource>
     </views:HomePage>
 
     <views:HomePage>
         <views:HomePage.IconImageSource>
-            <helpers:FontAwesomeFontImage Glyph="{x:Static helpers:Icon.FaShoppingCart}"/>
+            <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Person}"/>
+            <!--add cart count-->
         </views:HomePage.IconImageSource>
     </views:HomePage>
 
