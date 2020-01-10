@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Data;
-using System.Linq;
-using System.Windows.Input;
-using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Components
@@ -13,6 +9,7 @@ namespace nopCommerceMobile.Components
 	{
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsViewGrid), null, BindingMode.Default);
         public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(IEnumerable<object>), typeof(ItemsViewGrid), null, BindingMode.Default, null, OnSourceChanged);
+        public static readonly BindableProperty IsProductProperty = BindableProperty.Create(nameof(IsProduct), typeof(bool), typeof(ItemsViewGrid), false, BindingMode.Default);
         
         public IEnumerable<object> Source
 		{
@@ -24,6 +21,12 @@ namespace nopCommerceMobile.Components
 		{
 			get => (DataTemplate)GetValue(ItemTemplateProperty);
             set => SetValue(ItemTemplateProperty, value);
+        }
+
+        public bool IsProduct
+        {
+            get => (bool)GetValue(IsProductProperty);
+            set => SetValue(IsProductProperty, value);
         }
 
         private void ReloadSource()
@@ -75,12 +78,13 @@ namespace nopCommerceMobile.Components
 			ReloadSource();
 		}
 
+        #region Need to fix
+
         public event EventHandler ItemTapped; // ToDO find a way to access event
         //public event EventHandler ItemTapped = (e, a) =>
         //{
 
         //};
-
 
         internal virtual void OnItemTapped(EventArgs args)
         {
@@ -88,5 +92,7 @@ namespace nopCommerceMobile.Components
                 return;
             ItemTapped?.Invoke(this, args); // call event
         }
+
+        #endregion
     }
 }

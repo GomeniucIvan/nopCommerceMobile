@@ -4,8 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
              mc:Ignorable="d"
              x:Class="nopCommerceMobile.Views.Partial.ItemViewTemplate">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+        </ResourceDictionary>
+    </ContentView.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -13,11 +20,16 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--//TODO add image border radius-->
-        <forms:CachedImage Grid.Row="0" Source="{ Binding PictureModel.ImageUrl }" Aspect="AspectFill" />
+        <!--//TODO add top left right image border-->
 
-        <StackLayout Grid.Row="1" Padding="0,8,0,8" Spacing="0">
-            <Label Text="{ Binding Name }" FontSize="15" HorizontalOptions="Center" TextColor="{ DynamicResource BaseTextColor }" />
+        <!--category picture-->
+        <forms:CachedImage Grid.Row="0" Source="{ Binding PictureModel.ImageUrl }" Aspect="AspectFill" IsVisible="{Binding IsProduct, Converter={StaticResource InverseBooleanConverter}}" />
+        <!--product picture-->
+        <forms:CachedImage Grid.Row="0" Source="{ Binding DefaultPictureModel.ImageUrl }" Aspect="AspectFill" IsVisible="{Binding IsProduct}" />
+
+        <StackLayout Grid.Row="1" Padding="0,8,0,8" Spacing="0" Orientation="Vertical">
+            <Label Text="{ Binding Name }" Style="{StaticResource ItemViewNameLabel}"/>
+            <Label Text="{ Binding ProductPrice.Price }" Style="{StaticResource ItemViewPriceLabel}" IsVisible="{Binding IsProduct}"/>
         </StackLayout>
 
         <!--//TODO price variable-->

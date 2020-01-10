@@ -7,5 +7,6 @@ namespace nopCommerceMobile.Services.Catalog
     public interface ICatalogService
     {
         Task<ObservableCollection<CategoryModel>> GetHomeCategoriesAsync();
+        Task<ObservableCollection<ProductModel>> GetHomeProductsAsync();
     }
 }

@@ -43,6 +43,23 @@
                         </components:ItemsViewGrid.ItemTemplate>
                     </components:ItemsViewGrid>
                 </StackLayout>
+
+                <!--Products -->
+                <StackLayout IsVisible="{Binding AnyProducts}">
+                    <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Products}"></Label>
+
+                    <components:ItemsViewGrid Source="{ Binding Products }" Padding="5,0,5,0" RowSpacing="5" IsProduct="True">
+                        <components:ItemsViewGrid.ItemTemplate>
+                            <DataTemplate>
+                                <partial:ItemViewTemplate>
+                                    <View.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Product_OnClick" />
+                                    </View.GestureRecognizers>
+                                </partial:ItemViewTemplate>
+                            </DataTemplate>
+                        </components:ItemsViewGrid.ItemTemplate>
+                    </components:ItemsViewGrid>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
 

@@ -9,8 +9,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <x:Double x:Key="SmallFontSize">14</x:Double>
-            <x:Double x:Key="BaseFontSize">16</x:Double>
-            <x:Double x:Key="LargeFontSize">18</x:Double>
+            <x:Double x:Key="BaseFontSize">18</x:Double>
+            <x:Double x:Key="LargeFontSize">20</x:Double>
 
             <!--Colors-->
             <Color x:Key="PrimaryColor">#1e5474</Color>
@@ -19,11 +19,24 @@
             <Color x:Key="TextColor">DimGray</Color>
 
             <!--Labels-->
-            <Style x:Key="ContainerLabel" TargetType="Label">
-                <Setter Property="Color" Value="{StaticResource TextColor}" />
-                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Style x:Key="CenteredLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="ContainerLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}">
                 <Setter Property="FontSize" Value="{StaticResource LargeFontSize}" />
+            </Style>
+
+            <Style x:Key="ItemViewNameLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}">
+                <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+            </Style>
+
+            <Style x:Key="ItemViewPriceLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}" >
+                <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
             </Style>
 
             <!-- Common -->

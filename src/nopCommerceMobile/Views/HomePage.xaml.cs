@@ -44,6 +44,10 @@ namespace nopCommerceMobile.Views
             //just test
             //ToDo redirect to category page
         }
+
+        private void Product_OnClick(object sender, EventArgs e)
+        {
+        }
     }
 
 }

@@ -10,6 +10,7 @@ namespace nopCommerceMobile.Services.Catalog
     public class CatalogService : ICatalogService
     {
         private static readonly string ApiUrlBase = $"{GlobalSettings.DefaultEndpoint}/api/catalog";
+        private static readonly string HomeApiUrlBase = $"{GlobalSettings.DefaultEndpoint}/api/home";
 
         private readonly IRequestProvider _requestProvider;
 
@@ -20,7 +21,7 @@ namespace nopCommerceMobile.Services.Catalog
 
         public async Task<ObservableCollection<CategoryModel>> GetHomeCategoriesAsync()
         {
-            var uri = $"{ApiUrlBase}/homecategories";
+            var uri = $"{HomeApiUrlBase}/categories";
 
             List<CategoryModel> categories = await _requestProvider.GetAsync<List<CategoryModel>>(uri);
 
@@ -29,6 +30,19 @@ namespace nopCommerceMobile.Services.Catalog
 
             else
                 return new ObservableCollection<CategoryModel>();
+        }
+
+        public async Task<ObservableCollection<ProductModel>> GetHomeProductsAsync()
+        {
+            var uri = $"{HomeApiUrlBase}/products";
+
+            List<ProductModel> products = await _requestProvider.GetAsync<List<ProductModel>>(uri);
+
+            if (products != null)
+                return products.ToObservableCollection();
+
+            else
+                return new ObservableCollection<ProductModel>();
         }
     }
 }

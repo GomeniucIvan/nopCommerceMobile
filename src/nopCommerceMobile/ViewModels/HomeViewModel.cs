@@ -35,6 +35,17 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private ObservableCollection<ProductModel> _products;
+        public ObservableCollection<ProductModel> Products
+        {
+            get => _products;
+            set
+            {
+                _products = value;
+                OnPropertyChanged(nameof(Products));
+            }
+        }
+
         private bool _anyCategories;
         public bool AnyCategories
         {
@@ -46,6 +57,16 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private bool _anyProducts;
+        public bool AnyProducts
+        {
+            get => _anyProducts;
+            set
+            {
+                _anyProducts = value;
+                OnPropertyChanged(nameof(AnyProducts));
+            }
+        }
 
         public async Task InitializeAsync()
         {
@@ -53,6 +74,9 @@ namespace nopCommerceMobile.ViewModels
 
             Categories = await _catalogService.GetHomeCategoriesAsync();
             AnyCategories = Categories.Any();
+
+            Products = await _catalogService.GetHomeProductsAsync();
+            AnyProducts = Products.Any();
 
             IsBusy = false;
             IsDataLoaded = true;
