@@ -45,6 +45,10 @@
             </Style>
 
             <!-- Common -->
+            <Style x:Key="BaseScrollView" TargetType="ScrollView">
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+
             <Style x:Key="ContainerBoxView" TargetType="BoxView">
                 <Setter Property="HeightRequest" Value="1" />
                 <Setter Property="BackgroundColor" Value="White" />

@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView Margin="0,2,0,0">
+    <ScrollView Style="{StaticResource BaseScrollView}">
         <StackLayout VerticalOptions="FillAndExpand">
             <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
                                Scale="1.2"

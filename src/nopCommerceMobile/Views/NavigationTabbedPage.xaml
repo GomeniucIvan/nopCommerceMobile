@@ -4,6 +4,8 @@
                           xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
                           xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
                           xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                          xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+                          xmlns:customer="clr-namespace:nopCommerceMobile.Views.Customer;assembly=nopCommerceMobile"
                           android:TabbedPage.ToolbarPlacement="Top"
                           android:TabbedPage.BarSelectedItemColor="{DynamicResource NavigationSelectedIconColor}"
                           android:TabbedPage.BarItemColor="{DynamicResource NavigationIconColor}" 
@@ -11,6 +13,12 @@
                           BackgroundColor="{StaticResource PrimaryColor}"
                           x:Class="nopCommerceMobile.Views.NavigationTabbedPage"
                           NavigationPage.HasNavigationBar="False">
+
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
 
     <!--Add logo and search icon-->
     <views:HomePage>
@@ -39,11 +47,16 @@
         </views:HomePage.IconImageSource>
     </views:HomePage>
 
-    <views:HomePage>
+    <views:HomePage IsVisible="{Binding IsRegistered}">
         <views:HomePage.IconImageSource>
             <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Person}"/>
-            <!--add cart count-->
         </views:HomePage.IconImageSource>
     </views:HomePage>
+
+    <customer:LoginRegisterPage IsVisible="{Binding IsRegistered, Converter={StaticResource InverseBooleanConverter}}">
+        <customer:LoginRegisterPage.IconImageSource>
+            <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Person}"/>
+        </customer:LoginRegisterPage.IconImageSource>
+    </customer:LoginRegisterPage>
 
 </views:NavigationTabbedPageXaml>
