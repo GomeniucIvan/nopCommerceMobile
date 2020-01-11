@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using nopCommerceMobile.Models.Catalog;
+using nopCommerceMobile.Models.News;
 using nopCommerceMobile.Services.Catalog;
 using nopCommerceMobile.ViewModels.Base;
 
 namespace nopCommerceMobile.ViewModels
 {
-    public class HomeViewModel : ViewModelBase
+    public class HomeBaseViewModel : BaseViewModel
     {
         #region Fields
 
@@ -17,9 +18,9 @@ namespace nopCommerceMobile.ViewModels
 
         #region Ctor
 
-        public HomeViewModel()
+        public HomeBaseViewModel()
         {
-            _catalogService = ViewModelLocator.Resolve<ICatalogService>();
+            _catalogService = LocatorViewModel.Resolve<ICatalogService>();
         }
 
         #endregion
@@ -31,7 +32,7 @@ namespace nopCommerceMobile.ViewModels
             set
             {
                 _categories = value;
-                OnPropertyChanged(nameof(Categories));
+                RaisePropertyChanged(() => Categories);
             }
         }
 
@@ -42,7 +43,29 @@ namespace nopCommerceMobile.ViewModels
             set
             {
                 _products = value;
-                OnPropertyChanged(nameof(Products));
+                RaisePropertyChanged(() => Products);
+            }
+        }
+
+        private ObservableCollection<ProductModel> _bestSellers;
+        public ObservableCollection<ProductModel> BestSellers
+        {
+            get => _bestSellers;
+            set
+            {
+                _bestSellers = value;
+                RaisePropertyChanged(() => BestSellers);
+            }
+        }
+
+        private ObservableCollection<NewsItemModel> _news;
+        public ObservableCollection<NewsItemModel> News
+        {
+            get => _news;
+            set
+            {
+                _news = value;
+                RaisePropertyChanged(() => News);
             }
         }
 
@@ -53,7 +76,7 @@ namespace nopCommerceMobile.ViewModels
             set
             {
                 _anyCategories = value;
-                OnPropertyChanged(nameof(AnyCategories));
+                RaisePropertyChanged(() => AnyCategories);
             }
         }
 
@@ -64,7 +87,29 @@ namespace nopCommerceMobile.ViewModels
             set
             {
                 _anyProducts = value;
-                OnPropertyChanged(nameof(AnyProducts));
+                RaisePropertyChanged(() => AnyProducts);
+            }
+        }
+
+        private bool _anyBestSellers;
+        public bool AnyBestSellers
+        {
+            get => _anyBestSellers;
+            set
+            {
+                _anyBestSellers = value;
+                RaisePropertyChanged(() => AnyBestSellers);
+            }
+        }
+
+        private bool _anyNews;
+        public bool AnyNews
+        {
+            get => _anyNews;
+            set
+            {
+                _anyNews = value;
+                RaisePropertyChanged(() => AnyNews);
             }
         }
 
@@ -77,6 +122,12 @@ namespace nopCommerceMobile.ViewModels
 
             Products = await _catalogService.GetHomeProductsAsync();
             AnyProducts = Products.Any();
+
+            BestSellers = await _catalogService.GetHomeBestSellersAsync();
+            AnyBestSellers = BestSellers.Any();
+
+            News = await _catalogService.GetHomeNewsAsync();
+            AnyNews = News.Any();
 
             IsBusy = false;
             IsDataLoaded = true;

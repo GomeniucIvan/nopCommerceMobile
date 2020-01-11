@@ -22,7 +22,7 @@ namespace nopCommerceMobile
         {
             var page = new NavigationTabbedPage()
             {
-                BindingContext = new NavigationViewModel()
+                BindingContext = new NavigationBaseViewModel()
                 {
                     //TODO add count of favorite/card products
                 }

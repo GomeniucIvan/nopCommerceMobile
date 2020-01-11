@@ -9,7 +9,7 @@
               xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
               xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
               mc:Ignorable="d"
-              BackgroundColor="{DynamicResource PrimaryColor}"
+              BackgroundColor="{StaticResource PageColor}"
               x:Class="nopCommerceMobile.Views.HomePage">
 
     <ContentPage.Resources>
@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView BackgroundColor="White" Margin="0,2,0,0">
+    <ScrollView Margin="0,2,0,0">
         <StackLayout VerticalOptions="FillAndExpand">
             <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
                                Scale="1.2"
@@ -31,12 +31,13 @@
                 <!--Categories -->
                 <StackLayout IsVisible="{Binding AnyCategories}">
                     <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
+                    <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
-                    <!--//TODO implement ItemTapped=""-->
-                    <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="5">
+                    <!--//TODO find a way to implement ItemTapped event-->
+                    <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="0">
                         <components:ItemsViewGrid.ItemTemplate>
                             <DataTemplate>
-                                <partial:ItemViewTemplate>
+                                <partial:ItemViewTemplate IsProduct="False">
                                     <View.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Category_OnClick" />
                                     </View.GestureRecognizers>
@@ -49,11 +50,13 @@
                 <!--Products -->
                 <StackLayout IsVisible="{Binding AnyProducts}">
                     <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Products}"></Label>
+                    <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
-                    <components:ItemsViewGrid Source="{ Binding Products }" Padding="5,0,5,0" RowSpacing="5" IsProduct="True">
+                    <!--//TODO find a way to implement ItemTapped event-->
+                    <components:ItemsViewGrid Source="{ Binding Products }" Padding="5,0,5,0" RowSpacing="5">
                         <components:ItemsViewGrid.ItemTemplate>
                             <DataTemplate>
-                                <partial:ItemViewTemplate>
+                                <partial:ItemViewTemplate IsProduct="True">
                                     <View.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="Product_OnClick" />
                                     </View.GestureRecognizers>
@@ -61,6 +64,45 @@
                             </DataTemplate>
                         </components:ItemsViewGrid.ItemTemplate>
                     </components:ItemsViewGrid>
+                </StackLayout>
+
+                <!--Bestsellers -->
+                <StackLayout IsVisible="{Binding AnyBestSellers}">
+                    <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Bestsellers}"></Label>
+                    <BoxView Style="{ StaticResource ContainerBoxView }"/>
+
+                    <!--//TODO find a way to implement ItemTapped event-->
+                    <components:ItemsViewGrid Source="{ Binding BestSellers }" Padding="5,0,5,0" RowSpacing="5">
+                        <components:ItemsViewGrid.ItemTemplate>
+                            <DataTemplate>
+                                <partial:ItemViewTemplate IsProduct="True">
+                                    <View.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Product_OnClick" />
+                                    </View.GestureRecognizers>
+                                </partial:ItemViewTemplate>
+                            </DataTemplate>
+                        </components:ItemsViewGrid.ItemTemplate>
+                    </components:ItemsViewGrid>
+                </StackLayout>
+
+                <!--News -->
+                <StackLayout IsVisible="{Binding AnyNews}">
+                    <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate News}"></Label>
+                    <BoxView Style="{ StaticResource ContainerBoxView }"/>
+
+                    <ScrollView Orientation="Horizontal" HorizontalOptions="Fill" HorizontalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                        <FlexLayout BindableLayout.ItemsSource="{Binding News}" Direction="Row" Position="Relative" AlignItems="Start" FlowDirection="LeftToRight" JustifyContent="SpaceEvenly">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <partial:NewsViewTemplate>
+                                        <View.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="News_OnClick" />
+                                        </View.GestureRecognizers>
+                                    </partial:NewsViewTemplate>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </ScrollView>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

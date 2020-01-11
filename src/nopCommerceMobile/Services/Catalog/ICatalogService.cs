@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using nopCommerceMobile.Models.Catalog;
+using nopCommerceMobile.Models.News;
 
 namespace nopCommerceMobile.Services.Catalog
 {
@@ -8,5 +9,7 @@ namespace nopCommerceMobile.Services.Catalog
     {
         Task<ObservableCollection<CategoryModel>> GetHomeCategoriesAsync();
         Task<ObservableCollection<ProductModel>> GetHomeProductsAsync();
+        Task<ObservableCollection<ProductModel>> GetHomeBestSellersAsync();
+        Task<ObservableCollection<NewsItemModel>> GetHomeNewsAsync();
     }
 }

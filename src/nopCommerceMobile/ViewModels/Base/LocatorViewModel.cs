@@ -8,11 +8,11 @@ using TinyIoC;
 
 namespace nopCommerceMobile.ViewModels.Base
 {
-    public static class ViewModelLocator
+    public static class LocatorViewModel
     {
         private static TinyIoCContainer _container;
 
-        static ViewModelLocator()
+        static LocatorViewModel()
         {
             _container = new TinyIoCContainer();
 

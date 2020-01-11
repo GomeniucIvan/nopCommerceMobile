@@ -6,13 +6,13 @@ namespace nopCommerceMobile.Services.Navigation
 {
     public class NavigationService : INavigationService
     {
-        public ViewModelBase PreviousPageViewModel
+        public BaseViewModel PreviousPageBaseViewModel
         {
             get
             {
                 var mainPage = Application.Current.MainPage as NavigationPage;
                 var viewModel = mainPage.Navigation.NavigationStack[mainPage.Navigation.NavigationStack.Count - 2].BindingContext;
-                return viewModel as ViewModelBase;
+                return viewModel as BaseViewModel;
             }
         }
 

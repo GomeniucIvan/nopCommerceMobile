@@ -17,6 +17,7 @@
             <Color x:Key="NavigationSelectedIconColor">#1e5474</Color>
             <Color x:Key="NavigationIconColor">DimGray</Color>
             <Color x:Key="TextColor">DimGray</Color>
+            <Color x:Key="PageColor">#f3f3f3</Color>
 
             <!--Labels-->
             <Style x:Key="CenteredLabel" TargetType="Label">
@@ -33,13 +34,31 @@
 
             <Style x:Key="ItemViewNameLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}">
                 <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
             </Style>
 
             <Style x:Key="ItemViewPriceLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}" >
                 <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
             </Style>
 
             <!-- Common -->
+            <Style x:Key="ContainerBoxView" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="ItemDetailsBoxView" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColor}" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
+
             <Style x:Key="ActivityIndicatorStyle" TargetType="View">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />

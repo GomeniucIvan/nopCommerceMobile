@@ -5,7 +5,7 @@ namespace nopCommerceMobile.Services.Navigation
 {
     public interface INavigationService
     {
-		ViewModelBase PreviousPageViewModel { get; }
+		BaseViewModel PreviousPageBaseViewModel { get; }
 
         Task RemoveLastFromBackStackAsync();
 

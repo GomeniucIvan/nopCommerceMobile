@@ -7,7 +7,8 @@
                           android:TabbedPage.ToolbarPlacement="Top"
                           android:TabbedPage.BarSelectedItemColor="{DynamicResource NavigationSelectedIconColor}"
                           android:TabbedPage.BarItemColor="{DynamicResource NavigationIconColor}" 
-                          BarBackgroundColor="White"
+                          BarBackgroundColor="{StaticResource PageColor}"
+                          BackgroundColor="{StaticResource PrimaryColor}"
                           x:Class="nopCommerceMobile.Views.NavigationTabbedPage"
                           NavigationPage.HasNavigationBar="False">
 

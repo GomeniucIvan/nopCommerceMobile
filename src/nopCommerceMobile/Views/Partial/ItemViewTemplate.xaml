@@ -5,34 +5,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="nopCommerceMobile.Views.Partial.ItemViewTemplate">
 
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
-        </ResourceDictionary>
-    </ContentView.Resources>
+    <!--TODO add custom visual element template, and remove pancake package-->
+    <pancakeView:PancakeView CornerRadius="8,8,2,2" Margin="0,5,0,5"  BackgroundColor="White" HasShadow="True" >
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+            <!--category picture-->
+            <forms:CachedImage Grid.Row="0" 
+                               Source="{ Binding PictureModel.ImageUrl }" 
+                               Aspect="AspectFill" 
+                               x:Name="NotProductImage"/>
+            <!--product picture-->
+            <forms:CachedImage Grid.Row="0"
+                               Source="{ Binding DefaultPictureModel.ImageUrl }"
+                               Aspect="AspectFill"
+                               x:Name="ProductImage" />
 
-        <!--//TODO add top left right image border-->
+            <StackLayout Grid.Row="1" x:Name="NotProductDetailsContainer">
+                <Label Text="{ Binding Name }" Style="{StaticResource ItemViewNameLabel}" Margin="0,10,0,10"/>
+            </StackLayout>
 
-        <!--category picture-->
-        <forms:CachedImage Grid.Row="0" Source="{ Binding PictureModel.ImageUrl }" Aspect="AspectFill" IsVisible="{Binding IsProduct, Converter={StaticResource InverseBooleanConverter}}" />
-        <!--product picture-->
-        <forms:CachedImage Grid.Row="0" Source="{ Binding DefaultPictureModel.ImageUrl }" Aspect="AspectFill" IsVisible="{Binding IsProduct}" />
+            <StackLayout Grid.Row="1" Orientation="Vertical" x:Name="ProductDetailsContainer">
+                <Label Text="{ Binding Name }" Style="{StaticResource ItemViewNameLabel}"/>
+                <BoxView Style="{ StaticResource ItemDetailsBoxView }"/>
+                <Label Text="{ Binding ProductPrice.Price }" Style="{StaticResource ItemViewPriceLabel}"/>
+            </StackLayout>
+        </Grid>
+    </pancakeView:PancakeView>
 
-        <StackLayout Grid.Row="1" Padding="0,8,0,8" Spacing="0" Orientation="Vertical">
-            <Label Text="{ Binding Name }" Style="{StaticResource ItemViewNameLabel}"/>
-            <Label Text="{ Binding ProductPrice.Price }" Style="{StaticResource ItemViewPriceLabel}" IsVisible="{Binding IsProduct}"/>
-        </StackLayout>
 
-        <!--//TODO price variable-->
-
-    </Grid>
 </ContentView>

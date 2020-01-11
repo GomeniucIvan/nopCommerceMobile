@@ -70,7 +70,7 @@ namespace nopCommerceMobile.Components
 			{
 				notifyCollectionChanged2.CollectionChanged += itemsViewGrid.OnObservableCollectionChanged;
 			}
-			itemsViewGrid.ReloadSource();
+            itemsViewGrid.ReloadSource();
         }
 
         private void OnObservableCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

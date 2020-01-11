@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             x:Class="nopCommerceMobile.Views.Partial.NewsViewTemplate">
+
+    <pancakeView:PancakeView CornerRadius="8,8,2,2" HasShadow="True" Margin="10" BackgroundColor="White" WidthRequest="250">
+        <StackLayout Padding="5,10">
+            <Label Text="{ Binding Title }" FontSize="{StaticResource LargeFontSize}" Style="{StaticResource CenteredLabel}" />
+            <Label Text="{Binding CreatedOn, StringFormat='{0:MMMM dd, yyyy}'}" 
+                   FontSize="{StaticResource SmallFontSize}" Style="{StaticResource CenteredLabel}" />
+            <BoxView HeightRequest="1" BackgroundColor="{StaticResource PageColor}" Margin="20,0"/>
+
+            <Label Text="{ Binding Short }" FontSize="{StaticResource BaseFontSize}" Style="{StaticResource CenteredLabel}" />
+        </StackLayout>
+    </pancakeView:PancakeView>
+</ContentView>

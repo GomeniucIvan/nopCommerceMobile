@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views
 {
-    public abstract class HomePageXaml : ModelBoundContentPage<HomeViewModel> { }
+    public abstract class HomePageXaml : ModelBoundContentPage<HomeBaseViewModel> { }
     public partial class HomePage : HomePageXaml
     {
         public static HomePage _page;
@@ -15,17 +15,12 @@ namespace nopCommerceMobile.Views
         {
             InitializeComponent();
             _page = this;
-            BindingContext = new HomeViewModel();
+            BindingContext = new HomeBaseViewModel();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await ViewModel.InitializeAsync();
-        }
-
-        public async Task InitializeAsync(bool initializeData = false)
-        {
             await ViewModel.InitializeAsync();
         }
 
@@ -40,6 +35,11 @@ namespace nopCommerceMobile.Views
 
         private void Product_OnClick(object sender, EventArgs e)
         {
+        }
+
+        private void News_OnClick(object sender, EventArgs e)
+        {
+           
         }
     }
 

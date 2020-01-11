@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace nopCommerceMobile.Views.Partial
@@ -15,6 +9,31 @@ namespace nopCommerceMobile.Views.Partial
         public ItemViewTemplate()
         {
             InitializeComponent();
+        }
+
+        public bool IsProduct
+        {
+            set
+            {
+                if (value)
+                {
+                    //image
+                    ProductImage.IsVisible = true;
+                    NotProductImage.IsVisible = false;
+                    //details
+                    ProductDetailsContainer.IsVisible = true;
+                    NotProductDetailsContainer.IsVisible = false;
+                }
+                else
+                {
+                    //image
+                    ProductImage.IsVisible = false;
+                    NotProductImage.IsVisible = true;
+                    //details
+                    ProductDetailsContainer.IsVisible = false;
+                    NotProductDetailsContainer.IsVisible = true;
+                }
+            }
         }
     }
 }

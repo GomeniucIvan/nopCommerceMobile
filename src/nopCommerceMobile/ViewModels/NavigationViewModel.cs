@@ -2,7 +2,7 @@
 
 namespace nopCommerceMobile.ViewModels
 {
-    public class NavigationViewModel : ViewModelBase
+    public class NavigationBaseViewModel : BaseViewModel
     {
     }
 }

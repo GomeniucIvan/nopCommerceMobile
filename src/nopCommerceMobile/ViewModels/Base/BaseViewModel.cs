@@ -1,18 +1,17 @@
 ﻿using nopCommerceMobile.Services;
 using nopCommerceMobile.Services.Navigation;
-using Xamarin.Forms;
 
 namespace nopCommerceMobile.ViewModels.Base
 {
-    public abstract class ViewModelBase : ExtendedBindableObject
+    public abstract class BaseViewModel : ExtendedBindableObject
     {
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
 
-        protected ViewModelBase()
+        protected BaseViewModel()
         {
-            DialogService = ViewModelLocator.Resolve<IDialogService>();
-            NavigationService = ViewModelLocator.Resolve<INavigationService>();
+            DialogService = LocatorViewModel.Resolve<IDialogService>();
+            NavigationService = LocatorViewModel.Resolve<INavigationService>();
         }
 
         private bool _isDataLoaded;

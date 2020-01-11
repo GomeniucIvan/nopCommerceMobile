@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using nopCommerceMobile.Extensions;
 using nopCommerceMobile.Models.Catalog;
+using nopCommerceMobile.Models.News;
 using nopCommerceMobile.Services.RequestProvider;
 
 namespace nopCommerceMobile.Services.Catalog
@@ -23,7 +24,7 @@ namespace nopCommerceMobile.Services.Catalog
         {
             var uri = $"{HomeApiUrlBase}/categories";
 
-            List<CategoryModel> categories = await _requestProvider.GetAsync<List<CategoryModel>>(uri);
+            var categories = await _requestProvider.GetAsync<List<CategoryModel>>(uri);
 
             if (categories != null)
                 return categories.ToObservableCollection();
@@ -36,13 +37,39 @@ namespace nopCommerceMobile.Services.Catalog
         {
             var uri = $"{HomeApiUrlBase}/products";
 
-            List<ProductModel> products = await _requestProvider.GetAsync<List<ProductModel>>(uri);
+            var products = await _requestProvider.GetAsync<List<ProductModel>>(uri);
 
             if (products != null)
                 return products.ToObservableCollection();
 
             else
                 return new ObservableCollection<ProductModel>();
+        }
+
+        public async Task<ObservableCollection<ProductModel>> GetHomeBestSellersAsync()
+        {
+            var uri = $"{HomeApiUrlBase}/bestsellers";
+
+            var bestSellers = await _requestProvider.GetAsync<List<ProductModel>>(uri);
+
+            if (bestSellers != null)
+                return bestSellers.ToObservableCollection();
+
+            else
+                return new ObservableCollection<ProductModel>();
+        }
+
+        public async Task<ObservableCollection<NewsItemModel>> GetHomeNewsAsync()
+        {
+            var uri = $"{HomeApiUrlBase}/news";
+
+            var news = await _requestProvider.GetAsync<List<NewsItemModel>>(uri);
+
+            if (news != null)
+                return news.ToObservableCollection();
+
+            else
+                return new ObservableCollection<NewsItemModel>();
         }
     }
 }

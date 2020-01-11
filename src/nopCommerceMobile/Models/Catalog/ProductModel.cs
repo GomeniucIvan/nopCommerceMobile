@@ -41,9 +41,6 @@ namespace nopCommerceMobile.Models.Catalog
 
         public bool ForceRedirectionAfterAddingToCart { get; set; }
 
-        /// <summary>
-        /// A value indicating whether we should display tax/shipping info (used in Germany)
-        /// </summary>
         public bool DisplayTaxShippingInfo { get; set; }
     }
 
