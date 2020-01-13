@@ -1,9 +1,11 @@
 ﻿using nopCommerceMobile.Services;
 using nopCommerceMobile.Services.Catalog;
+using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.Services.Dialog;
 using nopCommerceMobile.Services.Navigation;
 using nopCommerceMobile.Services.RequestProvider;
 using nopCommerceMobile.Services.Settings;
+using nopCommerceMobile.Services.Topic;
 using TinyIoC;
 
 namespace nopCommerceMobile.ViewModels.Base
@@ -25,6 +27,8 @@ namespace nopCommerceMobile.ViewModels.Base
             _container.Register<IRequestProvider, RequestProvider>();
             _container.Register<ISettingsService, SettingsService>();
             _container.Register<ICatalogService, CatalogService>();
+            _container.Register<ICustomerService, CustomerService>();
+            _container.Register<ITopicService, TopicService>();
         }
 
         public static T Resolve<T>() where T : class

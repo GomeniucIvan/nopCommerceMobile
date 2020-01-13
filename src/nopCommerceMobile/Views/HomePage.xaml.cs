@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;

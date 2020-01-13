@@ -13,5 +13,13 @@ namespace nopCommerceMobile.Extensions
         {
             return model == null;
         }
+
+        public static bool IsNullOrEmpty(this string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return true;
+
+            return false;
+        }
     }
 }

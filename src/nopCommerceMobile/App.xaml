@@ -12,12 +12,50 @@
             <x:Double x:Key="BaseFontSize">18</x:Double>
             <x:Double x:Key="LargeFontSize">20</x:Double>
 
+            <x:Double x:Key="BaseButtonHeight">50</x:Double>
+
             <!--Colors-->
             <Color x:Key="PrimaryColor">#1e5474</Color>
             <Color x:Key="NavigationSelectedIconColor">#1e5474</Color>
             <Color x:Key="NavigationIconColor">DimGray</Color>
             <Color x:Key="TextColor">DimGray</Color>
             <Color x:Key="PageColor">#f3f3f3</Color>
+
+            <!--Icons-->
+            <OnPlatform x:Key="FontAwesomeFontFamily" x:TypeArguments="x:String">
+                <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
+                <On Platform="iOS" Value="fa-solid-900" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="IoniconsFontFamily" x:TypeArguments="x:String">
+                <On Platform="Android" Value="ionicons.ttf#Ionicons" />
+                <On Platform="iOS" Value="ionicons" />
+            </OnPlatform>
+
+            <!--Xamarin base templates-->
+            <Style TargetType="Entry" ApplyToDerivedTypes="true">
+                <Setter Property="TextColor" Value="DarkSlateGray" />
+                <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <!--Add border color -->
+            </Style>
+
+            <!--Buttons-->
+            <Style x:Key="BaseButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="HeightRequest" Value="{StaticResource BaseButtonHeight}" />
+            </Style>
+
+            <Style x:Key="DarkBlueButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#536794" />
+            </Style>
+
+            <Style x:Key="DarkGreenButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#388e3c" />
+            </Style>
 
             <!--Labels-->
             <Style x:Key="CenteredLabel" TargetType="Label">
@@ -44,6 +82,10 @@
                 <Setter Property="Margin" Value="0" />
             </Style>
 
+            <Style x:Key="TopicHtmlLabelStyle" TargetType="Label" BasedOn="{StaticResource CenteredLabel}">
+                <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <Setter Property="TextType" Value="Html" />
+            </Style>
             <!-- Common -->
             <Style x:Key="BaseScrollView" TargetType="ScrollView">
                 <Setter Property="Margin" Value="0,5,0,0" />

@@ -25,6 +25,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Customer\LoginViewXaml.xaml.cs">
+      <DependentUpon>LoginViewXaml.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +35,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Customer\LoginRegisterPage.xaml">
+    <EmbeddedResource Update="Views\Customer\LoginViewXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Customer\Partial\LoginView.xaml">

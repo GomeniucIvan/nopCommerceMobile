@@ -62,5 +62,8 @@ namespace nopCommerceMobile.Helpers
         public static string AndroidPerson = "\uf3a0";
         public static string Home = "\uf448";
         public static string IosHome = "\uf447";
+        public static string IosEmailOutline = "\uf422";
+        public static string IosLockedOutline = "\uf457";
+        public static string IosUnLockedOutline = "\uf4c8";
     }
 }

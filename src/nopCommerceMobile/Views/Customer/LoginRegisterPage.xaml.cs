@@ -9,11 +9,12 @@ namespace nopCommerceMobile.Views.Customer
     public partial class LoginRegisterPage : ContentPage
     {
         private View[] _views;
+        public static LoginRegisterPage _page;
 
         public LoginRegisterPage()
         {
             InitializeComponent();
-
+            _page = this;
             _views = new View[]
             {
                 new LoginView(),
@@ -23,12 +24,12 @@ namespace nopCommerceMobile.Views.Customer
             Carousel.ItemsSource = _views;
         }
 
-        private void SlideToRegisterView(object sender, EventArgs e)
+        internal void SlideToRegisterView()
         {
             Carousel.Position = 1;
         }
 
-        private void SlideToLoginView(object sender, EventArgs e)
+        internal void SlideToLoginView()
         {
             Carousel.Position = 0;
         }

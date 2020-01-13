@@ -20,6 +20,9 @@
         </ResourceDictionary>
     </TabbedPage.Resources>
 
+    <!--TODO change default NavigationTabbedPage-->
+    <!--//TODO IsVisible not working on NavigationTabbedPage - page level-->
+    <!--On startup all pages all called, make setting to allow to set - load only active page-->
     <!--Add logo and search icon-->
     <views:HomePage>
         <views:HomePage.IconImageSource>
@@ -47,13 +50,13 @@
         </views:HomePage.IconImageSource>
     </views:HomePage>
 
-    <views:HomePage IsVisible="{Binding IsRegistered}">
+    <!--<views:HomePage IsVisible="False">
         <views:HomePage.IconImageSource>
             <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Person}"/>
         </views:HomePage.IconImageSource>
-    </views:HomePage>
+    </views:HomePage>-->
 
-    <customer:LoginRegisterPage IsVisible="{Binding IsRegistered, Converter={StaticResource InverseBooleanConverter}}">
+    <customer:LoginRegisterPage IsVisible="{Binding IsRegisteredCustomer, Converter={StaticResource InverseBooleanConverter}}">
         <customer:LoginRegisterPage.IconImageSource>
             <helpers:IoniconsFontImage Glyph="{x:Static helpers:IoniconsIcon.Person}"/>
         </customer:LoginRegisterPage.IconImageSource>

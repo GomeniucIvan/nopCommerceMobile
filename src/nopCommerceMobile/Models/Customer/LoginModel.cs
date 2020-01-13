@@ -2,14 +2,34 @@
 
 namespace nopCommerceMobile.Models.Customer
 {
-    class LoginModel : BaseModel
+    public class LoginModel : BaseModel
     {
-        public string Email { get; set; }
+        private string _email;
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                RaisePropertyChanged(() => Email);
+            }
+        }
+
         public bool UsernamesEnabled { get; set; }
         public UserRegistrationType RegistrationType { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool RememberMe { get; set; }
+
+        private bool _rememberMe;
+        public bool RememberMe
+        {
+            get => _rememberMe;
+            set
+            {
+                _rememberMe = value;
+                RaisePropertyChanged(() => RememberMe);
+            }
+        }
     }
 
     #region Nested classes

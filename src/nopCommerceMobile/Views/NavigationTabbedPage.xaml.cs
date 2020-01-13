@@ -10,7 +10,8 @@ namespace nopCommerceMobile.Views
         {
             InitializeComponent();
             CurrentPage = Children[1]; //set default tab (home page - second tab)
-            BindingContext = new NavigationBaseViewModel();
+            if (BindingContext == null)
+                BindingContext = new NavigationBaseViewModel();
         }
 
         protected override async void OnAppearing()
