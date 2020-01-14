@@ -2,6 +2,7 @@
 using nopCommerceMobile.Services.Catalog;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.Services.Dialog;
+using nopCommerceMobile.Services.Localization;
 using nopCommerceMobile.Services.Navigation;
 using nopCommerceMobile.Services.RequestProvider;
 using nopCommerceMobile.Services.Settings;
@@ -29,6 +30,7 @@ namespace nopCommerceMobile.ViewModels.Base
             _container.Register<ICatalogService, CatalogService>();
             _container.Register<ICustomerService, CustomerService>();
             _container.Register<ITopicService, TopicService>();
+            _container.Register<ILocalizationService, LocalizationService>();
         }
 
         public static T Resolve<T>() where T : class

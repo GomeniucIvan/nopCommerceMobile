@@ -20,6 +20,9 @@
 
     <ScrollView Style="{StaticResource BaseScrollView}">
         <StackLayout VerticalOptions="FillAndExpand">
+            <!--//TODO find better way to implement translator-->
+            <Label IsVisible="False" Text="{extensions:Translate Homepage.Products}"></Label>
+
             <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
                                Scale="1.2"
                                Style="{StaticResource ActivityIndicatorStyle}" 

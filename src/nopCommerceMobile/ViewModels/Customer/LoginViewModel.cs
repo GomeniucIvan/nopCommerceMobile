@@ -20,8 +20,11 @@ namespace nopCommerceMobile.ViewModels.Customer
 
         public LoginViewModel()
         {
-            _customerService = LocatorViewModel.Resolve<ICustomerService>();
-            _topicService = LocatorViewModel.Resolve<ITopicService>();
+            if (_customerService == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
+
+            if (_topicService == null)
+                _topicService = LocatorViewModel.Resolve<ITopicService>();
         }
 
         #endregion

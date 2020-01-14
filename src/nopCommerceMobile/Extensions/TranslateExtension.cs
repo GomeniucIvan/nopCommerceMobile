@@ -1,9 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
 using System.Threading;
-using nopCommerceMobile.Resx;
+using System.Threading.Tasks;
+using nopCommerceMobile.Models.Localization;
+using nopCommerceMobile.Services.Localization;
+using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,8 +16,9 @@ namespace nopCommerceMobile.Extensions
     [ContentProperty("Key")]
     public class TranslateExtension : IMarkupExtension<Binding>, IMarkupExtension
     {
+        private static ILocalizationService _localizationService;
         public string Key { get; set; }
-        public string DefaultCultureName = "en-US";
+        public static string DefaultCultureName = "en-US";
 
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
         {
@@ -32,15 +37,13 @@ namespace nopCommerceMobile.Extensions
 
             var cultureName = DefaultCultureName;
 
-            //TODO get language culture from claim
-            //Based on web settings display resource in case if not exists in current culture
+            if (App.CustomerAppModel != null && App.CustomerAppModel.AppCulture.IsNullOrEmpty())
+            {
+                cultureName = App.CustomerAppModel.AppCulture;
+            }
 
-
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
-
-            var manager = new ResourceManager(typeof(AppResource));
-
-            BindingSource bindingSource = new BindingSource(manager, Key);
+            var resourceManager = new ResourceManager(typeof(LocaleResourceModel));
+            BindingSource bindingSource = new BindingSource(resourceManager, Key, cultureName);
 
             Binding binding = new Binding
             {
@@ -49,37 +52,47 @@ namespace nopCommerceMobile.Extensions
             };
 
             return binding;
+
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
+            //var resourceManager = new ResourceManager(typeof(AppResource));
+
+            //BindingSource bindingSource = new BindingSource(resourceManager, Key);
+
+            //Binding binding = new Binding
+            //{
+            //    Source = bindingSource,
+            //    Path = "Text"
+            //};
         }
 
         private class BindingSource : INotifyPropertyChanged
         {
             private readonly ResourceManager _manager;
             private readonly string _key;
+            private readonly string _currentCulture;
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            public BindingSource(ResourceManager manager, string key)
+            public BindingSource(ResourceManager manager, string key, string currentCulture)
             {
                 _manager = manager;
                 _key = key;
+                _currentCulture = currentCulture;
             }
 
-            
+            //return _manager.GetString(_key) ?? _key;
+            public string Text => GetStringValue(_key, _currentCulture).ToString();
 
-            public string Text
+            private string GetStringValue(string key, string languageCulture)
             {
-                get
+                var result = key;
+                if (App.LocaleResources == null || !App.LocaleResources.Any())
                 {
-                    try
-                    {
-                       return _manager.GetString(_key) ?? _key;
-                    }
-                    catch (Exception e)
-                    {
-                        //TODO add custom getstring in case if key not exists
-                        return _key;
-                    }
+                    //TODO implement xamarin forms database
+                    //https://github.com/reactiveui/akavache/
                 }
+
+                return result;
             }
         }
     }

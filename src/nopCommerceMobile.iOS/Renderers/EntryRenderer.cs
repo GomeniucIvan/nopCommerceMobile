@@ -16,10 +16,7 @@ namespace nopCommerceMobile.iOS.Renderers
 
             if (Control != null)
             {
-
                 Control.BorderStyle = UITextBorderStyle.None;
-                //Control.Layer.CornerRadius = 10;
-                //Control.TextColor = UIColor.White;
             }
         }
     }

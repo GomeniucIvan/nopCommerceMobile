@@ -1,5 +1,7 @@
-﻿using nopCommerceMobile.ViewModels;
-using nopCommerceMobile.ViewModels.Base;
+﻿using System.Collections.Generic;
+using nopCommerceMobile.Models.Customer;
+using nopCommerceMobile.Models.Localization;
+using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.Views;
 using Xamarin.Forms;
 
@@ -7,6 +9,8 @@ namespace nopCommerceMobile
 {
     public partial class App : Application
     {
+        public static CustomerAppModel CustomerAppModel;
+        public static IList<LocaleResourceModel> LocaleResources;
         public App()
         {
             InitializeComponent();

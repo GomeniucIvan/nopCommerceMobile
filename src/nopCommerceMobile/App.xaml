@@ -47,6 +47,7 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="CornerRadius" Value="5" />
                 <Setter Property="HeightRequest" Value="{StaticResource BaseButtonHeight}" />
+
             </Style>
 
             <Style x:Key="DarkBlueButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">

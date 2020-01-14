@@ -38,3 +38,4 @@ using Xamarin.Forms;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: ExportRenderer(typeof(Entry), typeof(EntryRenderer))]
+[assembly: ExportRenderer(typeof(Button), typeof(ButtonRenderer))]

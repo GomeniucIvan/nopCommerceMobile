@@ -20,7 +20,8 @@ namespace nopCommerceMobile.ViewModels
 
         public HomeBaseViewModel()
         {
-            _catalogService = LocatorViewModel.Resolve<ICatalogService>();
+            if (_catalogService == null)
+                _catalogService = LocatorViewModel.Resolve<ICatalogService>();
         }
 
         #endregion
