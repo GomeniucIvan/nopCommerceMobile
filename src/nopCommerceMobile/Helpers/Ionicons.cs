@@ -65,5 +65,6 @@ namespace nopCommerceMobile.Helpers
         public static string IosEmailOutline = "\uf422";
         public static string IosLockedOutline = "\uf457";
         public static string IosUnLockedOutline = "\uf4c8";
+        public static string Alert = "\uf101";
     }
 }

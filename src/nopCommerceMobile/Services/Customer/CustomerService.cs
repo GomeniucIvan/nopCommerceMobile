@@ -26,5 +26,17 @@ namespace nopCommerceMobile.Services.Customer
 
             return new LoginModel();
         }
+
+        public async Task<RegisterModel> GetRegisterModelAsync()
+        {
+            var uri = $"{ApiUrlBase}/register";
+
+            var registerModel = await _requestProvider.GetAsync<RegisterModel>(uri);
+
+            if (registerModel != null)
+                return registerModel;
+
+            return new RegisterModel();
+        }
     }
 }

@@ -8,7 +8,6 @@
                xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
                mc:Ignorable="d"
-               BackgroundColor="{StaticResource PageColor}"
                x:Class="nopCommerceMobile.Views.Customer.Partial.LoginView">
     <ScrollView>
         <Grid Padding="20">

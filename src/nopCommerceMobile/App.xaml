@@ -110,7 +110,10 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             </Style>
-
+            <!-- Pages -->
+            <Style TargetType="ContentView" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColor}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
