@@ -1,5 +1,9 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.ViewModels.Base;
+using nopCommerceMobile.ViewModels.Navigation;
+using nopCommerceMobile.Views;
+using Xamarin.Forms;
+using NavigationPage = nopCommerceMobile.Views.NavigationPage;
 
 namespace nopCommerceMobile.ViewModels
 {
@@ -13,6 +17,41 @@ namespace nopCommerceMobile.ViewModels
             {
                 _isRegisteredCustomer = value;
                 RaisePropertyChanged(() => IsRegisteredCustomer);
+            }
+        }
+
+        private Color _homePageTabColor;
+        public Color HomePageTabColor
+        {
+            get => _homePageTabColor;
+            set
+            {
+                _homePageTabColor = value;
+                RaisePropertyChanged(() => HomePageTabColor);
+            }
+        }
+
+        private Color _personTabColor;
+        public Color PersonTabColor
+        {
+            get => _personTabColor;
+            set
+            {
+                _personTabColor = value;
+                RaisePropertyChanged(() => PersonTabColor);
+            }
+        }
+
+        private NavigationPageEnum? _selectedNavigationPage;
+        public NavigationPageEnum? SelectedNavigationPage
+        {
+            get => _selectedNavigationPage;
+            set
+            {
+                _selectedNavigationPage = value;
+                RaisePropertyChanged(() => SelectedNavigationPage);
+
+                NavigationPage.Page.SetPageContentPage();
             }
         }
 

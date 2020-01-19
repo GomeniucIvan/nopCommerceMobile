@@ -1,4 +1,5 @@
 ﻿using System;
+using FFImageLoading.Forms;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
@@ -6,22 +7,28 @@ using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views
 {
-    public abstract class HomePageXaml : ModelBoundContentPage<HomeBaseViewModel> { }
-    public partial class HomePage : HomePageXaml
+    public abstract class HomeViewXaml : ModelBoundContentView<HomeBaseViewModel> { }
+    public partial class HomeView : HomeViewXaml
     {
-        public static HomePage _page;
-        public HomePage()
+        public static HomeView View;
+        public HomeView()
         {
             InitializeComponent();
-            _page = this;
+            View = this;
             BindingContext = new HomeBaseViewModel();
         }
 
-        protected override async void OnAppearing()
+        protected override async void OnParentSet()
         {
-            base.OnAppearing();
+            base.OnParentSet();
             await ViewModel.InitializeAsync();
         }
+
+        //protected override async void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    await ViewModel.InitializeAsync();
+        //}
 
         private void Category_OnClick(object sender, EventArgs e)
         {
@@ -39,6 +46,19 @@ namespace nopCommerceMobile.Views
         private void News_OnClick(object sender, EventArgs e)
         {
            
+        }
+
+        private void Slider_OnClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
+        {
+            var view = (CarouselView)sender;
+            var slider = (SliderModel)view.CurrentItem;
+
+            SliderBackground.Source = slider.Image;
         }
     }
 

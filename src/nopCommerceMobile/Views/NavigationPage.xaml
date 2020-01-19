@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:NavigationPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
+                          xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                          x:Class="nopCommerceMobile.Views.NavigationPage"
+                          NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="92*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollView x:Name="PageContainer" Padding="0" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalScrollBarVisibility="Never"/>
+
+                <StackLayout Grid.Row="1" Padding="0,3,0,0">
+                    <Grid RowSpacing="0" ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Home-->
+                        <StackLayout Grid.Column="0" Style="{StaticResource NavigationTabContainer}">
+                            <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                                   FontSize="30"
+                                                   TextColor="{Binding HomePageTabColor}"
+                                                   Text="{x:Static helpers:IoniconsIcon.Home}"/>
+                            <Label Text="Home" Style="{StaticResource CenteredLabel}" TextColor="{Binding HomePageTabColor}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="HomePageTabTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <!--Catalog-->
+                        <StackLayout Grid.Column="1" Style="{StaticResource NavigationTabContainer}">
+                            <helpers:FontAwesomeLabel Style="{StaticResource CenteredLabel}"
+                                                      FontSize="30"
+                                                      Text="{x:Static helpers:Icon.FaBars}"/>
+                        </StackLayout>
+
+                        <!--Person-->
+                        <StackLayout Grid.Column="2" Style="{StaticResource NavigationTabContainer}">
+                            <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                                   FontSize="30"
+                                                   TextColor="{Binding PersonTabColor}"
+                                                   Text="{x:Static helpers:IoniconsIcon.Person}"/>
+                            <Label Text="Person" Style="{StaticResource CenteredLabel}" TextColor="{Binding PersonTabColor}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PersonTabTapped"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <!--Hearth-->
+                        <StackLayout Grid.Column="3" Style="{StaticResource NavigationTabContainer}">
+                            <!--TODO make badge controller-->
+                            <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center">
+                                <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                                       FontSize="30"
+                                                       Text="{x:Static helpers:IoniconsIcon.Hearth}"/>
+                                <BoxView BackgroundColor="Red" 
+                                         CornerRadius="10" 
+                                         WidthRequest="18" 
+                                         HeightRequest="18" 
+                                         Margin="17,0,0,0"/>
+                                <Label Text="1"
+                                       Margin="22,0,0,0" 
+                                       TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
+                            </AbsoluteLayout>
+                        </StackLayout>
+
+                        <!--Cart-->
+                        <StackLayout Grid.Column="4" Style="{StaticResource NavigationTabContainer}">
+                            <!--TODO make badge controller-->
+                            <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center">
+                                <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                                       FontSize="30"
+                                                       Text="{x:Static helpers:IoniconsIcon.Cart}"/>
+                                <BoxView BackgroundColor="Red" 
+                                         CornerRadius="10" 
+                                         WidthRequest="18" 
+                                         HeightRequest="18" 
+                                         Margin="17,0,0,0"/>
+                                <Label Text="4"
+                                       Margin="22,0,0,0" 
+                                       TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
+                            </AbsoluteLayout>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</views:NavigationPageXaml>

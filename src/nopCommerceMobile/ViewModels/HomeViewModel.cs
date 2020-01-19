@@ -70,47 +70,14 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
-        private bool _anyCategories;
-        public bool AnyCategories
+        private ObservableCollection<SliderModel> _sliders;
+        public ObservableCollection<SliderModel> Sliders
         {
-            get => _anyCategories;
+            get => _sliders;
             set
             {
-                _anyCategories = value;
-                RaisePropertyChanged(() => AnyCategories);
-            }
-        }
-
-        private bool _anyProducts;
-        public bool AnyProducts
-        {
-            get => _anyProducts;
-            set
-            {
-                _anyProducts = value;
-                RaisePropertyChanged(() => AnyProducts);
-            }
-        }
-
-        private bool _anyBestSellers;
-        public bool AnyBestSellers
-        {
-            get => _anyBestSellers;
-            set
-            {
-                _anyBestSellers = value;
-                RaisePropertyChanged(() => AnyBestSellers);
-            }
-        }
-
-        private bool _anyNews;
-        public bool AnyNews
-        {
-            get => _anyNews;
-            set
-            {
-                _anyNews = value;
-                RaisePropertyChanged(() => AnyNews);
+                _sliders = value;
+                RaisePropertyChanged(() => Sliders);
             }
         }
 
@@ -119,16 +86,16 @@ namespace nopCommerceMobile.ViewModels
             IsBusy = true;
 
             Categories = await _catalogService.GetHomeCategoriesAsync();
-            AnyCategories = Categories.Any();
-
             Products = await _catalogService.GetHomeProductsAsync();
-            AnyProducts = Products.Any();
-
             BestSellers = await _catalogService.GetHomeBestSellersAsync();
-            AnyBestSellers = BestSellers.Any();
-
             News = await _catalogService.GetHomeNewsAsync();
-            AnyNews = News.Any();
+
+            Sliders = new ObservableCollection<SliderModel>()
+            {
+                new SliderModel(){ Image = "http://sermonspiceuploads.s3.amazonaws.com/3265/fp_68126/colourbackground4hd_full.jpg"},
+                new SliderModel(){ Image = "https://image.freepik.com/free-photo/colour-smoke-background_71163-196.jpg"},
+                new SliderModel(){ Image = "https://image.freepik.com/foto-gratis/movimiento-humo-colores-humo-rojo-abstracto-fondo-negro_36326-2576.jpg"}
+            };
 
             IsBusy = false;
             IsDataLoaded = true;

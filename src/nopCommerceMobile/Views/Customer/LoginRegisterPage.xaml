@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <!--https://github.com/jsuarezruiz/xamarin-forms-walkthrough-->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              mc:Ignorable="d"
-             x:Class="nopCommerceMobile.Views.Customer.LoginRegisterPage">
-    <ContentPage.Content>
+             x:Class="nopCommerceMobile.Views.Customer.LoginRegisterView">
+    <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <abstractions:CarouselViewControl Grid.Row="0"
+            <!--<abstractions:CarouselViewControl Grid.Row="0"
                                               x:Name="Carousel"
                                               Grid.RowSpan="2"
                                               Orientation="Horizontal"
@@ -24,7 +24,7 @@
                                               CurrentPageIndicatorTintColor="LightGray"
                                               IndicatorsTintColor="White"
                                               HorizontalOptions="FillAndExpand"
-                                              VerticalOptions="FillAndExpand" />
+                                              VerticalOptions="FillAndExpand" />-->
         </Grid>
-    </ContentPage.Content>
-</ContentPage>
+    </ContentView.Content>
+</ContentView>

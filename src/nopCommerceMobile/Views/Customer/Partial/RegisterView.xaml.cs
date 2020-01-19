@@ -23,7 +23,7 @@ namespace nopCommerceMobile.Views.Customer.Partial
 
         private void Login_OnClicked(object sender, EventArgs e)
         {
-            LoginRegisterPage._page.SlideToLoginView();
+            //LoginRegisterView.View.SlideToLoginView();
         }
 
         private void NewsletterLabel_OnTapped(object sender, EventArgs e)

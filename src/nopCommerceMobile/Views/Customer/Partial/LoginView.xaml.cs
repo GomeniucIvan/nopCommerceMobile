@@ -28,7 +28,7 @@ namespace nopCommerceMobile.Views.Customer.Partial
 
         private void Register_OnClicked(object sender, EventArgs e)
         {
-            LoginRegisterPage._page.SlideToRegisterView();
+            //LoginRegisterView.View.SlideToRegisterView();
         }
 
         private void Login_OnClicked(object sender, EventArgs e)

@@ -18,7 +18,6 @@ namespace nopCommerceMobile.Droid.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             InvokeMainActivity();
         }
 

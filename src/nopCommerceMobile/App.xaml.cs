@@ -4,6 +4,7 @@ using nopCommerceMobile.Models.Localization;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.Views;
 using Xamarin.Forms;
+using NavigationPage = nopCommerceMobile.Views.NavigationPage;
 
 namespace nopCommerceMobile
 {
@@ -24,7 +25,7 @@ namespace nopCommerceMobile
 
         public static Page GetMainPage()
         {
-            var page = new NavigationTabbedPage()
+            var page = new NavigationPage()
             {
                 BindingContext = new NavigationBaseViewModel()
                 {
