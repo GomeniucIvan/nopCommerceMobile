@@ -1,4 +1,5 @@
-﻿using nopCommerceMobile.Services;
+﻿using Akavache;
+using nopCommerceMobile.Services;
 using nopCommerceMobile.Services.Catalog;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.Services.Dialog;

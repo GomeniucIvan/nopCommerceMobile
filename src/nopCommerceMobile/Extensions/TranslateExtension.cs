@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
+using Akavache;
 using nopCommerceMobile.Models.Localization;
 using nopCommerceMobile.Services.Localization;
 using nopCommerceMobile.ViewModels.Base;
@@ -71,6 +74,9 @@ namespace nopCommerceMobile.Extensions
             private readonly string _key;
             private readonly string _currentCulture;
 
+            private Lazy<IBlobCache> _LazyBlob;
+            private IBlobCache _BlobCache => _LazyBlob.Value;
+
             public event PropertyChangedEventHandler PropertyChanged;
 
             public BindingSource(ResourceManager manager, string key, string currentCulture)
@@ -86,10 +92,11 @@ namespace nopCommerceMobile.Extensions
             private string GetStringValue(string key, string languageCulture)
             {
                 var result = key;
-                if (App.LocaleResources == null || !App.LocaleResources.Any())
+
+                if (App.LocaleResources != null && App.LocaleResources.Any())
                 {
-                    //TODO implement xamarin forms database
-                    //https://github.com/reactiveui/akavache/
+                   var localeResource = App.LocaleResources.FirstOrDefault(v => v.ResourceName.ToLower() == key.ToLower());
+                   result = localeResource != null ? localeResource.ResourceValue : key;
                 }
 
                 return result;
