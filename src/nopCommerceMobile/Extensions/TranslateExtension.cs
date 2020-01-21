@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Resources;
-using System.Threading;
-using System.Threading.Tasks;
-using Akavache;
 using nopCommerceMobile.Models.Localization;
-using nopCommerceMobile.Services.Localization;
-using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +11,6 @@ namespace nopCommerceMobile.Extensions
     [ContentProperty("Key")]
     public class TranslateExtension : IMarkupExtension<Binding>, IMarkupExtension
     {
-        private static ILocalizationService _localizationService;
         public string Key { get; set; }
         public static string DefaultCultureName = "en-US";
 
@@ -55,17 +46,6 @@ namespace nopCommerceMobile.Extensions
             };
 
             return binding;
-
-            //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureName);
-            //var resourceManager = new ResourceManager(typeof(AppResource));
-
-            //BindingSource bindingSource = new BindingSource(resourceManager, Key);
-
-            //Binding binding = new Binding
-            //{
-            //    Source = bindingSource,
-            //    Path = "Text"
-            //};
         }
 
         private class BindingSource : INotifyPropertyChanged
@@ -73,9 +53,6 @@ namespace nopCommerceMobile.Extensions
             private readonly ResourceManager _manager;
             private readonly string _key;
             private readonly string _currentCulture;
-
-            private Lazy<IBlobCache> _LazyBlob;
-            private IBlobCache _BlobCache => _LazyBlob.Value;
 
             public event PropertyChangedEventHandler PropertyChanged;
 
