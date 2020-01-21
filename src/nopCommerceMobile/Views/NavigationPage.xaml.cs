@@ -39,15 +39,17 @@ namespace nopCommerceMobile.Views
 
         public void SetPageContentPage()
         {
+            var primaryColor = Color.FromHex("#1e5474");
+
             //set selected/unselected colors
-            ViewModel.HomePageTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Home ? Color.Red : Color.Default;
-            ViewModel.PersonTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Person ? Color.Red : Color.Default;
+            ViewModel.HomePageTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Home ? primaryColor : Color.Default;
+            ViewModel.AccountTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Account ? primaryColor : Color.Default;
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Home)
                 PageContainer.Content = new HomeView();
 
-            if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Person)
-                PageContainer.Content = new LoginRegisterView();
+            if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Account)
+                PageContainer.Content = new CustomerView();
         }
 
         private void HomePageTabTapped(object sender, EventArgs e)
@@ -55,9 +57,9 @@ namespace nopCommerceMobile.Views
             ViewModel.SelectedNavigationPage = NavigationPageEnum.Home;
         }
 
-        private void PersonTabTapped(object sender, EventArgs e)
+        private void AccountTabTapped(object sender, EventArgs e)
         {
-            ViewModel.SelectedNavigationPage = NavigationPageEnum.Person;
+            ViewModel.SelectedNavigationPage = NavigationPageEnum.Account;
         }
     }
 }

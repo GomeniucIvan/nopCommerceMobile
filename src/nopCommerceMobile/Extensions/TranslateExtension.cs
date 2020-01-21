@@ -37,9 +37,9 @@ namespace nopCommerceMobile.Extensions
 
             var cultureName = DefaultCultureName;
 
-            if (App.CustomerAppModel != null && App.CustomerAppModel.AppCulture.IsNullOrEmpty())
+            if (App.CurrentCostumer != null && App.CustomerAppCulture.IsNullOrEmpty())
             {
-                cultureName = App.CustomerAppModel.AppCulture;
+                cultureName = App.CustomerAppCulture;
             }
 
             var resourceManager = new ResourceManager(typeof(LocaleResourceModel));

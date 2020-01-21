@@ -7,47 +7,44 @@ using nopCommerceMobile.ViewModels.Base;
 
 namespace nopCommerceMobile.ViewModels.Customer
 {
-    public class LoginViewModel : BaseViewModel
+    public class CustomerViewModel : BaseViewModel
     {
         #region Fields
 
         private ICustomerService _customerService;
-        private ITopicService _topicService;
 
         #endregion
 
         #region Ctor
 
-        public LoginViewModel()
+        public CustomerViewModel()
         {
             if (_customerService == null)
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
-
-            if (_topicService == null)
-                _topicService = LocatorViewModel.Resolve<ITopicService>();
         }
 
         #endregion
 
-        private LoginModel _loginModel;
-        public LoginModel LoginModel
+        private CustomerModel _customerModel;
+        public CustomerModel CustomerModel
         {
-            get => _loginModel;
+            get => _customerModel;
             set
             {
-                _loginModel = value;
-                RaisePropertyChanged(() => LoginModel);
+                _customerModel = value;
+                RaisePropertyChanged(() => CustomerModel);
             }
         }
 
-        private TopicModel _loginRegistrationInfo;
-        public TopicModel LoginRegistrationInfo
+        private bool _isRegistered;
+
+        public bool IsRegistered
         {
-            get => _loginRegistrationInfo;
+            get => _isRegistered;
             set
             {
-                _loginRegistrationInfo = value;
-                RaisePropertyChanged(() => LoginRegistrationInfo);
+                _isRegistered = value;
+                RaisePropertyChanged(() => IsRegistered);
             }
         }
 
@@ -57,8 +54,10 @@ namespace nopCommerceMobile.ViewModels.Customer
             {
                 IsBusy = true;
 
-                LoginModel = await _customerService.GetLoginModelAsync();
-                LoginRegistrationInfo = await _topicService.GetModelBySystemNameAsync("LoginRegistrationInfo");
+                var customer = await _customerService.GetCurrentCustomerModelAsync();
+
+                CustomerModel = customer;
+                IsRegistered = customer.IsRegistered();
 
                 IsBusy = false;
                 IsDataLoaded = true;

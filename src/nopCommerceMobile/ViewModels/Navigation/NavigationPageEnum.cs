@@ -3,6 +3,6 @@
     public enum NavigationPageEnum
     {
         Home,
-        Person
+        Account
     }
 }

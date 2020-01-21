@@ -24,8 +24,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Customer\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Customer\LoginViewXaml.xaml.cs">
       <DependentUpon>LoginViewXaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\NavigationPage.xaml.cs">
       <DependentUpon>NavigationPage.xaml</DependentUpon>
@@ -40,13 +46,7 @@
     <EmbeddedResource Update="Views\Customer\LoginViewXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Customer\Partial\LoginView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Customer\Partial\RegisterView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\HomePage.xaml">
+    <EmbeddedResource Update="Views\HomeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NavigationPage.xaml">

@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customer:CustomerViewXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+                  xmlns:customer="clr-namespace:nopCommerceMobile.Views.Customer;assembly=nopCommerceMobile"
+                  xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
+                  xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                  xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                  mc:Ignorable="d"
+                  x:Class="nopCommerceMobile.Views.Customer.CustomerView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+            <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <StackLayout>
+        <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
+                           Scale="1.2"
+                           Style="{StaticResource ActivityIndicatorStyle}" 
+                           Color="{StaticResource PrimaryColor}" IsRunning="True"/>
+
+        <StackLayout IsVisible="{Binding IsDataLoaded}">
+
+            <Grid ColumnSpacing="0"
+                  Padding="0,25,0,0"
+                  IsVisible="{Binding IsRegistered, Converter={StaticResource InverseBooleanConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="45*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label HorizontalTextAlignment="End"
+                       Text="{extensions:Translate Account.Login}" 
+                       FontAttributes="Bold"
+                       FontSize="{StaticResource LargeFontSize}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Login_OnClick"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="1" 
+                       Style="{StaticResource CenteredLabel}" 
+                       Text="/" 
+                       FontAttributes="Bold"
+                       Padding="5,0,5,0" 
+                       FontSize="{StaticResource LargeFontSize}"/>
+
+                <Label Grid.Column="2" 
+                       HorizontalTextAlignment="Start"
+                       Text="{extensions:Translate Account.Register}" 
+                       FontAttributes="Bold"
+                       FontSize="{StaticResource LargeFontSize}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Register_OnClick"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <Grid ColumnSpacing="0" IsVisible="{Binding IsRegistered}" Padding="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Style="{StaticResource CenteredLabel}" 
+                       Text="{Binding CustomerModel.FullName}" 
+                       FontSize="{StaticResource LargeFontSize}"></Label>
+
+                <Label Grid.Column="1" Style="{StaticResource CenteredLabel}" 
+                       Text="Avatar"
+                       FontSize="{StaticResource LargeFontSize}"></Label>
+            </Grid>
+
+            <Grid ColumnSpacing="0" Padding="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <pancakeView:PancakeView HasShadow="True" 
+                                         CornerRadius="15,10,15,10" 
+                                         BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                               Padding="0,8,0,0"
+                                               FontSize="36"
+                                               Text="{x:Static helpers:IoniconsIcon.IosPaperOutline}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="News" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </pancakeView:PancakeView>
+
+                <pancakeView:PancakeView Grid.Column="1" HasShadow="True" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                               Padding="0,8,0,0"
+                                               FontSize="36"
+                                               Text="{x:Static helpers:IoniconsIcon.IosChatBoxesOutline}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Blog" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </pancakeView:PancakeView>
+
+                <pancakeView:PancakeView Grid.Column="2" HasShadow="True" CornerRadius="10" BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                               Padding="0,8,0,0"
+                                               FontSize="36"
+                                               Text="{x:Static helpers:IoniconsIcon.IosBrowsersOutline}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Compare" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </pancakeView:PancakeView>
+
+                <pancakeView:PancakeView Grid.Column="3" HasShadow="True" CornerRadius="10,15,10,15" BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
+                                               Padding="0,8,0,0"
+                                               FontSize="36"
+                                               Text="{x:Static helpers:IoniconsIcon.Speakerphone}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Products" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </pancakeView:PancakeView>
+            </Grid>
+
+            <Frame VerticalOptions="FillAndExpand" HasShadow="True" BackgroundColor="White" CornerRadius="5" BorderColor="Transparent" Padding="0">
+                <StackLayout Spacing="0">
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.AndroidPerson}" FontSize="26"/>
+                        <Label FontSize="{StaticResource LargeFontSize}" Text="My Account"/>
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gainsboro" Margin="20,0,20,0" HeightRequest="1"/>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="My Account"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="MyAccount_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Orders"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Orders_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Addresses"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Addresses_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Shopping Cart"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShoppingCart_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Wishlist"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Wishlist_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+
+            <Frame VerticalOptions="FillAndExpand" HasShadow="True" BackgroundColor="White" CornerRadius="5" BorderColor="Transparent" Padding="0,15,0,15">
+                <StackLayout Spacing="0">
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.SettingsOutline}" FontSize="26"/>
+                        <Label FontSize="{StaticResource LargeFontSize}" Text="Customer Service"/>
+                    </StackLayout>
+                    <BoxView BackgroundColor="Gainsboro" Margin="20,0,20,0" HeightRequest="1"/>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="News"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="News_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Blog"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Blog_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="Recently viewed products"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RecentlyViewedProducts_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+
+            <!--Add Settings for languages, currency ToDo-->
+        </StackLayout>
+
+    </StackLayout>
+</customer:CustomerViewXaml>

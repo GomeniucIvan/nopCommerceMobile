@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.RequestProvider;
+using nopCommerceMobile.ViewModels.Customer;
 
 namespace nopCommerceMobile.Services.Customer
 {
@@ -37,6 +38,18 @@ namespace nopCommerceMobile.Services.Customer
                 return registerModel;
 
             return new RegisterModel();
+        }
+
+        public async Task<CustomerModel> GetCurrentCustomerModelAsync()
+        {
+            var uri = $"{ApiUrlBase}/currentcustomer";
+
+            var customerModel = await _requestProvider.GetAsync<CustomerModel>(uri);
+
+            if (customerModel != null)
+                return customerModel;
+
+            return new CustomerModel();
         }
     }
 }

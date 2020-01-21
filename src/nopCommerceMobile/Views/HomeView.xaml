@@ -50,7 +50,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140"/>
                         </Grid.RowDefinitions>
-                        <CarouselView ItemsSource="{Binding Sliders}" CurrentItemChanged="sliderView_OnCurrentItemChanged">
+                        <CarouselView ItemsSource="{Binding Sliders}" CurrentItemChanged="SliderView_OnCurrentItemChanged">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

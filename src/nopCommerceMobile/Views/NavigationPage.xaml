@@ -43,17 +43,18 @@
                             <helpers:FontAwesomeLabel Style="{StaticResource CenteredLabel}"
                                                       FontSize="30"
                                                       Text="{x:Static helpers:Icon.FaBars}"/>
+                            <Label Text="Catalog" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
-                        <!--Person-->
+                        <!--Account-->
                         <StackLayout Grid.Column="2" Style="{StaticResource NavigationTabContainer}">
                             <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
                                                    FontSize="30"
-                                                   TextColor="{Binding PersonTabColor}"
+                                                   TextColor="{Binding AccountTabColor}"
                                                    Text="{x:Static helpers:IoniconsIcon.Person}"/>
-                            <Label Text="Person" Style="{StaticResource CenteredLabel}" TextColor="{Binding PersonTabColor}"/>
+                            <Label Text="Account" Style="{StaticResource CenteredLabel}" TextColor="{Binding AccountTabColor}"/>
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="PersonTabTapped"/>
+                                <TapGestureRecognizer Tapped="AccountTabTapped"/>
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
 
@@ -73,6 +74,8 @@
                                        Margin="22,0,0,0" 
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
+
+                            <Label Text="Wish List" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
                         <!--Cart-->
@@ -91,6 +94,8 @@
                                        Margin="22,0,0,0" 
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
+
+                            <Label Text="Cart" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
                     </Grid>
 

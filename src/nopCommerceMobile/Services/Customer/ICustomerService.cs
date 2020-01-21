@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
+using nopCommerceMobile.ViewModels.Customer;
 
 namespace nopCommerceMobile.Services.Customer
 {
@@ -7,5 +8,6 @@ namespace nopCommerceMobile.Services.Customer
     {
         Task<LoginModel> GetLoginModelAsync();
         Task<RegisterModel> GetRegisterModelAsync();
+        Task<CustomerModel> GetCurrentCustomerModelAsync();
     }
 }

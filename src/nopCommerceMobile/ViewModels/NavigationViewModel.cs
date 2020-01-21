@@ -31,14 +31,14 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
-        private Color _personTabColor;
-        public Color PersonTabColor
+        private Color _accountTabColor;
+        public Color AccountTabColor
         {
-            get => _personTabColor;
+            get => _accountTabColor;
             set
             {
-                _personTabColor = value;
-                RaisePropertyChanged(() => PersonTabColor);
+                _accountTabColor = value;
+                RaisePropertyChanged(() => AccountTabColor);
             }
         }
 

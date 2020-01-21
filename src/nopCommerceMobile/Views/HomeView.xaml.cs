@@ -15,7 +15,8 @@ namespace nopCommerceMobile.Views
         {
             InitializeComponent();
             View = this;
-            BindingContext = new HomeBaseViewModel();
+            if (BindingContext == null)
+                BindingContext = new HomeBaseViewModel();
         }
 
         protected override async void OnParentSet()
@@ -53,7 +54,7 @@ namespace nopCommerceMobile.Views
 
         }
 
-        private void sliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
+        private void SliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
             var view = (CarouselView)sender;
             var slider = (SliderModel)view.CurrentItem;
