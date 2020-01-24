@@ -71,5 +71,6 @@ namespace nopCommerceMobile.Helpers
         public static string IosGitCompare = "\uf3f9";
         public static string Speakerphone = "\uf2b2";
         public static string IosBrowsersOutline = "\uf3ef";
+        public static string IosCloseRound = "\uf129";
     }
 }

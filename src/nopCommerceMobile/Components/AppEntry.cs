@@ -7,6 +7,8 @@ using Xamarin.Forms.PancakeView;
 namespace nopCommerceMobile.Components
 {
     // https://xamgirl.com/image-entry-in-xamarin-forms/
+
+    //TODO after adding all required fields change binding options
     public class AppEntry : StackLayout
     {
         public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(string), typeof(AppEntry), string.Empty, BindingMode.Default, null, EntryPropertyChanged);
@@ -16,7 +18,7 @@ namespace nopCommerceMobile.Components
         public static readonly BindableProperty IconColorProperty = BindableProperty.Create(nameof(IconColor), typeof(Color), typeof(AppEntry), Color.FromHex("1e5474"), BindingMode.Default, null, EntryPropertyChanged);
         public static readonly BindableProperty BorderCornerRadiusProperty = BindableProperty.Create(nameof(BorderCornerRadius), typeof(float), typeof(AppEntry), 8f, BindingMode.Default, null, EntryPropertyChanged);
         public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(AppEntry), string.Empty, BindingMode.Default,null, EntryPropertyChanged);
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(AppEntry), string.Empty, BindingMode.TwoWay, null, EntryPropertyChanged);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(AppEntry), string.Empty, BindingMode.TwoWay);
         public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(AppEntry),false, BindingMode.Default, null, EntryPropertyChanged);
         public static readonly BindableProperty IsRequiredProperty = BindableProperty.Create(nameof(IsRequired), typeof(bool), typeof(AppEntry), false, BindingMode.Default, null, EntryPropertyChanged);
         public static readonly BindableProperty IsRequiredIconVisibleProperty = BindableProperty.Create(nameof(IsRequiredIconVisible), typeof(bool), typeof(AppEntry), false, BindingMode.Default, null, EntryPropertyChanged);
@@ -116,6 +118,7 @@ namespace nopCommerceMobile.Components
             {
                 TextColor = Color.Red,
                 FontSize = 16,
+                BindingContext = this,
                 VerticalOptions = LayoutOptions.Center,
                 VerticalTextAlignment = TextAlignment.Center,
                 Margin = new Thickness(0, 0, 10, 0),
@@ -129,10 +132,13 @@ namespace nopCommerceMobile.Components
             {
                 PlaceholderColor = Color.Gray,
                 Placeholder = Placeholder,
+                BindingContext = this,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 Text = Text,
                 IsPassword = IsPassword,
             };
+
+            entry.SetBinding(Entry.TextProperty, nameof(Text), BindingMode.TwoWay);
 
             if (IsRequired)
                 entry.TextChanged += EntryOnTextChanged;

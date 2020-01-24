@@ -37,7 +37,6 @@ namespace nopCommerceMobile.ViewModels.Customer
         }
 
         private bool _isRegistered;
-
         public bool IsRegistered
         {
             get => _isRegistered;
@@ -50,18 +49,14 @@ namespace nopCommerceMobile.ViewModels.Customer
 
         public async Task InitializeAsync()
         {
-            if (!IsDataLoaded)
-            {
-                IsBusy = true;
+            IsBusy = true;
 
-                var customer = await _customerService.GetCurrentCustomerModelAsync();
+            var customer = App.CurrentCostumer;
+            CustomerModel = customer;
+            IsRegistered = customer.IsRegistered();
 
-                CustomerModel = customer;
-                IsRegistered = customer.IsRegistered();
-
-                IsBusy = false;
-                IsDataLoaded = true;
-            }
+            IsBusy = false;
+            IsDataLoaded = true;
         }
     }
 }

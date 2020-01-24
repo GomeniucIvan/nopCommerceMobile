@@ -1,4 +1,5 @@
 ﻿using System;
+using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Customer;
 
@@ -7,10 +8,11 @@ namespace nopCommerceMobile.Views.Customer
     public abstract class CustomerViewXaml : ModelBoundContentView<CustomerViewModel> { }
     public partial class CustomerView : CustomerViewXaml
     {
+        public static CustomerView View;
         public CustomerView()
         {
             InitializeComponent();
-
+            View = this;
             if (BindingContext == null)
                 BindingContext = new CustomerViewModel();
         }
@@ -23,6 +25,7 @@ namespace nopCommerceMobile.Views.Customer
 
         private void Login_OnClick(object sender, EventArgs e)
         {
+            Navigation.PushModalAsync(new Xamarin.Forms.NavigationPage(new LoginPage()));
         }
 
         private void Register_OnClick(object sender, EventArgs e)

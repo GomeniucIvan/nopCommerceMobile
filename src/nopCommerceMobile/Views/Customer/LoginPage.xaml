@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customer:LoginPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:customer="clr-namespace:nopCommerceMobile.Views.Customer;assembly=nopCommerceMobile"
+               xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
+               xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
+               xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+               mc:Ignorable="d"
+               NavigationPage.HasNavigationBar="False"
+               x:Class="nopCommerceMobile.Views.Customer.LoginPage">
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.IosCloseRound }" FontSize="24" HorizontalTextAlignment="End">
+                <helpers:IoniconsLabel.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Close_OnTapped"></TapGestureRecognizer>
+                </helpers:IoniconsLabel.GestureRecognizers>
+            </helpers:IoniconsLabel>
+
+            <StackLayout Grid.Row="1" Padding="0,30,0,0">
+                <Label Text="{Binding LoginRegistrationInfo.Body}" Style="{StaticResource TopicHtmlLabelStyle}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" VerticalOptions="Center" Spacing="20">
+                <!-- Email -->
+                <components:AppEntry Placeholder="Email" 
+                                     IconFontFamily="Ionicons"
+                                     Icon="{x:Static helpers:IoniconsIcon.IosEmailOutline }"
+                                     IconSize="22"
+                                     IsRequired="True"
+                                     BorderCornerRadius="10"
+                                     Text="{Binding LoginModel.Email}" />
+
+                <components:AppEntry Placeholder="Password" 
+                                     IconFontFamily="Ionicons"
+                                     Icon="{x:Static helpers:IoniconsIcon.IosLockedOutline }"
+                                     IconSize="22"
+                                     IsRequired="True"
+                                     IsPassword="True"
+                                     BorderCornerRadius="10"
+                                     Text="{Binding LoginModel.Password}" />
+
+                <!-- Remember me? -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding LoginModel.RememberMe}" HorizontalOptions="Start"/>
+                    <Label Text="{extensions:Translate Account.Login.Fields.RememberMe}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="RememberMeLabel_OnTapped" NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="3" Spacing="14" VerticalOptions="End" Padding="0,20">
+                <!-- Login Button -->
+                <Button Text="{extensions:Translate Account.Login.LoginButton}" 
+                        Clicked="Login_OnClicked"
+                        HorizontalOptions="FillAndExpand" 
+                        Style="{ StaticResource DarkGreenButtonStyle }" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</customer:LoginPageXaml>

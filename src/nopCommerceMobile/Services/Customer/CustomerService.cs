@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.RequestProvider;
-using nopCommerceMobile.ViewModels.Customer;
 
 namespace nopCommerceMobile.Services.Customer
 {
@@ -50,6 +49,13 @@ namespace nopCommerceMobile.Services.Customer
                 return customerModel;
 
             return new CustomerModel();
+        }
+
+        public async Task<CustomerModel> LoginAsync(LoginModel model)
+        {
+            var uri = $"{ApiUrlBase}/login";
+
+            return await _requestProvider.PostAsync<CustomerModel,LoginModel>(uri, model);
         }
     }
 }

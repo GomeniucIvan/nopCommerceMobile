@@ -26,7 +26,6 @@ namespace nopCommerceMobile.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Splat.Resource.String.library_name = global::nopCommerceMobile.Droid.Resource.String.library_name;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::nopCommerceMobile.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::nopCommerceMobile.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::nopCommerceMobile.Droid.Resource.Attribute.font;
@@ -6896,31 +6895,28 @@ namespace nopCommerceMobile.Droid
 			public const int hide_bottom_view_on_scroll_behavior = 2131492909;
 			
 			// aapt resource value: 0x7F0C002E
-			public const int library_name = 2131492910;
+			public const int mtrl_chip_close_icon_content_description = 2131492910;
 			
 			// aapt resource value: 0x7F0C002F
-			public const int mtrl_chip_close_icon_content_description = 2131492911;
+			public const int password_toggle_content_description = 2131492911;
 			
 			// aapt resource value: 0x7F0C0030
-			public const int password_toggle_content_description = 2131492912;
+			public const int path_password_eye = 2131492912;
 			
 			// aapt resource value: 0x7F0C0031
-			public const int path_password_eye = 2131492913;
+			public const int path_password_eye_mask_strike_through = 2131492913;
 			
 			// aapt resource value: 0x7F0C0032
-			public const int path_password_eye_mask_strike_through = 2131492914;
+			public const int path_password_eye_mask_visible = 2131492914;
 			
 			// aapt resource value: 0x7F0C0033
-			public const int path_password_eye_mask_visible = 2131492915;
+			public const int path_password_strike_through = 2131492915;
 			
 			// aapt resource value: 0x7F0C0034
-			public const int path_password_strike_through = 2131492916;
+			public const int search_menu_title = 2131492916;
 			
 			// aapt resource value: 0x7F0C0035
-			public const int search_menu_title = 2131492917;
-			
-			// aapt resource value: 0x7F0C0036
-			public const int status_bar_notification_info_overflow = 2131492918;
+			public const int status_bar_notification_info_overflow = 2131492917;
 			
 			static String()
 			{

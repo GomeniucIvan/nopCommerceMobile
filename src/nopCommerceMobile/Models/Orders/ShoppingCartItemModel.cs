@@ -3,7 +3,7 @@ using nopCommerceMobile.Models.Base;
 
 namespace nopCommerceMobile.Models.Orders
 {
-    public class ShoppingCartItemModel : BaseModel
+    public class ShoppingCartItemModel
     {
         /// <summary>
         /// Gets or sets the store identifier

@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using nopCommerceMobile.Exceptions;
 
@@ -32,6 +33,25 @@ namespace nopCommerceMobile.Services.RequestProvider
             string serialized = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
+        }
+
+        public async Task<TResult> PostAsync<TResult, TModel>(string uri, TModel data)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = new StringContent(JsonConvert.SerializeObject(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            TResult result = await Task.Run(() =>
+                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
+
+            return result;
         }
 
         private async Task HandleResponse(HttpResponseMessage response)

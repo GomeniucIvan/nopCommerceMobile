@@ -53,4 +53,9 @@
         /// </summary>
         public int PurchasedWithProductId { get; set; }
     }
+
+    public class CustomerRole : CustomerRoleModel
+    {
+
+    }
 }
