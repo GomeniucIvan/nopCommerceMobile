@@ -54,6 +54,17 @@ namespace nopCommerceMobile.Services.RequestProvider
             return result;
         }
 
+        public async void PostAsync<TModel>(string uri, TModel data)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = new StringContent(JsonConvert.SerializeObject(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            await httpClient.PostAsync(uri, content);
+        }
+
         private async Task HandleResponse(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)

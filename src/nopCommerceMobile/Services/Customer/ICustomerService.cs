@@ -10,5 +10,7 @@ namespace nopCommerceMobile.Services.Customer
         Task<RegisterModel> GetRegisterModelAsync();
         Task<CustomerModel> GetCurrentCustomerModelAsync();
         Task<CustomerModel> LoginAsync(LoginModel model);
+        void LogoutCustomer();
+        void SetCurrentCustomer();
     }
 }

@@ -1,21 +1,38 @@
 ﻿using System;
+using System.IO;
 using nopCommerceMobile.Models.Customer;
+using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Customer;
+using SQLite;
 
 namespace nopCommerceMobile.Views.Customer
 {
     public abstract class CustomerViewXaml : ModelBoundContentView<CustomerViewModel> { }
     public partial class CustomerView : CustomerViewXaml
     {
+        #region Fields
+
+        private ICustomerService _customerService;
         public static CustomerView View;
+
+        #endregion
+
+        #region Ctor
+
         public CustomerView()
         {
             InitializeComponent();
             View = this;
+
             if (BindingContext == null)
                 BindingContext = new CustomerViewModel();
+
+            if (_customerService == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
         }
+
+        #endregion
 
         protected override async void OnParentSet()
         {
@@ -63,6 +80,14 @@ namespace nopCommerceMobile.Views.Customer
 
         private void RecentlyViewedProducts_OnTapped(object sender, EventArgs e)
         {
+        }
+
+        private async void Logout_OnTapped(object sender, EventArgs e)
+        {
+            //add popup yes/no TODO
+            _customerService.LogoutCustomer();
+
+            await ViewModel.InitializeAsync();
         }
     }
 }

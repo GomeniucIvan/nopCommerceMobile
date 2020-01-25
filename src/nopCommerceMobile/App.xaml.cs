@@ -56,66 +56,7 @@ namespace nopCommerceMobile
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "nopCommerce.db");
             var database = new SQLiteAsyncConnection(databasePath);
 
-            //customer table
-            var customerTable = await database.GetTableInfoAsync(nameof(Customer));
-            if (customerTable.Count == 0)
-            {
-                await database.CreateTableAsync<Customer>();
-            }
-            var customer = await database.Table<Customer>().CountAsync();
-            if (customer == 0)
-            {
-                CurrentCostumer = await _customerService.GetCurrentCustomerModelAsync();
-                await database.InsertAsync(new Customer()
-                {
-                    CustomerGuid = CurrentCostumer.CustomerGuid,
-                    Email = CurrentCostumer.Email,
-                    CustomerRoles = CurrentCostumer.CustomerRoles,
-                    FirstName = CurrentCostumer.FirstName,
-                    LastName = CurrentCostumer.LastName
-                });
-            }
-            else
-            {
-                var dbCustomer = await database.Table<Customer>().FirstOrDefaultAsync();
-                CurrentCostumer = new CustomerModel()
-                {
-                    CustomerGuid = dbCustomer.CustomerGuid,
-                    Email = dbCustomer.Email,
-                    CustomerRoles = dbCustomer.CustomerRoles
-                };
-            }
-
-            //customer role table
-            var customerRoleTable = await database.GetTableInfoAsync(nameof(CustomerRole));
-            if (customerRoleTable.Count == 0)
-            {
-                await database.CreateTableAsync<CustomerRole>();
-            }
-            var customerRole = await database.Table<CustomerRole>().CountAsync();
-            if (customerRole == 0)
-            {
-                foreach (var currentCustomerRole in CurrentCostumer.CustomerRoles)
-                {
-                    await database.InsertAsync(new CustomerRole()
-                    {
-                        Name = currentCustomerRole.Name,
-                        SystemName = currentCustomerRole.SystemName,
-                        Active = currentCustomerRole.Active
-                    });
-                }
-
-            }
-            else
-            {
-                var dbCustomerRoles = await database.Table<CustomerRole>().ToListAsync();
-                CurrentCostumer.CustomerRoles = dbCustomerRoles.Select(v => new CustomerRoleModel()
-                {
-                    Name = v.Name,
-                    SystemName = v.SystemName
-                }).ToList();
-            }
-
+            _customerService.SetCurrentCustomer();
             //locale resource table
             var localeResourceTable = await database.GetTableInfoAsync(nameof(LocaleResource));
             if (localeResourceTable.Count == 0)
@@ -138,7 +79,7 @@ namespace nopCommerceMobile
             }
             else
             {
-                var dbLocaleResources = await database.Table<LocaleResource>().ToListAsync();
+                var dbLocaleResources = await database.Table<LocaleResource>().ToListAsync().ConfigureAwait(true);
                 LocaleResources = dbLocaleResources.Select(v => new LocaleResourceModel()
                 {
                     LanguageId = v.LanguageId,

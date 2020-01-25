@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
-using nopCommerceMobile.Models.Topics;
 using nopCommerceMobile.Services.Customer;
-using nopCommerceMobile.Services.Topic;
 using nopCommerceMobile.ViewModels.Base;
 
 namespace nopCommerceMobile.ViewModels.Customer
@@ -51,9 +49,8 @@ namespace nopCommerceMobile.ViewModels.Customer
         {
             IsBusy = true;
 
-            var customer = App.CurrentCostumer;
-            CustomerModel = customer;
-            IsRegistered = customer.IsRegistered();
+            CustomerModel = App.CurrentCostumer;
+            IsRegistered = CustomerModel.IsRegistered();
 
             IsBusy = false;
             IsDataLoaded = true;

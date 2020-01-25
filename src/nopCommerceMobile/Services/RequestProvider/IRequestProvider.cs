@@ -7,5 +7,6 @@ namespace nopCommerceMobile.Services.RequestProvider
     {
         Task<TResult> GetAsync<TResult>(string uri);
         Task<TResult> PostAsync<TResult, TModel>(string uri, TModel data);
+        void PostAsync<TModel>(string uri, TModel data);
     }
 }

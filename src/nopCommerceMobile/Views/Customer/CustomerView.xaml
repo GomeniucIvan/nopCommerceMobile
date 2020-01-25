@@ -62,18 +62,20 @@
                 </Label>
             </Grid>
 
-            <Grid ColumnSpacing="0" IsVisible="{Binding IsRegistered}" Padding="0,10,0,0">
+            <Grid ColumnSpacing="0" IsVisible="{Binding IsRegistered}" Padding="20,20,20,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Style="{StaticResource CenteredLabel}" 
+                <Label HorizontalTextAlignment="Start"
+                       HorizontalOptions="Start"
                        Text="{Binding CustomerModel.FullName}" 
-                       FontSize="{StaticResource LargeFontSize}"></Label>
+                       FontSize="{StaticResource LargeFontSize}"/>
 
-                <Label Grid.Column="1" Style="{StaticResource CenteredLabel}" 
+                <Label Grid.Column="1"
+                       HorizontalOptions="End"
                        Text="Avatar"
-                       FontSize="{StaticResource LargeFontSize}"></Label>
+                       FontSize="{StaticResource LargeFontSize}"/>
             </Grid>
 
             <Grid ColumnSpacing="0" Padding="20">
@@ -186,23 +188,30 @@
                     <BoxView BackgroundColor="Gainsboro" Margin="20,0,20,0" HeightRequest="1"/>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="News"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate News}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="News_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="Blog"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Blog}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Blog_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="Recently viewed products"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Products.RecentlyViewedProducts}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RecentlyViewedProducts_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Account.Logout}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Logout_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 

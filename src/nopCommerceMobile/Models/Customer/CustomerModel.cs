@@ -137,6 +137,17 @@ namespace nopCommerceMobile.Models.Customer
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        private string _fullName;
+        public string FullName
+        {
+            get => $"{FirstName} {LastName}";
+            set
+            {
+                _fullName = value;
+                RaisePropertyChanged(()=> FullName);
+            }
+        }
+
         #region Navigation properties
 
         /// <summary>
@@ -284,8 +295,6 @@ namespace nopCommerceMobile.Models.Customer
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public string FullName => $"{FirstName} {LastName}";
 
         #region Navigation properties
 
