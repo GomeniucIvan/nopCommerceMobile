@@ -100,5 +100,10 @@ namespace nopCommerceMobile.ViewModels
             IsBusy = false;
             IsDataLoaded = true;
         }
+
+        public async Task<CategoryModel> GetCategoryByIdAsync(int categoryId)
+        {
+            return await _catalogService.GetCategoryByIdAsync(categoryId);
+        }
     }
 }

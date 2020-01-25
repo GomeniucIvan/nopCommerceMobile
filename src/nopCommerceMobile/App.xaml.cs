@@ -9,9 +9,9 @@ using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.Services.Localization;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
+using nopCommerceMobile.Views;
 using SQLite;
 using Xamarin.Forms;
-using NavigationPage = nopCommerceMobile.Views.NavigationPage;
 
 namespace nopCommerceMobile
 {
@@ -91,7 +91,11 @@ namespace nopCommerceMobile
 
         public static Page GetMainPage()
         {
-            var page = new NavigationPage() { BindingContext = new NavigationBaseViewModel() };
+            var appNavigationPage = new AppNavigationPage()
+            {
+                BindingContext = new AppNavigationBaseViewModel()
+            };
+            var page = new NavigationPage(appNavigationPage);
             return page;
         }
 

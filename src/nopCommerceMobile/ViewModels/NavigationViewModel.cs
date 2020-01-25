@@ -3,11 +3,10 @@ using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Navigation;
 using nopCommerceMobile.Views;
 using Xamarin.Forms;
-using NavigationPage = nopCommerceMobile.Views.NavigationPage;
 
 namespace nopCommerceMobile.ViewModels
 {
-    public class NavigationBaseViewModel : BaseViewModel
+    public class AppNavigationBaseViewModel : BaseViewModel
     {
         private bool _isRegisteredCustomer;
         public bool IsRegisteredCustomer
@@ -51,7 +50,7 @@ namespace nopCommerceMobile.ViewModels
                 _selectedNavigationPage = value;
                 RaisePropertyChanged(() => SelectedNavigationPage);
 
-                NavigationPage.Page.SetPageContentPage();
+                AppNavigationPage.Page.SetPageContentPage();
             }
         }
 

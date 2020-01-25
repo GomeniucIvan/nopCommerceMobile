@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <StackLayout VerticalOptions="FillAndExpand" >
+    <StackLayout VerticalOptions="FillAndExpand">
         <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
                                Scale="1.2"
                                Style="{StaticResource ActivityIndicatorStyle}" 

@@ -1,44 +1,24 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using FFImageLoading.Forms;
 using nopCommerceMobile.Models.Catalog;
-using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Catalog;
-using nopCommerceMobile.Views.Catalog;
 using Xamarin.Forms;
 
-namespace nopCommerceMobile.Views
+namespace nopCommerceMobile.Views.Catalog
 {
-    public abstract class HomeViewXaml : ModelBoundContentView<HomeBaseViewModel> { }
-    public partial class HomeView : HomeViewXaml
+    public abstract class CategoriesPageXaml : ModelBoundContentPage<CategoriesViewModel> { }
+    public partial class CategoriesPage : CategoriesPageXaml
     {
-        public static HomeView View;
-        public HomeView()
+        public CategoriesPage()
         {
             InitializeComponent();
-            View = this;
-            if (BindingContext == null)
-                BindingContext = new HomeBaseViewModel();
         }
-
-        protected override async void OnParentSet()
-        {
-            base.OnParentSet();
-            await ViewModel.InitializeAsync();
-        }
-
-        //protected override async void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    await ViewModel.InitializeAsync();
-        //}
 
         private async void Category_OnClick(object sender, EventArgs e)
         {
             var view = (View)sender;
-            var selectedCategory = (CategoryModel)view.BindingContext;
+            var selectedCategory = (SubCategoryModel)view.BindingContext;
             var category = await ViewModel.GetCategoryByIdAsync(selectedCategory.Id);
 
             if (category.SubCategories.Any())
@@ -75,28 +55,5 @@ namespace nopCommerceMobile.Views
                 }
             }
         }
-
-        private void Product_OnClick(object sender, EventArgs e)
-        {
-        }
-
-        private void News_OnClick(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Slider_OnClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        {
-            var view = (CarouselView)sender;
-            var slider = (SliderModel)view.CurrentItem;
-
-            SliderBackground.Source = slider.Image;
-        }
     }
-
 }

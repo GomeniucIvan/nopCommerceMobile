@@ -71,5 +71,12 @@ namespace nopCommerceMobile.Services.Catalog
             else
                 return new ObservableCollection<NewsItemModel>();
         }
+
+        public Task<CategoryModel> GetCategoryByIdAsync(int categoryId)
+        {
+            var uri = $"{ApiUrlBase}/categories/{categoryId}";
+
+            return _requestProvider.GetAsync<CategoryModel>(uri);
+        }
     }
 }

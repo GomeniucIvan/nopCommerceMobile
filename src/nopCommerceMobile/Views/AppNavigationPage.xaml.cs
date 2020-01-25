@@ -7,17 +7,17 @@ using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views
 {
-    public abstract class NavigationPageXaml : ModelBoundContentPage<NavigationBaseViewModel> { }
-    public partial class NavigationPage : NavigationPageXaml
+    public abstract class NavigationPageXaml : ModelBoundContentPage<AppNavigationBaseViewModel> { }
+    public partial class AppNavigationPage : NavigationPageXaml
     {
-        public static NavigationPage Page;
+        public static AppNavigationPage Page;
 
-        public NavigationPage()
+        public AppNavigationPage()
         {
             InitializeComponent();
             Page = this;
             if (BindingContext == null)
-                BindingContext = new NavigationBaseViewModel();
+                BindingContext = new AppNavigationBaseViewModel();
         }
 
         protected override async void OnAppearing()
