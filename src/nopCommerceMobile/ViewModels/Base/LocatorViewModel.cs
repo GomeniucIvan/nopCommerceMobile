@@ -31,6 +31,7 @@ namespace nopCommerceMobile.ViewModels.Base
             _container.Register<ICustomerService, CustomerService>();
             _container.Register<ITopicService, TopicService>();
             _container.Register<ILocalizationService, LocalizationService>();
+            _container.Register<IProductService, ProductService>();
         }
 
         public static T Resolve<T>() where T : class

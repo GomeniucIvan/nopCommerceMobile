@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
             <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
+            <converters:ListContainsMoreThanOneConverter x:Key="ListContainsMoreThanOneConverter"></converters:ListContainsMoreThanOneConverter>
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -33,24 +34,13 @@
             <!--Slider -->
             <StackLayout IsVisible="{Binding Sliders, Converter={StaticResource AnyItemInListConverter}}">
                 <Grid>
-                    <pancakeView:PancakeView CornerRadius="0,0,80,80">
-                        <forms:CachedImage
-                            Margin="-10,0,-10,0"
-                            FadeAnimationEnabled="true"
-                            x:Name="SliderBackground"
-                            Aspect="AspectFill"
-                            HeightRequest="100"
-                            DownsampleHeight="20"
-                            Opacity="0.9"
-                            ScaleX="1.4"/>
-                    </pancakeView:PancakeView>
 
-                    <!--Add slider indicators and loop functionality TODO-->
+                    <!--Add loop functionality, add auto change TODO-->
                     <Grid Margin="10,10,10,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140"/>
                         </Grid.RowDefinitions>
-                        <CarouselView ItemsSource="{Binding Sliders}" CurrentItemChanged="SliderView_OnCurrentItemChanged">
+                        <CarouselView x:Name="SliderCarouselView" ItemsSource="{Binding Sliders}" IsScrollAnimated="True">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -68,6 +58,16 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
+
+                        <IndicatorView 
+                            IsVisible="{Binding Sliders, Converter={StaticResource ListContainsMoreThanOneConverter}}"
+                            IndicatorColor="Gray"
+                            Grid.Row="0"
+                            SelectedIndicatorColor="Black"
+                            VerticalOptions="End"
+                            Padding="0,0,0,10"
+                            IndicatorSize="10" HorizontalOptions="Center"
+                            IndicatorView.ItemsSourceBy="SliderCarouselView"/>
                     </Grid>
                 </Grid>
             </StackLayout>

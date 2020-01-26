@@ -24,6 +24,7 @@ namespace nopCommerceMobile.Droid.Activities
             Xamarin.Essentials.Platform.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(null);
 
+            Forms.SetFlags("IndicatorView_Experimental");
             Forms.Init(this, bundle);
 
             LoadApplication(new App());

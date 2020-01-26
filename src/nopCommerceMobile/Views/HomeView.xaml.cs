@@ -90,13 +90,13 @@ namespace nopCommerceMobile.Views
 
         }
 
-        private void SliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        {
-            var view = (CarouselView)sender;
-            var slider = (SliderModel)view.CurrentItem;
+        //private void SliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
+        //{
+        //    var view = (CarouselView)sender;
+        //    var slider = (SliderModel)view.CurrentItem;
 
-            SliderBackground.Source = slider.Image;
-        }
+        //    SliderBackground.Source = slider.Image;
+        //}
     }
 
 }

@@ -78,5 +78,7 @@ namespace nopCommerceMobile.Services.Catalog
 
             return _requestProvider.GetAsync<CategoryModel>(uri);
         }
+
+
     }
 }

@@ -24,6 +24,20 @@ namespace nopCommerceMobile.Models.Catalog
 
     #region Nested Classes
 
+    public class ProductDetailsModel : ProductModel
+    {
+        public ProductDetailsModel()
+        {
+            PictureModels = new List<PictureModel>();
+            AssociatedProducts = new List<ProductDetailsModel>();
+            ProductAttributes = new List<ProductAttributeModel>();
+        }
+
+        public IList<PictureModel> PictureModels { get; set; }
+        public IList<ProductDetailsModel> AssociatedProducts { get; set; }
+        public IList<ProductAttributeModel> ProductAttributes { get; set; }
+    }
+
     public class ProductPriceModel : BaseModel
     {
         public string OldPrice { get; set; }
@@ -55,6 +69,11 @@ namespace nopCommerceMobile.Models.Catalog
         public string ColorSquaresRgb { get; set; }
 
         public int AttributeTypeId { get; set; }
+    }
+
+    public class ProductAttributeModel
+    {
+        public string Name { get; set; }
     }
 
     #endregion

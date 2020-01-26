@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<catalog:ProductPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+                 xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
+                 xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 mc:Ignorable="d"
+                 x:Class="nopCommerceMobile.Views.Catalog.ProductPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+            <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
+            <converters:ListContainsMoreThanOneConverter x:Key="ListContainsMoreThanOneConverter"></converters:ListContainsMoreThanOneConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <CarouselView x:Name="PictureCarouselView" Grid.Row="0" ItemsSource="{Binding Product.PictureModels}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <forms:CachedImage Source="{ Binding ImageUrl }" Aspect="Fill" FadeAnimationEnabled="true"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView 
+                    IsVisible="{Binding Product.PictureModels, Converter={StaticResource ListContainsMoreThanOneConverter}}"
+                    IndicatorColor="Gray"
+                    Grid.Row="0"
+                    SelectedIndicatorColor="Black"
+                    VerticalOptions="End"
+                    Padding="0,0,0,20"
+                    IndicatorSize="10" HorizontalOptions="Center"
+                    IndicatorView.ItemsSourceBy="PictureCarouselView"/>
+
+                <!--Content-->
+            </Grid>
+        </StackLayout>
+
+    </ScrollView>
+</catalog:ProductPageXaml>
