@@ -15,7 +15,16 @@ namespace nopCommerceMobile.Models.Catalog
         public string Name { get; set; }
 
         //price
-        public ProductPriceModel ProductPrice { get; set; }
+        private ProductPriceModel _productPrice;
+        public ProductPriceModel ProductPrice
+        {
+            get => _productPrice;
+            set
+            {
+                _productPrice = value;
+                RaisePropertyChanged(()=> ProductPrice);
+            }
+        }
         //picture
         public PictureModel DefaultPictureModel { get; set; }
         //specification attributes
@@ -32,6 +41,9 @@ namespace nopCommerceMobile.Models.Catalog
             AssociatedProducts = new List<ProductDetailsModel>();
             ProductAttributes = new List<ProductAttributeModel>();
         }
+
+        public string ShortDescription { get; set; }
+        public string FullDescription { get; set; }
 
         public IList<PictureModel> PictureModels { get; set; }
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }

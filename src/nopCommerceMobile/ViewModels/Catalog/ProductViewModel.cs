@@ -36,6 +36,18 @@ namespace nopCommerceMobile.ViewModels.Catalog
             }
         }
 
+        //based on this bool add background black opacity, disable scrolling, and add tapgesture to the grid to close current model
+        private bool _isBottomModelVisible;
+        public bool IsBottomModelVisible
+        {
+            get => _isBottomModelVisible;
+            set
+            {
+                _isBottomModelVisible = value;
+                RaisePropertyChanged(()=> IsBottomModelVisible);
+            }
+        }
+
         public async Task InitializeAsync()
         {
             if (!IsDataLoaded)

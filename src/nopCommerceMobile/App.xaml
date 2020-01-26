@@ -32,17 +32,30 @@
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                 <On Platform="iOS" Value="fa-solid-900" />
             </OnPlatform>
-
             <OnPlatform x:Key="IoniconsFontFamily" x:TypeArguments="x:String">
                 <On Platform="Android" Value="ionicons.ttf#Ionicons" />
                 <On Platform="iOS" Value="ionicons" />
             </OnPlatform>
 
             <!--Xamarin base templates-->
+            <Style TargetType="ContentView" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColor}" />
+            </Style>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageColor}" />
+            </Style>
+
             <Style TargetType="Entry" ApplyToDerivedTypes="true">
                 <Setter Property="TextColor" Value="DarkSlateGray" />
                 <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
                 <!--Add border color -->
+            </Style>
+            <Style TargetType="StackLayout" ApplyToDerivedTypes="true">
+                <Setter Property="Spacing" Value="0" />
+            </Style>
+            <Style TargetType="Grid" ApplyToDerivedTypes="true">
+                <Setter Property="RowSpacing" Value="0" />
+                <Setter Property="ColumnSpacing" Value="5" />
             </Style>
 
             <!--Buttons-->
@@ -93,6 +106,7 @@
                 <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
                 <Setter Property="TextType" Value="Html" />
             </Style>
+
             <!-- Common -->
             <Style x:Key="BaseScrollView" TargetType="ScrollView">
                 <Setter Property="Margin" Value="0,5,0,0" />
@@ -116,10 +130,7 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             </Style>
-            <!-- Pages -->
-            <Style TargetType="ContentView" ApplyToDerivedTypes="True">
-                <Setter Property="BackgroundColor" Value="{StaticResource PageColor}" />
-            </Style>
+
             <!-- Stack layouts -->
             <Style x:Key="NavigationTabContainer" TargetType="StackLayout">
                 <Setter Property="Spacing" Value="0" />

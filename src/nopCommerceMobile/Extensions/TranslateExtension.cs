@@ -53,7 +53,6 @@ namespace nopCommerceMobile.Extensions
             private readonly ResourceManager _manager;
             private readonly string _key;
             private readonly string _currentCulture;
-
             public event PropertyChangedEventHandler PropertyChanged;
 
             public BindingSource(ResourceManager manager, string key, string currentCulture)
@@ -63,7 +62,6 @@ namespace nopCommerceMobile.Extensions
                 _currentCulture = currentCulture;
             }
 
-            //return _manager.GetString(_key) ?? _key;
             public string Text => GetStringValue(_key, _currentCulture).ToString();
 
             private string GetStringValue(string key, string languageCulture)

@@ -21,8 +21,8 @@ namespace nopCommerceMobile.Droid.Renderers
             if (Control != null)
             {
                 GradientDrawable gd = new GradientDrawable();
-                gd.SetColor(global::Android.Graphics.Color.Transparent);
-                Control.SetBackgroundDrawable(gd);
+                gd.SetColor(Android.Graphics.Color.Transparent);
+                Control.Background = gd;
                 Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
                 //Control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.White));
             }

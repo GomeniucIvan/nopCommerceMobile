@@ -6,6 +6,8 @@
                  xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
                  xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
                  xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                 xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
                  mc:Ignorable="d"
                  x:Class="nopCommerceMobile.Views.Catalog.ProductPage">
 
@@ -14,37 +16,159 @@
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
             <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
             <converters:ListContainsMoreThanOneConverter x:Key="ListContainsMoreThanOneConverter"></converters:ListContainsMoreThanOneConverter>
+            <converters:NotEmptyStringConverter x:Key="NotEmptyStringConverter"></converters:NotEmptyStringConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView VerticalOptions="FillAndExpand">
-        <StackLayout Spacing="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="400"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+    <StackLayout Spacing="0">
+        <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
+                               Scale="1.2"
+                               Style="{StaticResource ActivityIndicatorStyle}" 
+                               Color="{StaticResource PrimaryColor}" IsRunning="True"/>
 
-                <CarouselView x:Name="PictureCarouselView" Grid.Row="0" ItemsSource="{Binding Product.PictureModels}">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <forms:CachedImage Source="{ Binding ImageUrl }" Aspect="Fill" FadeAnimationEnabled="true"/>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                <IndicatorView 
-                    IsVisible="{Binding Product.PictureModels, Converter={StaticResource ListContainsMoreThanOneConverter}}"
-                    IndicatorColor="Gray"
-                    Grid.Row="0"
-                    SelectedIndicatorColor="Black"
-                    VerticalOptions="End"
-                    Padding="0,0,0,20"
-                    IndicatorSize="10" HorizontalOptions="Center"
-                    IndicatorView.ItemsSourceBy="PictureCarouselView"/>
+        <Grid IsVisible="{Binding IsDataLoaded}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
 
-                <!--Content-->
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <CarouselView x:Name="PictureCarouselView" Grid.Row="0" ItemsSource="{Binding Product.PictureModels}">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <forms:CachedImage Source="{ Binding ImageUrl }" Aspect="Fill" FadeAnimationEnabled="true"/>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView IsVisible="{Binding Product.PictureModels, Converter={StaticResource ListContainsMoreThanOneConverter}}"
+                                   IndicatorColor="Gray"
+                                   Grid.Row="0"
+                                   SelectedIndicatorColor="Black"
+                                   VerticalOptions="End"
+                                   Padding="0,0,0,20"
+                                   IndicatorSize="10" HorizontalOptions="Center"
+                                   IndicatorView.ItemsSourceBy="PictureCarouselView"/>
+
+                    <!--Content-->
+                    <StackLayout Grid.Row="1" Spacing="20">
+                        <Frame BackgroundColor="White" CornerRadius="3" Padding="15,0,15,0">
+                            <StackLayout Padding="0,20,0,20">
+                                <!--Main price-->
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Product.ProductPrice.Price}" 
+                                       FontSize="{StaticResource LargeFontSize}" 
+                                       FontAttributes="Bold" 
+                                       VerticalOptions="Center" />
+
+                                    <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.HearthOutline}" 
+                                                       HorizontalOptions="EndAndExpand"
+                                                       VerticalOptions="Center" 
+                                                       FontSize="30"  />
+                                </StackLayout>
+
+                                <!--text-decoration: line-through; Todo-->
+                                <!--Old price-->
+                                <Label Text="{Binding Product.ProductPrice.OldPrice}" 
+                                   FontSize="{StaticResource LargeFontSize}" 
+                                   FontAttributes="Bold" 
+                                   VerticalOptions="Center" />
+
+                                <!--Name-->
+                                <Label Text="{Binding Product.Name}" 
+                                   FontSize="{StaticResource LargeFontSize}" 
+                                   FontAttributes="Bold" 
+                                   VerticalOptions="Center" />
+
+                                <!--Star rank, reviews Todo-->
+
+                                <!--Short description-->
+                                <Label Text="{Binding Product.ShortDescription}" FontSize="{StaticResource BaseFontSize}" />
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame BackgroundColor="White" CornerRadius="3" Padding="15,0,15,0">
+                            <StackLayout Padding="0,20,0,20">
+
+                                <!--Spec-->
+                                <Label Text="{extensions:Translate Products.Specs}" 
+                                   FontSize="{StaticResource BaseFontSize}" 
+                                   IsVisible="{Binding Product.SpecificationAttributeModels, Converter={StaticResource AnyItemInListConverter}}"
+                                   FontAttributes="Bold" 
+                                   Padding="5"
+                                   TextColor="{DynamicResource TextColor}"
+                                   VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ProductSpec_OnTapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <BoxView BackgroundColor="Gainsboro"
+                                     IsVisible="{Binding Product.SpecificationAttributeModels, Converter={StaticResource AnyItemInListConverter}}"
+                                     Margin="0"
+                                     HeightRequest="1"/>
+
+                                <!--Description-->
+                                <Label Text="{extensions:Translate Account.VendorInfo.Description}" 
+                                       FontSize="{StaticResource BaseFontSize}" 
+                                       IsVisible="{Binding Product.FullDescription, Converter={StaticResource NotEmptyStringConverter}}"
+                                       FontAttributes="Bold" 
+                                       Padding="5"
+                                       TextColor="{DynamicResource TextColor}"
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="FullDescription_OnTapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <BoxView BackgroundColor="Gainsboro"
+                                         IsVisible="{Binding Product.FullDescription, Converter={StaticResource NotEmptyStringConverter}}"
+                                         Margin="0"
+                                         HeightRequest="1"/>
+
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+
+            <Grid Grid.Row="1" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout BackgroundColor="LightPink" VerticalOptions="FillAndExpand">
+                    <Label Text="{extensions:Translate ShoppingCart.AddToCart}"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="Red"
+                           Style="{StaticResource CenteredLabel}"
+                           FontSize="{StaticResource BaseFontSize}"/>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1" BackgroundColor="Red">
+                    <Label Text="ShopCart"
+                           TextColor="White"
+                           VerticalOptions="CenterAndExpand"
+                           Style="{StaticResource CenteredLabel}"
+                           FontSize="{StaticResource BaseFontSize}"/>
+                </StackLayout>
+
             </Grid>
-        </StackLayout>
 
-    </ScrollView>
+            <Frame x:Name="AppearingFrame" 
+                   HasShadow="True" 
+                   Padding="0" 
+                   Grid.RowSpan="2"
+                   Margin="0" 
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="EndAndExpand"
+                   CornerRadius="5" 
+                   BackgroundColor="White"/>
+
+        </Grid>
+    </StackLayout>
+
 </catalog:ProductPageXaml>
