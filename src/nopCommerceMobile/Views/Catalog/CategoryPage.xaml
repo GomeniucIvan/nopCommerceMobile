@@ -16,18 +16,35 @@
                      Clicked="Filter_OnClick"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout VerticalOptions="FillAndExpand">
-        <!--find a way to implement ItemTapped event TODO-->
-        <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0">
-            <components:ItemsViewGrid.ItemTemplate>
-                <DataTemplate>
-                    <partial:ItemViewTemplate IsProduct="True">
-                        <View.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Product_OnClick" />
-                        </View.GestureRecognizers>
-                    </partial:ItemViewTemplate>
-                </DataTemplate>
-            </components:ItemsViewGrid.ItemTemplate>
-        </components:ItemsViewGrid>
-    </StackLayout>
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Vertical">
+            <!--find a way to implement ItemTapped event TODO-->
+            <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0">
+                <components:ItemsViewGrid.ItemTemplate>
+                    <DataTemplate>
+                        <partial:ItemViewTemplate IsProduct="True">
+                            <View.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Product_OnClick" />
+                            </View.GestureRecognizers>
+                        </partial:ItemViewTemplate>
+                    </DataTemplate>
+                </components:ItemsViewGrid.ItemTemplate>
+            </components:ItemsViewGrid>
+        </StackLayout>
+
+        <Frame x:Name="AppearingFrame" 
+               HasShadow="True" 
+               Padding="0" 
+               Margin="0" 
+               HorizontalOptions="EndAndExpand"
+               VerticalOptions="FillAndExpand"
+               CornerRadius="0" 
+               BackgroundColor="White"/>
+    </Grid>
+
+
 </catalog:CategoryPageXaml>

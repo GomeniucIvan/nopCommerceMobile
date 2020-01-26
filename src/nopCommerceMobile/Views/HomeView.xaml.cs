@@ -29,12 +29,6 @@ namespace nopCommerceMobile.Views
             await ViewModel.InitializeAsync();
         }
 
-        //protected override async void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    await ViewModel.InitializeAsync();
-        //}
-
         private async void Category_OnClick(object sender, EventArgs e)
         {
             var view = (View)sender;
@@ -76,8 +70,21 @@ namespace nopCommerceMobile.Views
             }
         }
 
-        private void Product_OnClick(object sender, EventArgs e)
+        private async void Product_OnClick(object sender, EventArgs e)
         {
+            var view = (View)sender;
+            var selectedProduct = (ProductModel)view.BindingContext;
+
+            var productPage = new ProductPage()
+            {
+                Title = selectedProduct.Name,
+                BindingContext = new ProductViewModel()
+                {
+                    ProductId = selectedProduct.Id
+                }
+            };
+
+            await Navigation.PushAsync(productPage);
         }
 
         private void News_OnClick(object sender, EventArgs e)

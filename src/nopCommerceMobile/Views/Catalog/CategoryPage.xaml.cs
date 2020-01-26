@@ -31,9 +31,29 @@ namespace nopCommerceMobile.Views.Catalog
             await Navigation.PushAsync(productPage);
         }
 
-        private void Filter_OnClick(object sender, EventArgs e)
+        private async void Filter_OnClick(object sender, EventArgs e)
         {
-            //add website filters from product spec, than add filter modal page
+            var mainStackLayout = new StackLayout()
+            {
+                WidthRequest = Width - 50,
+                Padding = 0
+            };
+
+            var bottomButtonsStackLayout = new Grid();
+            bottomButtonsStackLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(5, GridUnitType.Star) });
+            bottomButtonsStackLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(5, GridUnitType.Star) });
+
+            //var resetLabel = new Label()
+            //{
+            //    Text = "Reset"
+            //};
+
+            //bottomButtonsStackLayout.Children.Add(topLeft, 0, 0);
+            //bottomButtonsStackLayout.Children.Add(topRight, 1, 0);
+
+            AppearingFrame.Content = mainStackLayout;
+            ViewModel.IsRightModalVisible = true;
+            await AppearingFrame.TranslateTo(0, 0);
         }
     }
 }

@@ -32,5 +32,16 @@ namespace nopCommerceMobile.ViewModels.Catalog
                 RaisePropertyChanged(() => Category);
             }
         }
+
+        private bool _isRightModalVisible;
+        public bool IsRightModalVisible
+        {
+            get => _isRightModalVisible;
+            set
+            {
+                _isRightModalVisible = value;
+                RaisePropertyChanged(()=> IsRightModalVisible);
+            }
+        }
     }
 }

@@ -161,6 +161,7 @@
             <Frame x:Name="AppearingFrame" 
                    HasShadow="True" 
                    Padding="0" 
+                   Grid.Row="0"
                    Grid.RowSpan="2"
                    Margin="0" 
                    HorizontalOptions="FillAndExpand"
