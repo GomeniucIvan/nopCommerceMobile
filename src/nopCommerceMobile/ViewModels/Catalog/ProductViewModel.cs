@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.Services.Catalog;
+using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
 
 namespace nopCommerceMobile.ViewModels.Catalog
@@ -10,6 +12,7 @@ namespace nopCommerceMobile.ViewModels.Catalog
         #region Fields
 
         private IProductService _productService;
+        private ICustomerService _customerService;
 
         #endregion
 
@@ -19,6 +22,9 @@ namespace nopCommerceMobile.ViewModels.Catalog
         {
             if (_productService == null)
                 _productService = LocatorViewModel.Resolve<IProductService>();
+
+            if (_customerService == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
         }
 
         #endregion
@@ -48,6 +54,17 @@ namespace nopCommerceMobile.ViewModels.Catalog
             }
         }
 
+        private int _cartCount;
+        public int CartCount
+        {
+            get => _cartCount;
+            set
+            {
+                _cartCount = value;
+                RaisePropertyChanged(()=> CartCount);
+            }
+        }
+
         public async Task InitializeAsync()
         {
             if (!IsDataLoaded)
@@ -55,10 +72,27 @@ namespace nopCommerceMobile.ViewModels.Catalog
                 IsBusy = true;
 
                 Product = await _productService.GetProductByIdAsync(ProductId);
+                CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity);
 
                 IsBusy = false;
                 IsDataLoaded = true;
             }
+        }
+
+        public async Task AddProductToCartAsync()
+        {
+            IsBusy = true;
+
+            await _productService.AddProductToCartAsync(ProductId);
+            await RefreshCart();
+
+            IsBusy = false;
+        }
+
+        private async Task RefreshCart()
+        {
+            await _customerService.SetCurrentCustomer(true);
+            CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity); CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity);
         }
     }
 }

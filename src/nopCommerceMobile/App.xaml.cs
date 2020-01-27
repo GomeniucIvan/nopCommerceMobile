@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Localization;
 using nopCommerceMobile.Services.Customer;
@@ -15,9 +14,18 @@ using Xamarin.Forms;
 
 namespace nopCommerceMobile
 {
+    //remove from all pages default navigation TODO
+    //fix translator on first loading TODO
+    //add default image(for CachedImage plugin) TODO
+    //add web slider functionality TODO
+    //implement baerer auth TODO
+    //implement pagination TODO
+    //add web locale resources version (when value is updated or added update mobile db) TODO
+    //add web customer claims based on email/password TODO
+    //in cs files use styles/variables from app.xaml TODO
+
     public partial class App : Application
     {
-
         #region Fields
 
         private ICustomerService _customerService;
@@ -56,7 +64,7 @@ namespace nopCommerceMobile
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "nopCommerce.db");
             var database = new SQLiteAsyncConnection(databasePath);
 
-            _customerService.SetCurrentCustomer();
+            await _customerService.SetCurrentCustomer();
             //locale resource table
             var localeResourceTable = await database.GetTableInfoAsync(nameof(LocaleResource));
             if (localeResourceTable.Count == 0)

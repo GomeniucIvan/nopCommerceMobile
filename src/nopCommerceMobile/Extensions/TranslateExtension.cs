@@ -77,5 +77,18 @@ namespace nopCommerceMobile.Extensions
                 return result;
             }
         }
+
+        public static string Translate(string key)
+        {
+            var result = key;
+
+            if (App.LocaleResources != null && App.LocaleResources.Any())
+            {
+                var localeResource = App.LocaleResources.FirstOrDefault(v => v.ResourceName.ToLower() == key.ToLower());
+                result = localeResource != null ? localeResource.ResourceValue : key;
+            }
+
+            return result;
+        }
     }
 }

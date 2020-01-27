@@ -9,6 +9,7 @@
                  xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                  xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
                  mc:Ignorable="d"
+                 NavigationPage.HasNavigationBar="False"
                  x:Class="nopCommerceMobile.Views.Catalog.ProductPage">
 
     <ContentPage.Resources>
@@ -17,22 +18,24 @@
             <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
             <converters:ListContainsMoreThanOneConverter x:Key="ListContainsMoreThanOneConverter"></converters:ListContainsMoreThanOneConverter>
             <converters:NotEmptyStringConverter x:Key="NotEmptyStringConverter"></converters:NotEmptyStringConverter>
+            <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"></converters:GreaterThanZeroConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Spacing="0">
+    <AbsoluteLayout>
         <ActivityIndicator IsVisible="{Binding IsDataLoaded, Converter={StaticResource InverseBooleanConverter}}" 
-                               Scale="1.2"
-                               Style="{StaticResource ActivityIndicatorStyle}" 
-                               Color="{StaticResource PrimaryColor}" IsRunning="True"/>
+                           Scale="1.2"
+                           AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                           Style="{StaticResource ActivityIndicatorStyle}" 
+                           Color="{StaticResource PrimaryColor}" IsRunning="True"/>
 
-        <Grid IsVisible="{Binding IsDataLoaded}">
+        <Grid IsVisible="{Binding IsDataLoaded}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
 
-            <ScrollView>
+            <ScrollView Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
@@ -141,9 +144,11 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <StackLayout BackgroundColor="LightPink" VerticalOptions="FillAndExpand">
-                    <Label Text="{extensions:Translate ShoppingCart.AddToCart}"
+                    <Button Text="{extensions:Translate ShoppingCart.AddToCart}"
                            VerticalOptions="CenterAndExpand"
+                           Clicked="AddProductToCart_OnClicked"
                            TextColor="Red"
+                           BorderColor="Transparent"
                            Style="{StaticResource CenteredLabel}"
                            FontSize="{StaticResource BaseFontSize}"/>
                 </StackLayout>
@@ -170,6 +175,40 @@
                    BackgroundColor="White"/>
 
         </Grid>
-    </StackLayout>
+
+        <!--Find a way to add toolbar icons on the top of the page, hide when scroll down and show when scroll at the up?! TODO-->
+        
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand"
+                     AbsoluteLayout.LayoutFlags="WidthProportional"
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 50"
+                     IsVisible="{Binding IsDataLoaded}">
+
+            <helpers:ToolbarBackButton />
+
+            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center" VerticalOptions="Center" >
+                    <helpers:ToolbarCartButtonStackLayout/>
+
+                    <BoxView BackgroundColor="Red" 
+                             CornerRadius="10" 
+                             WidthRequest="18" 
+                             HeightRequest="18" 
+                             IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
+                             Margin="17,0,0,0"/>
+
+                    <Label Text="{Binding CartCount}"
+                           Margin="22,0,0,0" 
+                           IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
+                           TextColor="White" 
+                           Padding="0" 
+                           Style="{StaticResource CenteredLabel}" 
+                           HorizontalOptions="End"/>
+                </AbsoluteLayout>
+
+                <helpers:ToolbarMenuButton />
+            </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
 
 </catalog:ProductPageXaml>

@@ -37,34 +37,6 @@ namespace nopCommerceMobile.Views.Customer
                 ViewModel.IsBusy = true;
                 var response = await ViewModel.LoginCustomer();
 
-                App.CurrentCostumer = response;
-
-                //make interface for database TODO
-                var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "nopCommerce.db");
-                var database = new SQLiteAsyncConnection(databasePath);
-
-                //customer table
-                await database.UpdateAsync(new Models.Customer.Customer()
-                {
-                    CustomerGuid = App.CurrentCostumer.CustomerGuid,
-                    Email = App.CurrentCostumer.Email,
-                    CustomerRoles = App.CurrentCostumer.CustomerRoles,
-                    FirstName = App.CurrentCostumer.FirstName,
-                    LastName = App.CurrentCostumer.LastName,
-                });
-
-                //customer role table
-                await database.DeleteAllAsync<CustomerRole>();
-                foreach (var currentCustomerRole in App.CurrentCostumer.CustomerRoles)
-                {
-                    await database.InsertAsync(new CustomerRole()
-                    {
-                        Name = currentCustomerRole.Name,
-                        SystemName = currentCustomerRole.SystemName,
-                        Active = currentCustomerRole.Active
-                    });
-                }
-
                 //add popup with success message
                 await Navigation.PopModalAsync();
             }

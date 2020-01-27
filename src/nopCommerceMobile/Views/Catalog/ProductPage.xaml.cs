@@ -18,6 +18,14 @@ namespace nopCommerceMobile.Views.Catalog
         {
             base.OnAppearing();
             await ViewModel.InitializeAsync();
+
+            //initialize stack layout on first click fade to not working
+            var mainStackLayout = new StackLayout()
+            {
+                HeightRequest = Height - 150
+            };
+            AppearingFrame.Content = mainStackLayout;
+            HideFrame();
         }
 
         private async void ProductSpec_OnTapped(object sender, EventArgs e)
@@ -36,11 +44,7 @@ namespace nopCommerceMobile.Views.Catalog
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (sender, e) =>
-            {
-                AppearingFrame.TranslateTo(0, 450);
-                ViewModel.IsBottomModelVisible = false;
-            };
+            tapGestureRecognizer.Tapped += (s, oe) => { HideFrame();  };
             closeLabel.GestureRecognizers.Add(tapGestureRecognizer);
 
             mainStackLayout.Children.Add(closeLabel);
@@ -101,11 +105,7 @@ namespace nopCommerceMobile.Views.Catalog
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += (sender, e) =>
-            {
-                AppearingFrame.TranslateTo(0, 450);
-                ViewModel.IsBottomModelVisible = false;
-            };
+            tapGestureRecognizer.Tapped += (s, oe) => { HideFrame(); };
             closeLabel.GestureRecognizers.Add(tapGestureRecognizer);
 
             mainStackLayout.Children.Add(closeLabel);
@@ -122,6 +122,17 @@ namespace nopCommerceMobile.Views.Catalog
             AppearingFrame.Content = mainStackLayout;
             ViewModel.IsBottomModelVisible = true;
             await AppearingFrame.TranslateTo(0, 0);
+        }
+
+        private void HideFrame()
+        {
+            AppearingFrame.TranslateTo(0, Height + 100);
+            ViewModel.IsBottomModelVisible = false;
+        }
+
+        private async void AddProductToCart_OnClicked(object sender, EventArgs e)
+        {
+            await ViewModel.AddProductToCartAsync();
         }
     }
 }

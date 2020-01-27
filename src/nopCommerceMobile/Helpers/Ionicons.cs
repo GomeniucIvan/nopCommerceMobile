@@ -72,5 +72,7 @@ namespace nopCommerceMobile.Helpers
         public static string Speakerphone = "\uf2b2";
         public static string IosBrowsersOutline = "\uf3ef";
         public static string IosCloseRound = "\uf129";
+        public static string IonArrowLeftC = "\uf108";
+        public static string IonNavicon = "\uf20e";
     }
 }

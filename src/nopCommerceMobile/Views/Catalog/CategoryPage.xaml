@@ -39,6 +39,7 @@
         <Frame x:Name="AppearingFrame" 
                HasShadow="True" 
                Padding="0" 
+               IsVisible="False"
                Margin="0" 
                HorizontalOptions="EndAndExpand"
                VerticalOptions="FillAndExpand"

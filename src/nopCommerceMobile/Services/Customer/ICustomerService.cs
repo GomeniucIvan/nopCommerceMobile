@@ -11,6 +11,6 @@ namespace nopCommerceMobile.Services.Customer
         Task<CustomerModel> GetCurrentCustomerModelAsync();
         Task<CustomerModel> LoginAsync(LoginModel model);
         void LogoutCustomer();
-        void SetCurrentCustomer();
+        Task SetCurrentCustomer(bool refreshData = false);
     }
 }

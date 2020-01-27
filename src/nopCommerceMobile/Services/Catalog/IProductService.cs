@@ -6,5 +6,6 @@ namespace nopCommerceMobile.Services.Catalog
     public interface IProductService
     {
         Task<ProductDetailsModel> GetProductByIdAsync(int productId);
+        Task AddProductToCartAsync(int productId);
     }
 }

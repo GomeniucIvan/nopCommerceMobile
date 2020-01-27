@@ -1,5 +1,6 @@
 ﻿using System;
 using nopCommerceMobile.Models.Base;
+using SQLite;
 
 namespace nopCommerceMobile.Models.Orders
 {
@@ -59,5 +60,11 @@ namespace nopCommerceMobile.Models.Orders
         /// Gets or sets the date and time of instance update
         /// </summary>
         public DateTime UpdatedOnUtc { get; set; }
+    }
+
+    public class ShoppingCartItem : ShoppingCartItemModel
+    {
+        [PrimaryKey]
+        public int Id { get; set; }
     }
 }

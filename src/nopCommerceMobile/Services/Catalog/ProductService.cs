@@ -21,5 +21,12 @@ namespace nopCommerceMobile.Services.Catalog
 
             return _requestProvider.GetAsync<ProductDetailsModel>(uri);
         }
+
+        public Task AddProductToCartAsync(int productId)
+        {
+            var uri = $"{ApiUrlBase}/{productId}/{(int)ShoppingCartType.ShoppingCart}";
+
+            return _requestProvider.GetAsync<ProductDetailsModel>(uri);
+        }
     }
 }

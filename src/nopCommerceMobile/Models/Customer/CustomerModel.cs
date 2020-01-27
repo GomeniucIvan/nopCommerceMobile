@@ -158,7 +158,7 @@ namespace nopCommerceMobile.Models.Customer
         /// <summary>
         /// Gets or sets shopping cart items
         /// </summary>
-        public ICollection<ShoppingCartItemModel> ShoppingCartItems { get; set; }
+        public IList<ShoppingCartItemModel> ShoppingCartItems { get; set; }
 
         #endregion
     }
