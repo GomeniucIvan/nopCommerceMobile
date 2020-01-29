@@ -23,6 +23,7 @@ namespace nopCommerceMobile
     //add web locale resources version (when value is updated or added update mobile db) TODO
     //add web customer claims based on email/password TODO
     //in cs files use styles/variables from app.xaml TODO
+    //change popup notification - stack layout to absolute layout, to be able to scroll behind content TODO
 
     public partial class App : Application
     {

@@ -6,45 +6,60 @@
                   xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
                   xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
                   xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
+                  xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                   mc:Ignorable="d"
+                  NavigationPage.HasNavigationBar="False"
                   x:Class="nopCommerceMobile.Views.Catalog.CategoryPage">
 
-    <!--find a way to render iconicons instead of image for toolbar items TODO-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="filter.png"
-                     Order="Primary"
-                     Clicked="Filter_OnClick"/>
-    </ContentPage.ToolbarItems>
-
     <Grid VerticalOptions="FillAndExpand">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <StackLayout Orientation="Vertical">
-            <!--find a way to implement ItemTapped event TODO-->
-            <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0">
-                <components:ItemsViewGrid.ItemTemplate>
-                    <DataTemplate>
-                        <partial:ItemViewTemplate IsProduct="True">
-                            <View.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Product_OnClick" />
-                            </View.GestureRecognizers>
-                        </partial:ItemViewTemplate>
-                    </DataTemplate>
-                </components:ItemsViewGrid.ItemTemplate>
-            </components:ItemsViewGrid>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+            <helpers:ToolbarBackButton />
+
+            <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+            <StackLayout HorizontalOptions="EndAndExpand">
+                <helpers:ToolbarFilterButton Clicked="Filter_OnClick"/>
+            </StackLayout>
         </StackLayout>
+
+        <Grid VerticalOptions="FillAndExpand" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Orientation="Vertical">
+                <!--find a way to implement ItemTapped event TODO-->
+                <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0">
+                    <components:ItemsViewGrid.ItemTemplate>
+                        <DataTemplate>
+                            <partial:ItemViewTemplate IsProduct="True">
+                                <View.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Product_OnClick" />
+                                </View.GestureRecognizers>
+                            </partial:ItemViewTemplate>
+                        </DataTemplate>
+                    </components:ItemsViewGrid.ItemTemplate>
+                </components:ItemsViewGrid>
+            </StackLayout>
+        </Grid>
 
         <Frame x:Name="AppearingFrame" 
                HasShadow="True" 
                Padding="0" 
                IsVisible="False"
                Margin="0" 
+               Grid.Row="0"
+               Grid.RowSpan="2"
                HorizontalOptions="EndAndExpand"
                VerticalOptions="FillAndExpand"
                CornerRadius="0" 
                BackgroundColor="White"/>
+
     </Grid>
 
 

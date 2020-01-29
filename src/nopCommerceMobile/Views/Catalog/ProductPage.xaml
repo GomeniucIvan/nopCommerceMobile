@@ -180,7 +180,6 @@
         </Grid>
 
         <!--Find a way to add toolbar icons on the top of the page, hide when scroll down and show when scroll at the up?! TODO-->
-        
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="FillAndExpand"
                      AbsoluteLayout.LayoutFlags="WidthProportional"

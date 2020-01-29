@@ -107,6 +107,14 @@
                 <Setter Property="TextType" Value="Html" />
             </Style>
 
+            <Style x:Key="PageTitleLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="22" />
+            </Style>
+
             <!-- Common -->
             <Style x:Key="BaseScrollView" TargetType="ScrollView">
                 <Setter Property="Margin" Value="0,5,0,0" />

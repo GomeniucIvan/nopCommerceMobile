@@ -45,5 +45,16 @@ namespace nopCommerceMobile.ViewModels.Base
             var dialog = new PopupNotification { Text = message, MessageType = messageType };
             await PopupNavigation.Instance.PushAsync(dialog);
         }
+
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                RaisePropertyChanged(()=> Title);
+            }
+        }
     }
 }

@@ -4,25 +4,35 @@
                     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
-                    xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
                     xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
                     xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
+                    xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                     mc:Ignorable="d"
+                    NavigationPage.HasNavigationBar="False"
                     x:Class="nopCommerceMobile.Views.Catalog.CategoriesPage">
 
     <StackLayout VerticalOptions="FillAndExpand">
-        <!--//TODO find a way to implement ItemTapped event-->
-        <components:ItemsViewGrid Source="{ Binding Category.SubCategories }" Padding="5,0,5,0" RowSpacing="0">
-            <components:ItemsViewGrid.ItemTemplate>
-                <DataTemplate>
-                    <partial:ItemViewTemplate IsProduct="False">
-                        <View.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="Category_OnClick" />
-                        </View.GestureRecognizers>
-                    </partial:ItemViewTemplate>
-                </DataTemplate>
-            </components:ItemsViewGrid.ItemTemplate>
-        </components:ItemsViewGrid>
-    </StackLayout>
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand">
 
+            <helpers:ToolbarBackButton />
+
+            <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="FillAndExpand">
+            <!--//TODO find a way to implement ItemTapped event-->
+            <components:ItemsViewGrid Source="{ Binding Category.SubCategories }" Padding="5,0,5,0" RowSpacing="0">
+                <components:ItemsViewGrid.ItemTemplate>
+                    <DataTemplate>
+                        <partial:ItemViewTemplate IsProduct="False">
+                            <View.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Category_OnClick" />
+                            </View.GestureRecognizers>
+                        </partial:ItemViewTemplate>
+                    </DataTemplate>
+                </components:ItemsViewGrid.ItemTemplate>
+            </components:ItemsViewGrid>
+        </StackLayout>
+    </StackLayout>
 </catalog:CategoriesPageXaml>

@@ -64,4 +64,16 @@ namespace nopCommerceMobile.Helpers
             //TODO display content
         }
     }
+
+    public class ToolbarFilterButton : Button
+    {
+        public ToolbarFilterButton()
+        {
+            FontFamily = IoniconsFamilyName.FontFamily;
+            Text = IoniconsIcon.IonIosSettingsStrong;
+            FontSize = 30;
+            WidthRequest = 50;
+            BackgroundColor = Color.Transparent;
+        }
+    }
 }

@@ -63,7 +63,7 @@ namespace nopCommerceMobile.Views.Catalog
             var closeLabel = new IoniconsLabel()
             {
                 Text = IoniconsIcon.IosCloseRound,
-                Padding = new Thickness(0, 0, 15, 0),
+                Padding = new Thickness(0, 10, 15, 0),
                 FontSize = 30,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
             };

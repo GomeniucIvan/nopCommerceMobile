@@ -42,7 +42,8 @@ namespace nopCommerceMobile.Views
                     Title = category.Name,
                     BindingContext = new CategoriesViewModel()
                     {
-                        Category = category
+                        Category = category,
+                        Title = category.Name,
                     }
                 };
 
@@ -57,7 +58,8 @@ namespace nopCommerceMobile.Views
                         Title = category.Name,
                         BindingContext = new CategoryViewModel()
                         {
-                            Category = category
+                            Category = category,
+                            Title = category.Name,
                         }
                     };
 
