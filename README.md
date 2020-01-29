@@ -33,4 +33,6 @@
 <img src="/screenshots/login.png" width="210" style="max-width:100%;"></a>
 <a target="_blank" href="/screenshots/customer-info.png">
 <img src="/screenshots/customer-info.png" width="210" style="max-width:100%;"></a>
+  <a target="_blank" href="/screenshots/popup.png">
+<img src="/screenshots/popup.png" width="210" style="max-width:100%;"></a>
 </p>
