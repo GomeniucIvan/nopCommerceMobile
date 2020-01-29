@@ -22,9 +22,9 @@
             <Color x:Key="PageColor">#f3f3f3</Color>
 
             <!--Font families-->
-            <OnPlatform x:Key="BoldFontFamily" x:TypeArguments="x:String">
-                <On Platform="Android" Value="ionicons.ttf#Ionicons" />
-                <On Platform="iOS" Value="ionicons" />
+            <OnPlatform x:Key="MontserratRegularFont" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Montserrat-Regular.otf#Montserrat" />
+                <On Platform="iOS" Value="Montserrat" />
             </OnPlatform>
 
             <!--Icons-->
@@ -48,6 +48,7 @@
             <Style TargetType="Entry" ApplyToDerivedTypes="true">
                 <Setter Property="TextColor" Value="DarkSlateGray" />
                 <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegularFont}" />
                 <!--Add border color -->
             </Style>
             <Style TargetType="StackLayout" ApplyToDerivedTypes="true">
@@ -56,6 +57,12 @@
             <Style TargetType="Grid" ApplyToDerivedTypes="true">
                 <Setter Property="RowSpacing" Value="0" />
                 <Setter Property="ColumnSpacing" Value="5" />
+            </Style>
+            <Style TargetType="Label" ApplyToDerivedTypes="true">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegularFont}" />
+            </Style>
+            <Style TargetType="Button" ApplyToDerivedTypes="true">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegularFont}" />
             </Style>
 
             <!--Buttons-->
@@ -66,7 +73,6 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="CornerRadius" Value="5" />
                 <Setter Property="HeightRequest" Value="{StaticResource BaseButtonHeight}" />
-
             </Style>
 
             <Style x:Key="DarkBlueButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
