@@ -48,6 +48,17 @@ namespace nopCommerceMobile.Models.Catalog
         public IList<PictureModel> PictureModels { get; set; }
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }
         public IList<ProductAttributeModel> ProductAttributes { get; set; }
+
+        private ProductReviewOverviewModel _productReviewOverview;
+        public ProductReviewOverviewModel ProductReviewOverview
+        {
+            get => _productReviewOverview;
+            set
+            {
+                _productReviewOverview = value;
+                RaisePropertyChanged(()=> ProductReviewOverview);
+            }
+        }
     }
 
     public class ProductPriceModel : BaseModel
@@ -86,6 +97,24 @@ namespace nopCommerceMobile.Models.Catalog
     public class ProductAttributeModel
     {
         public string Name { get; set; }
+    }
+
+    public class ProductReviewOverviewModel : BaseModel
+    {
+        private int _ratingSum;
+        public int RatingSum
+        {
+            get => _ratingSum;
+            set
+            {
+                _ratingSum = value;
+                RaisePropertyChanged(()=> RatingSum);
+            }
+        }
+
+        public int TotalReviews { get; set; }
+
+        public bool AllowCustomerReviews { get; set; }
     }
 
     #endregion

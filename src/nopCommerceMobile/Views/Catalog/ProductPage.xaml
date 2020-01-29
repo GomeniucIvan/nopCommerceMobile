@@ -8,6 +8,7 @@
                  xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                  xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
+                 xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
                  mc:Ignorable="d"
                  NavigationPage.HasNavigationBar="False"
                  x:Class="nopCommerceMobile.Views.Catalog.ProductPage">
@@ -88,7 +89,9 @@
                                    FontAttributes="Bold" 
                                    VerticalOptions="Center" />
 
-                                <!--Star rank, reviews Todo-->
+                                <components:Rating Value="{Binding Product.ProductReviewOverview.RatingSum}" />
+
+                                <!--Reviews Todo-->
 
                                 <!--Short description-->
                                 <Label Text="{Binding Product.ShortDescription}" FontSize="{StaticResource BaseFontSize}" />

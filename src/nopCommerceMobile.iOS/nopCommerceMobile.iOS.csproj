@@ -143,5 +143,11 @@
   <ItemGroup>
     <BundleResource Include="Resources\filter.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rating2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rating1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
