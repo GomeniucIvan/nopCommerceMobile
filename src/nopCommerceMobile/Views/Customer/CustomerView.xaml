@@ -37,7 +37,7 @@
 
                 <Label HorizontalTextAlignment="End"
                        Text="{extensions:Translate Account.Login}" 
-                       FontAttributes="Bold"
+                       Style="{StaticResource BoldLabel}"
                        FontSize="{StaticResource LargeFontSize}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Login_OnClick"/>
@@ -45,16 +45,15 @@
                 </Label>
 
                 <Label Grid.Column="1" 
-                       Style="{StaticResource CenteredLabel}" 
+                       Style="{StaticResource CenteredBoldLabel}" 
                        Text="/" 
-                       FontAttributes="Bold"
                        Padding="5,0,5,0" 
                        FontSize="{StaticResource LargeFontSize}"/>
 
                 <Label Grid.Column="2" 
                        HorizontalTextAlignment="Start"
                        Text="{extensions:Translate Account.Register}" 
-                       FontAttributes="Bold"
+                       Style="{StaticResource BoldLabel}"
                        FontSize="{StaticResource LargeFontSize}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Register_OnClick"/>

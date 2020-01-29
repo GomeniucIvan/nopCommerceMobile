@@ -26,6 +26,10 @@
                 <On Platform="Android" Value="Montserrat-Regular.otf#Montserrat" />
                 <On Platform="iOS" Value="Montserrat" />
             </OnPlatform>
+            <OnPlatform x:Key="MontserratSemiBoldFont" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Montserrat-SemiBold.otf#Montserrat SemiBold" />
+                <On Platform="iOS" Value="Montserrat SemiBold" />
+            </OnPlatform>
 
             <!--Icons-->
             <OnPlatform x:Key="FontAwesomeFontFamily" x:TypeArguments="x:String">
@@ -90,6 +94,19 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="BoldLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBoldFont}" />
+            </Style>
+
+            <Style x:Key="CenteredBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBoldFont}" />
             </Style>
 
             <Style x:Key="ContainerLabel" TargetType="Label" BasedOn="{StaticResource CenteredLabel}">

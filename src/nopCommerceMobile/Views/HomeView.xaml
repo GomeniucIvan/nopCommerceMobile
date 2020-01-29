@@ -33,7 +33,6 @@
             <!--Slider -->
             <StackLayout IsVisible="{Binding Sliders, Converter={StaticResource AnyItemInListConverter}}">
                 <Grid>
-
                     <!--Add loop functionality, add auto change TODO-->
                     <Grid Margin="10,10,10,0">
                         <Grid.RowDefinitions>
@@ -72,7 +71,7 @@
             </StackLayout>
 
             <!--Categories -->
-            <StackLayout IsVisible="{Binding Categories, Converter={StaticResource AnyItemInListConverter}}">
+            <StackLayout IsVisible="{Binding Categories, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
@@ -91,7 +90,7 @@
             </StackLayout>
 
             <!--Products -->
-            <StackLayout IsVisible="{Binding Products, Converter={StaticResource AnyItemInListConverter}}">
+            <StackLayout IsVisible="{Binding Products, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Products}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
@@ -110,7 +109,7 @@
             </StackLayout>
 
             <!--Bestsellers -->
-            <StackLayout IsVisible="{Binding BestSellers, Converter={StaticResource AnyItemInListConverter}}">
+            <StackLayout IsVisible="{Binding BestSellers, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Bestsellers}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
@@ -129,7 +128,7 @@
             </StackLayout>
 
             <!--News -->
-            <StackLayout IsVisible="{Binding News, Converter={StaticResource AnyItemInListConverter}}">
+            <StackLayout IsVisible="{Binding News, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate News}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 

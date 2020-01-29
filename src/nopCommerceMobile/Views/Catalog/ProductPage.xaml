@@ -67,7 +67,7 @@
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding Product.ProductPrice.Price}" 
                                        FontSize="{StaticResource LargeFontSize}" 
-                                       FontAttributes="Bold" 
+                                       Style="{StaticResource BoldLabel}"
                                        VerticalOptions="Center" />
 
                                     <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.HearthOutline}" 
@@ -80,13 +80,12 @@
                                 <!--Old price-->
                                 <Label Text="{Binding Product.ProductPrice.OldPrice}" 
                                    FontSize="{StaticResource LargeFontSize}" 
-                                   FontAttributes="Bold" 
                                    VerticalOptions="Center" />
 
                                 <!--Name-->
                                 <Label Text="{Binding Product.Name}" 
                                    FontSize="{StaticResource LargeFontSize}" 
-                                   FontAttributes="Bold" 
+                                   Style="{StaticResource BoldLabel}"
                                    VerticalOptions="Center" />
 
                                 <components:Rating Value="{Binding Product.ProductReviewOverview.RatingSum}" />
@@ -105,7 +104,6 @@
                                 <Label Text="{extensions:Translate Products.Specs}" 
                                    FontSize="{StaticResource BaseFontSize}" 
                                    IsVisible="{Binding Product.SpecificationAttributeModels, Converter={StaticResource AnyItemInListConverter}}"
-                                   FontAttributes="Bold" 
                                    Padding="5"
                                    TextColor="{DynamicResource TextColor}"
                                    VerticalOptions="Center">
@@ -122,7 +120,6 @@
                                 <Label Text="{extensions:Translate Account.VendorInfo.Description}" 
                                        FontSize="{StaticResource BaseFontSize}" 
                                        IsVisible="{Binding Product.FullDescription, Converter={StaticResource NotEmptyStringConverter}}"
-                                       FontAttributes="Bold" 
                                        Padding="5"
                                        TextColor="{DynamicResource TextColor}"
                                        VerticalOptions="Center">
