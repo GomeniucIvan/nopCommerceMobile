@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Net;
@@ -6,6 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using nopCommerceMobile.Exceptions;
+using nopCommerceMobile.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace nopCommerceMobile.Services.RequestProvider
 {
@@ -77,7 +80,22 @@ namespace nopCommerceMobile.Services.RequestProvider
                     throw new ServiceAuthenticationException(content);
                 }
 
-                throw new HttpRequestExceptionEx(response.StatusCode, content);
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var mainPage = Application.Current.MainPage as NavigationPage;
+                    if (mainPage != null)
+                    {
+                        var viewModel = mainPage.CurrentPage.BindingContext;
+                        var castModel = viewModel as BaseViewModel;
+                        castModel?.DisplayPopupNotification(content, NotificationTypeEnum.Danger);
+                    }
+                }
+
+                else
+                {
+                    throw new HttpRequestExceptionEx(response.StatusCode, content);
+
+                }
             }
         }
     }

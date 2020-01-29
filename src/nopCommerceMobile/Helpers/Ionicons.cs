@@ -74,5 +74,9 @@ namespace nopCommerceMobile.Helpers
         public static string IosCloseRound = "\uf129";
         public static string IonArrowLeftC = "\uf108";
         public static string IonNavicon = "\uf20e";
+        public static string IonCheckmarkCircled = "\uf120";
+        public static string IonCloseCircled = "\uf128";
+        public static string IonInformationCircled = "\uf149";
+        public static string IonAlertCircled = "\uf100";
     }
 }

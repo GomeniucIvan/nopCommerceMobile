@@ -21,6 +21,7 @@ namespace nopCommerceMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.SetFlags("IndicatorView_Experimental");
+            Rg.Plugins.Popup.Popup.Init();
             Forms.Init();
             LoadApplication(new App());
 

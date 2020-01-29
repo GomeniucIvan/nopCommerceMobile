@@ -1,5 +1,7 @@
-﻿using nopCommerceMobile.Services;
+﻿using nopCommerceMobile.Components;
+using nopCommerceMobile.Services;
 using nopCommerceMobile.Services.Navigation;
+using Rg.Plugins.Popup.Services;
 
 namespace nopCommerceMobile.ViewModels.Base
 {
@@ -36,6 +38,12 @@ namespace nopCommerceMobile.ViewModels.Base
                 _isBusy = value;
                 RaisePropertyChanged(() => IsBusy);
             }
+        }
+
+        public async void DisplayPopupNotification(string message, NotificationTypeEnum messageType = NotificationTypeEnum.Success)
+        {
+            var dialog = new PopupNotification { Text = message, MessageType = messageType };
+            await PopupNavigation.Instance.PushAsync(dialog);
         }
     }
 }
