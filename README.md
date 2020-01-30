@@ -21,8 +21,8 @@
 </br>
 <h2>Pages</h2>
 <p>
-<a target="_blank" href="/screenshots/category.png">
-<img src="/screenshots/category.png" width="210" style="max-width:100%;"></a>
+<a target="_blank" href="/screenshots/sub-category.png">
+<img src="/screenshots/sub-category.png" width="210" style="max-width:100%;"></a>
 <a target="_blank" href="/screenshots/home.png">
 <img src="/screenshots/home.png" width="210" style="max-width:100%;"></a>
 <a target="_blank" href="/screenshots/home2.png">
