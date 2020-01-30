@@ -21,6 +21,8 @@
 </br>
 <h2>Pages</h2>
 <p>
+  <a target="_blank" href="/screenshots/list-template.png">
+<img src="/screenshots/list-template.png" width="210" style="max-width:100%;"></a>
 <a target="_blank" href="/screenshots/sub-category.png">
 <img src="/screenshots/sub-category.png" width="210" style="max-width:100%;"></a>
 <a target="_blank" href="/screenshots/home.png">
