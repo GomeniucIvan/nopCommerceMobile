@@ -7,48 +7,70 @@
                   xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
                   xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
                   xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                  xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
                   mc:Ignorable="d"
                   NavigationPage.HasNavigationBar="False"
                   x:Class="nopCommerceMobile.Views.Catalog.CategoryPage">
 
-    <Grid VerticalOptions="FillAndExpand">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+<ScrollView>
+        <Grid VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <helpers:ToolbarBackButton />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
-            <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
-            <StackLayout HorizontalOptions="EndAndExpand">
-                <helpers:ToolbarFilterButton Clicked="Filter_OnClick"/>
+                <helpers:ToolbarBackButton />
+
+                <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+                <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                    <helpers:GridButton Clicked="Grid_OnClick" IsVisible="{Binding ListViewModel}"/>
+                    <helpers:ListButton Clicked="List_OnClick" IsVisible="{Binding ListViewModel, Converter={ StaticResource InverseBooleanConverter}}"/>
+                    <helpers:ToolbarFilterButton Clicked="Filter_OnClick"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
 
-        <Grid VerticalOptions="FillAndExpand" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Grid VerticalOptions="FillAndExpand" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <StackLayout Orientation="Vertical">
-                <!--find a way to implement ItemTapped event TODO-->
-                <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0">
-                    <components:ItemsViewGrid.ItemTemplate>
-                        <DataTemplate>
-                            <partial:ItemViewTemplate IsProduct="True">
-                                <View.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Product_OnClick" />
-                                </View.GestureRecognizers>
-                            </partial:ItemViewTemplate>
-                        </DataTemplate>
-                    </components:ItemsViewGrid.ItemTemplate>
-                </components:ItemsViewGrid>
-            </StackLayout>
-        </Grid>
+                <StackLayout Orientation="Vertical">
+                    <!--find a way to implement ItemTapped event TODO-->
+                    <components:ItemsViewGrid Source="{ Binding Category.Products }" Padding="5,0,5,0" RowSpacing="0" IsVisible="{Binding ListViewModel, Converter={StaticResource InverseBooleanConverter}}">
+                        <components:ItemsViewGrid.ItemTemplate>
+                            <DataTemplate>
+                                <partial:ItemViewTemplate IsProduct="True">
+                                    <View.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Product_OnClick" />
+                                    </View.GestureRecognizers>
+                                </partial:ItemViewTemplate>
+                            </DataTemplate>
+                        </components:ItemsViewGrid.ItemTemplate>
+                    </components:ItemsViewGrid>
 
-        <Frame x:Name="AppearingFrame" 
+                    <components:ItemsViewList Source="{ Binding Category.Products }" Padding="5,0,5,0" IsVisible="{Binding ListViewModel}">
+                        <components:ItemsViewList.ItemTemplate>
+                            <DataTemplate>
+                                <partial:ItemViewTemplate ListViewModel="True" IsProduct="True">
+                                    <View.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Product_OnClick" />
+                                    </View.GestureRecognizers>
+                                </partial:ItemViewTemplate>
+                            </DataTemplate>
+                        </components:ItemsViewList.ItemTemplate>
+                    </components:ItemsViewList>
+                </StackLayout>
+            </Grid>
+
+            <Frame x:Name="AppearingFrame" 
                HasShadow="True" 
                Padding="0" 
                IsVisible="False"
@@ -60,7 +82,7 @@
                CornerRadius="0" 
                BackgroundColor="White"/>
 
-    </Grid>
-
+        </Grid>
+    </ScrollView>
 
 </catalog:CategoryPageXaml>

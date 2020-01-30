@@ -148,6 +148,8 @@ namespace nopCommerceMobile.Models.Customer
             }
         }
 
+        public string ViewMode { get; set; }
+
         #region Navigation properties
 
         /// <summary>
@@ -159,6 +161,7 @@ namespace nopCommerceMobile.Models.Customer
         /// Gets or sets shopping cart items
         /// </summary>
         public IList<ShoppingCartItemModel> ShoppingCartItems { get; set; }
+
 
         #endregion
     }
@@ -295,6 +298,7 @@ namespace nopCommerceMobile.Models.Customer
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ViewModel { get; set; }
 
         #region Navigation properties
 
@@ -309,6 +313,7 @@ namespace nopCommerceMobile.Models.Customer
         /// </summary>
         [Ignore]
         public ICollection<ShoppingCartItemModel> ShoppingCartItems { get; set; }
+
 
         #endregion
     }

@@ -95,4 +95,68 @@ namespace nopCommerceMobile.Components
 
         #endregion
     }
+
+    public class ItemsViewList : StackLayout
+    {
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsViewList), null, BindingMode.Default);
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(IEnumerable<object>), typeof(ItemsViewList), null, BindingMode.Default, null, OnSourceChanged);
+        public static readonly BindableProperty IsProductProperty = BindableProperty.Create(nameof(IsProduct), typeof(bool), typeof(ItemsViewList), false, BindingMode.Default);
+
+        public IEnumerable<object> Source
+        {
+            get => (IEnumerable<object>)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
+        }
+
+        public DataTemplate ItemTemplate
+        {
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
+            set => SetValue(ItemTemplateProperty, value);
+        }
+
+        public bool IsProduct
+        {
+            get => (bool)GetValue(IsProductProperty);
+            set => SetValue(IsProductProperty, value);
+        }
+
+        private void ReloadSource()
+        {
+            var itemsSource = Source;
+            if (itemsSource == null) return;
+            foreach (var item in itemsSource)
+            {
+                Children.Add(CreateItem(item));
+            }
+        }
+
+        private View CreateItem(object element)
+        {
+            var obj = ItemTemplate.CreateContent();
+            var view = obj as View;
+            view.BindingContext = element;
+
+            return view;
+        }
+
+        private static void OnSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
+        {
+            var itemsViewGrid = (ItemsViewList)bindableObject;
+            if (oldValue is INotifyCollectionChanged notifyCollectionChanged)
+            {
+                notifyCollectionChanged.CollectionChanged -= itemsViewGrid.OnObservableCollectionChanged;
+            }
+
+            if (newValue is INotifyCollectionChanged notifyCollectionChanged2)
+            {
+                notifyCollectionChanged2.CollectionChanged += itemsViewGrid.OnObservableCollectionChanged;
+            }
+            itemsViewGrid.ReloadSource();
+        }
+
+        private void OnObservableCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ReloadSource();
+        }
+    }
 }

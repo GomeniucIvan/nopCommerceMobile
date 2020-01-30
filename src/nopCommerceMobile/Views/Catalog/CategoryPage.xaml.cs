@@ -27,6 +27,8 @@ namespace nopCommerceMobile.Views.Catalog
             };
             AppearingFrame.Content = mainStackLayout;
             HideFrame();
+
+            ViewModel.ListViewModel = App.CurrentCostumer.ViewMode == "list";
         }
 
         private async void Product_OnClick(object sender, EventArgs e)
@@ -157,6 +159,20 @@ namespace nopCommerceMobile.Views.Catalog
         {
             AppearingFrame.TranslateTo(450, 0);
             ViewModel.IsRightModalVisible = false;
+        }
+
+        private void Grid_OnClick(object sender, EventArgs e)
+        {
+            App.CurrentCostumer.ViewMode = "grid";
+            ViewModel.ListViewModel = false;
+            ViewModel.UpdateViewMode(false);
+        }
+
+        private void List_OnClick(object sender, EventArgs e)
+        {
+            App.CurrentCostumer.ViewMode = "list";
+            ViewModel.ListViewModel = true;
+            ViewModel.UpdateViewMode(true);
         }
     }
 }

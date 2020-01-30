@@ -176,7 +176,8 @@ namespace nopCommerceMobile.Services.Customer
                         CustomerGuid = dbCustomer.CustomerGuid,
                         Email = dbCustomer.Email,
                         FirstName = dbCustomer.FirstName,
-                        LastName = dbCustomer.LastName
+                        LastName = dbCustomer.LastName,
+                        ViewMode = dbCustomer.ViewModel
                     };
                 }
 
@@ -242,6 +243,14 @@ namespace nopCommerceMobile.Services.Customer
                     }).ToList();
                 }
             }
+        }
+
+        public async Task UpdateViewMode(bool isList)
+        {
+            await database.UpdateAsync(new Models.Customer.Customer()
+            {
+                ViewModel = isList ? "list" : "grid"
+            });
         }
 
         private async Task DeleteCurrentCustomer()

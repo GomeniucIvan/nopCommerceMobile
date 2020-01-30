@@ -1,5 +1,6 @@
 ﻿using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.Services.Catalog;
+using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
 
 namespace nopCommerceMobile.ViewModels.Catalog
@@ -9,6 +10,7 @@ namespace nopCommerceMobile.ViewModels.Catalog
         #region Fields
 
         private ICatalogService _catalogService;
+        private ICustomerService _customerService;
 
         #endregion
 
@@ -18,6 +20,9 @@ namespace nopCommerceMobile.ViewModels.Catalog
         {
             if (_catalogService == null)
                 _catalogService = LocatorViewModel.Resolve<ICatalogService>();
+
+            if (_customerService == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
         }
 
         #endregion
@@ -42,6 +47,22 @@ namespace nopCommerceMobile.ViewModels.Catalog
                 _isRightModalVisible = value;
                 RaisePropertyChanged(()=> IsRightModalVisible);
             }
+        }
+
+        private bool _listViewMode;
+        public bool ListViewModel
+        {
+            get => _listViewMode;
+            set
+            {
+                _listViewMode = value;
+                OnPropertyChanged(nameof(ListViewModel));
+            }
+        }
+
+        public void UpdateViewMode(bool isList)
+        {
+            _customerService.UpdateViewMode(isList);
         }
     }
 }

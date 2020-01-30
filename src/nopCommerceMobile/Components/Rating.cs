@@ -1,12 +1,11 @@
-﻿using System;
-using FFImageLoading.Forms;
+﻿using FFImageLoading.Forms;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Components
 {
     public class Rating : StackLayout
     {
-        private static StackLayout stackLayout;
+        private static StackLayout _stackLayout;
 
         public static readonly BindableProperty ValueProperty =
             BindableProperty.Create(nameof(Value), typeof(double), typeof(Rating), 5.0, BindingMode.Default, null, UpdateRating);
@@ -19,12 +18,12 @@ namespace nopCommerceMobile.Components
 
         public Rating()
         {
-            stackLayout = this;
+            _stackLayout = this;
 
-            stackLayout.Children.Clear();
+            _stackLayout.Children.Clear();
 
-            stackLayout.Orientation = StackOrientation.Horizontal;
-            stackLayout.Spacing = 3;
+            _stackLayout.Orientation = StackOrientation.Horizontal;
+            _stackLayout.Spacing = 3;
 
             for (int i = 0; i < 5; i++)
             {
@@ -39,7 +38,7 @@ namespace nopCommerceMobile.Components
                         WidthRequest = 25
 
                     };
-                    stackLayout.Children.Add(image);
+                    _stackLayout.Children.Add(image);
                 }
                 else
                 {
@@ -49,17 +48,17 @@ namespace nopCommerceMobile.Components
                         HeightRequest = 25,
                         WidthRequest = 25
                     };
-                    stackLayout.Children.Add(image);
+                    _stackLayout.Children.Add(image);
                 }
             }
         }
 
         private static void UpdateRating(BindableObject bindable, object oldvalue, object newvalue)
         {
-            stackLayout.Children.Clear();
+            _stackLayout.Children.Clear();
 
-            stackLayout.Orientation = StackOrientation.Horizontal;
-            stackLayout.Spacing = 3;
+            _stackLayout.Orientation = StackOrientation.Horizontal;
+            _stackLayout.Spacing = 3;
 
             for (int i = 0; i <= 5; i++)
             {
@@ -73,7 +72,7 @@ namespace nopCommerceMobile.Components
                         HeightRequest = 25,
                         WidthRequest = 25
                     };
-                    stackLayout.Children.Add(image);
+                    _stackLayout.Children.Add(image);
                 }
                 else
                 {
@@ -83,7 +82,7 @@ namespace nopCommerceMobile.Components
                         HeightRequest = 25,
                         WidthRequest = 25
                     };
-                    stackLayout.Children.Add(image);
+                    _stackLayout.Children.Add(image);
                 }
             }
         }

@@ -13,6 +13,7 @@ namespace nopCommerceMobile.Models.Catalog
         }
 
         public string Name { get; set; }
+        public string ShortDescription { get; set; }
 
         //price
         private ProductPriceModel _productPrice;
@@ -42,7 +43,6 @@ namespace nopCommerceMobile.Models.Catalog
             ProductAttributes = new List<ProductAttributeModel>();
         }
 
-        public string ShortDescription { get; set; }
         public string FullDescription { get; set; }
 
         public IList<PictureModel> PictureModels { get; set; }

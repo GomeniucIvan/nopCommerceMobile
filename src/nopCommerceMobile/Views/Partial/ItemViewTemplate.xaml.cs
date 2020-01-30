@@ -11,18 +11,31 @@ namespace nopCommerceMobile.Views.Partial
             InitializeComponent();
         }
 
+        public bool ListViewModel { get; set; }
+
         public bool IsProduct
         {
             set
             {
                 if (value)
                 {
-                    //image
-                    ProductImage.IsVisible = true;
-                    NotProductImage.IsVisible = false;
-                    //details
-                    ProductDetailsContainer.IsVisible = true;
-                    NotProductDetailsContainer.IsVisible = false;
+                    if (ListViewModel)
+                    {
+                        GridViewModelPancakeView.IsVisible = false;
+                        ListViewModelPancakeView.IsVisible = true;
+                    }
+                    else
+                    {
+                        //image
+                        ProductImage.IsVisible = true;
+                        NotProductImage.IsVisible = false;
+                        //details
+                        ProductDetailsContainer.IsVisible = true;
+                        NotProductDetailsContainer.IsVisible = false;
+
+                        GridViewModelPancakeView.IsVisible = true;
+                        ListViewModelPancakeView.IsVisible = false;
+                    }
                 }
                 else
                 {
@@ -32,6 +45,9 @@ namespace nopCommerceMobile.Views.Partial
                     //details
                     ProductDetailsContainer.IsVisible = false;
                     NotProductDetailsContainer.IsVisible = true;
+
+                    GridViewModelPancakeView.IsVisible = true;
+                    ListViewModelPancakeView.IsVisible = false;
                 }
             }
         }

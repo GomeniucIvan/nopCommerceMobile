@@ -76,4 +76,28 @@ namespace nopCommerceMobile.Helpers
             BackgroundColor = Color.Transparent;
         }
     }
+
+    public class GridButton : Button
+    {
+        public GridButton()
+        {
+            FontFamily = IoniconsFamilyName.FontFamily;
+            Text = IoniconsIcon.IonGrid;
+            FontSize = 30;
+            WidthRequest = 50;
+            BackgroundColor = Color.Transparent;
+        }
+    }
+
+    public class ListButton : Button
+    {
+        public ListButton()
+        {
+            FontFamily = IoniconsFamilyName.FontFamily;
+            Text = IoniconsIcon.IonIosListOutline;
+            FontSize = 30;
+            WidthRequest = 50;
+            BackgroundColor = Color.Transparent;
+        }
+    }
 }
