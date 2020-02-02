@@ -8,10 +8,11 @@ namespace nopCommerceMobile.Services.Customer
     {
         Task<LoginModel> GetLoginModelAsync();
         Task<RegisterModel> GetRegisterModelAsync();
-        Task<CustomerModel> GetCurrentCustomerModelAsync();
         Task<CustomerModel> LoginAsync(LoginModel model);
+        Task<CustomerModel> GetCurrentCustomerModelAsync();
         void LogoutCustomer();
         Task SetCurrentCustomer(bool refreshData = false);
-        Task UpdateViewMode(bool isList);
+        Task CreateOrUpdateCustomerSettings();
+        Task CreateOrUpdateShoppingCartItems();
     }
 }

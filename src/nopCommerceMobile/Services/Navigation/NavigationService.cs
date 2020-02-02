@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using nopCommerceMobile.ViewModels.Base;
+using nopCommerceMobile.Views.Catalog;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Services.Navigation
@@ -43,6 +45,17 @@ namespace nopCommerceMobile.Services.Navigation
             }
 
             return Task.FromResult(true);
+        }
+
+        public bool PageExist<T>(T categoriesPage)
+        {
+            var mainPage = Application.Current.MainPage as NavigationPage;
+            if (mainPage != null)
+            {
+                return mainPage.Navigation.NavigationStack.Any(v => v.GetType() == categoriesPage.GetType());
+            }
+
+            return false;
         }
     }
 }

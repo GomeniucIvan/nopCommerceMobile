@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using nopCommerceMobile.Helpers;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Catalog;
@@ -10,9 +11,17 @@ namespace nopCommerceMobile.Views.Catalog
     public abstract class CategoriesPageXaml : ModelBoundContentPage<CategoriesViewModel> { }
     public partial class CategoriesPage : CategoriesPageXaml
     {
+        public static CategoriesPage Page;
         public CategoriesPage()
         {
             InitializeComponent();
+            Page = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            RefreshToolbarItems();
         }
 
         private async void Category_OnClick(object sender, EventArgs e)
@@ -56,6 +65,13 @@ namespace nopCommerceMobile.Views.Catalog
                     //add popup notification ToDo
                 }
             }
+        }
+
+        public void RefreshToolbarItems()
+        {
+            ToolbarItems.Children.Clear();
+            ToolbarItems.Children.Add(new ShoppingCart());
+            ToolbarItems.Children.Add(new ToolbarMenuButton());
         }
     }
 }

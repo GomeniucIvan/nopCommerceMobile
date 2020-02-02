@@ -38,18 +38,6 @@ namespace nopCommerceMobile.Services.Customer
             return new LoginModel();
         }
 
-        public async Task<RegisterModel> GetRegisterModelAsync()
-        {
-            var uri = $"{ApiUrlBase}/register";
-
-            var registerModel = await _requestProvider.GetAsync<RegisterModel>(uri);
-
-            if (registerModel != null)
-                return registerModel;
-
-            return new RegisterModel();
-        }
-
         public async Task<CustomerModel> GetCurrentCustomerModelAsync()
         {
             var uri = $"{ApiUrlBase}/currentcustomer";
@@ -60,6 +48,18 @@ namespace nopCommerceMobile.Services.Customer
                 return customerModel;
 
             return new CustomerModel();
+        }
+
+        public async Task<RegisterModel> GetRegisterModelAsync()
+        {
+            var uri = $"{ApiUrlBase}/register";
+
+            var registerModel = await _requestProvider.GetAsync<RegisterModel>(uri);
+
+            if (registerModel != null)
+                return registerModel;
+
+            return new RegisterModel();
         }
 
         public async Task<CustomerModel> LoginAsync(LoginModel model)
@@ -74,7 +74,7 @@ namespace nopCommerceMobile.Services.Customer
         public async void LogoutCustomer()
         {
             var uri = $"{ApiUrlBase}/logout";
-            _requestProvider.PostAsync<CustomerModel>(uri, App.CurrentCostumer);
+           await _requestProvider.PostAsync<CustomerModel>(uri, App.CurrentCostumer);
 
             await DeleteCurrentCustomer();
             await SetCurrentCustomer(true);
@@ -82,181 +82,127 @@ namespace nopCommerceMobile.Services.Customer
 
         public async Task SetCurrentCustomer(bool refreshData = false)
         {
+            await CreateOrUpdateCustomer(refreshData);
+            await CreateOrUpdateCustomerSettings();
+            await CreateOrUpdateCustomerRoles();
+            await CreateOrUpdateShoppingCartItems();
+        }
+
+        private async Task CreateOrUpdateCustomer(bool refreshData = false)
+        {
             if (refreshData)
             {
                 App.CurrentCostumer = await GetCurrentCustomerModelAsync();
+            }
 
-                //customer table
-                var customerTable = await database.GetTableInfoAsync(nameof(Models.Customer.Customer));
-                if (customerTable.Count == 0)
+            var customerTable = await database.GetTableInfoAsync(nameof(Models.Customer.Customer));
+            if (customerTable.Count == 0)
+            {
+                await database.CreateTableAsync<Models.Customer.Customer>();
+            }
+            var customer = await database.Table<Models.Customer.Customer>().CountAsync();
+            if (customer == 0)
+            {
+                await database.InsertAsync(new Models.Customer.Customer()
                 {
-                    await database.CreateTableAsync<Models.Customer.Customer>();
-                }
-                var customer = await database.Table<Models.Customer.Customer>().CountAsync();
-                if (customer == 0)
-                {
-                    await database.InsertAsync(new Models.Customer.Customer()
-                    {
-                        CustomerGuid = App.CurrentCostumer.CustomerGuid,
-                        Email = App.CurrentCostumer.Email,
-                        FirstName = App.CurrentCostumer.FirstName,
-                        LastName = App.CurrentCostumer.LastName
-                    });
-                }
-                else
-                {
-                    await database.UpdateAsync(new Models.Customer.Customer()
-                    {
-                        CustomerGuid = App.CurrentCostumer.CustomerGuid,
-                        Email = App.CurrentCostumer.Email,
-                        FirstName = App.CurrentCostumer.FirstName,
-                        LastName = App.CurrentCostumer.LastName
-                    });
-                }
-
-                //customer role table
-                await database.DeleteAllAsync<CustomerRole>();
-                var customerRoleTable = await database.GetTableInfoAsync(nameof(CustomerRole));
-                if (customerRoleTable.Count == 0)
-                {
-                    await database.CreateTableAsync<CustomerRole>();
-                }
-                foreach (var currentCustomerRole in App.CurrentCostumer.CustomerRoles)
-                {
-                    await database.InsertAsync(new CustomerRole()
-                    {
-                        Name = currentCustomerRole.Name,
-                        SystemName = currentCustomerRole.SystemName,
-                        Active = currentCustomerRole.Active
-                    });
-                }
-
-                //shopping cart table
-                await database.DeleteAllAsync<ShoppingCartItem>();
-                var shoppingCartItemTable = await database.GetTableInfoAsync(nameof(ShoppingCartItem));
-                if (shoppingCartItemTable.Count == 0)
-                {
-                    await database.CreateTableAsync<ShoppingCartItem>();
-                }
-                foreach (var cartItem in App.CurrentCostumer.ShoppingCartItems)
-                {
-                    await database.InsertAsync(new ShoppingCartItem()
-                    {
-                        ProductId = cartItem.ProductId,
-                        ShoppingCartTypeId = cartItem.ShoppingCartTypeId,
-                        Quantity = cartItem.Quantity
-                    });
-                }
+                    CustomerGuid = App.CurrentCostumer.CustomerGuid,
+                    Email = App.CurrentCostumer.Email,
+                    FirstName = App.CurrentCostumer.FirstName,
+                    LastName = App.CurrentCostumer.LastName,
+                });
             }
             else
             {
-                //customer table
-                var customerTable = await database.GetTableInfoAsync(nameof(Models.Customer.Customer));
-                if (customerTable.Count == 0)
+                await database.UpdateAsync(new Models.Customer.Customer()
                 {
-                    await database.CreateTableAsync<Models.Customer.Customer>();
-                }
-                var customer = await database.Table<Models.Customer.Customer>().CountAsync();
-                if (customer == 0)
-                {
-                    App.CurrentCostumer = await GetCurrentCustomerModelAsync();
-                    await database.InsertAsync(new Models.Customer.Customer()
-                    {
-                        CustomerGuid = App.CurrentCostumer.CustomerGuid,
-                        Email = App.CurrentCostumer.Email,
-                        FirstName = App.CurrentCostumer.FirstName,
-                        LastName = App.CurrentCostumer.LastName
-                    });
-                }
-                else
-                {
-                    var dbCustomer = await database.Table<Models.Customer.Customer>().FirstOrDefaultAsync();
-                    App.CurrentCostumer = new CustomerModel()
-                    {
-                        CustomerGuid = dbCustomer.CustomerGuid,
-                        Email = dbCustomer.Email,
-                        FirstName = dbCustomer.FirstName,
-                        LastName = dbCustomer.LastName,
-                        ViewMode = dbCustomer.ViewModel
-                    };
-                }
-
-                //customer role table
-                var customerRoleTable = await database.GetTableInfoAsync(nameof(CustomerRole));
-                if (customerRoleTable.Count == 0)
-                {
-                    await database.CreateTableAsync<CustomerRole>();
-                }
-                var customerRole = await database.Table<CustomerRole>().CountAsync();
-                if (customerRole == 0)
-                {
-                    foreach (var currentCustomerRole in App.CurrentCostumer.CustomerRoles)
-                    {
-                        await database.InsertAsync(new CustomerRole()
-                        {
-                            Name = currentCustomerRole.Name,
-                            SystemName = currentCustomerRole.SystemName,
-                            Active = currentCustomerRole.Active
-                        });
-                    }
-
-                }
-                else
-                {
-                    var dbCustomerRoles = await database.Table<CustomerRole>().ToListAsync();
-                    App.CurrentCostumer.CustomerRoles = dbCustomerRoles.Select(v => new CustomerRoleModel()
-                    {
-                        Name = v.Name,
-                        SystemName = v.SystemName,
-                        Active = v.Active
-                    }).ToList();
-                }
-
-
-                //shopping cart item table
-                var shoppingCartItemTable = await database.GetTableInfoAsync(nameof(ShoppingCartItem));
-                if (shoppingCartItemTable.Count == 0)
-                {
-                    await database.CreateTableAsync<ShoppingCartItem>();
-                }
-                var shoppingCartItem = await database.Table<ShoppingCartItem>().CountAsync();
-                if (shoppingCartItem == 0)
-                {
-                    foreach (var cartItem in App.CurrentCostumer.ShoppingCartItems)
-                    {
-                        await database.InsertAsync(new ShoppingCartItem()
-                        {
-                            ProductId = cartItem.ProductId,
-                            ShoppingCartTypeId = cartItem.ShoppingCartTypeId,
-                            Quantity = cartItem.Quantity
-                        });
-                    }
-                }
-                else
-                {
-                    var dbShoppingCartItem = await database.Table<ShoppingCartItem>().ToListAsync();
-                    App.CurrentCostumer.ShoppingCartItems = dbShoppingCartItem.Select(v => new ShoppingCartItemModel()
-                    {
-                        ProductId = v.ProductId,
-                        ShoppingCartTypeId = v.ShoppingCartTypeId,
-                        Quantity = v.Quantity
-                    }).ToList();
-                }
+                    CustomerGuid = App.CurrentCostumer.CustomerGuid,
+                    Email = App.CurrentCostumer.Email,
+                    FirstName = App.CurrentCostumer.FirstName,
+                    LastName = App.CurrentCostumer.LastName
+                });
             }
         }
 
-        public async Task UpdateViewMode(bool isList)
+        public async Task CreateOrUpdateCustomerSettings()
         {
-            await database.UpdateAsync(new Models.Customer.Customer()
+            var customerSettingsTable = await database.GetTableInfoAsync(nameof(CustomerSettings));
+            if (customerSettingsTable.Count == 0)
             {
-                ViewModel = isList ? "list" : "grid"
-            });
+                await database.CreateTableAsync<CustomerSettings>();
+            }
+            var customerSettings = await database.Table<CustomerSettings>().CountAsync();
+            if (customerSettings == 0)
+            {
+                await database.InsertAsync(new CustomerSettings()
+                {
+                    CurrentLanguage = "en-US",
+                    ViewMode = "grid"
+                });
+            }
+            else
+            {
+                await database.UpdateAsync(new CustomerSettings()
+                {
+                    CurrentLanguage = App.CurrentCostumer.CurrentLanguage,
+                    ViewMode = App.CurrentCostumer.ViewMode,
+                });
+            }
+            var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
+            App.CurrentCostumer.ViewMode = dbCustomerSettings.ViewMode;
+            App.CurrentCostumer.CurrentLanguage = dbCustomerSettings.CurrentLanguage;
+        }
+
+        private async Task CreateOrUpdateCustomerRoles()
+        {
+            var customerRoleTable = await database.GetTableInfoAsync(nameof(CustomerRole));
+            if (customerRoleTable.Count == 0)
+            {
+                await database.CreateTableAsync<CustomerRole>();
+            }
+            else
+            {
+                await database.DeleteAllAsync<CustomerRole>();
+            }
+
+            foreach (var currentCustomerRole in App.CurrentCostumer.CustomerRoles)
+            {
+                await database.InsertAsync(new CustomerRole()
+                {
+                    Name = currentCustomerRole.Name,
+                    SystemName = currentCustomerRole.SystemName,
+                    Active = currentCustomerRole.Active
+                });
+            }
+        }
+
+        public async Task CreateOrUpdateShoppingCartItems()
+        {
+            var shoppingCartItemTable = await database.GetTableInfoAsync(nameof(ShoppingCartItem));
+            if (shoppingCartItemTable.Count == 0)
+            {
+                await database.CreateTableAsync<ShoppingCartItem>();
+            }
+            else
+            {
+                await database.DeleteAllAsync<ShoppingCartItem>();
+            }
+            foreach (var cartItem in App.CurrentCostumer.ShoppingCartItems)
+            {
+                await database.InsertAsync(new ShoppingCartItem()
+                {
+                    ProductId = cartItem.ProductId,
+                    ShoppingCartTypeId = cartItem.ShoppingCartTypeId,
+                    Quantity = cartItem.Quantity,
+                    ShoppingCartItemId = Guid.NewGuid()
+                });
+            }
         }
 
         private async Task DeleteCurrentCustomer()
         {
             await database.DeleteAllAsync<Models.Customer.Customer>();
             await database.DeleteAllAsync<CustomerRole>();
+            await database.DeleteAllAsync<ShoppingCartItem>();
         }
     }
 }

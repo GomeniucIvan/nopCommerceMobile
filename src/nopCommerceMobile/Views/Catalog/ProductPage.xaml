@@ -180,30 +180,12 @@
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="FillAndExpand"
                      AbsoluteLayout.LayoutFlags="WidthProportional"
-                     AbsoluteLayout.LayoutBounds="0, 0, 1, 50"
-                     IsVisible="{Binding IsDataLoaded}">
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 50">
 
             <helpers:ToolbarBackButton />
 
             <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center" VerticalOptions="Center" >
-                    <helpers:ToolbarCartButtonStackLayout/>
-
-                    <BoxView BackgroundColor="Red" 
-                             CornerRadius="10" 
-                             WidthRequest="18" 
-                             HeightRequest="18" 
-                             IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
-                             Margin="17,0,0,0"/>
-
-                    <Label Text="{Binding CartCount}"
-                           Margin="22,0,0,0" 
-                           IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
-                           TextColor="White" 
-                           Padding="0" 
-                           Style="{StaticResource CenteredLabel}" 
-                           HorizontalOptions="End"/>
-                </AbsoluteLayout>
+                <helpers:ShoppingCart />
 
                 <helpers:ToolbarMenuButton />
             </StackLayout>

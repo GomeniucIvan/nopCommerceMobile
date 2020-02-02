@@ -15,6 +15,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
+            <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"></converters:GreaterThanZeroConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,11 +27,15 @@
             </Grid.RowDefinitions>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-
                 <helpers:ToolbarBackButton />
 
                 <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+
                 <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal" Spacing="0" x:Name="ToolbarItems">
+
+                    </StackLayout>
+
                     <helpers:GridButton Clicked="Grid_OnClick" IsVisible="{Binding ListViewModel}"/>
                     <helpers:ListButton Clicked="List_OnClick" IsVisible="{Binding ListViewModel, Converter={ StaticResource InverseBooleanConverter}}"/>
                     <helpers:ToolbarFilterButton Clicked="Filter_OnClick"/>

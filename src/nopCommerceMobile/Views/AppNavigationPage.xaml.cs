@@ -24,12 +24,13 @@ namespace nopCommerceMobile.Views
         {
             base.OnAppearing();
 
+            await ViewModel.InitializeAsync();
+
             if (!ViewModel.SelectedNavigationPage.HasValue)
                 SetHomePage();
             else
                 Page.SetPageContentPage();
 
-            await ViewModel.InitializeAsync();
         }
 
         private void SetHomePage()

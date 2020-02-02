@@ -1,14 +1,31 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using System;
+using nopCommerceMobile.Models.Catalog;
+using nopCommerceMobile.Services.Catalog;
+using nopCommerceMobile.Services.Navigation;
+using nopCommerceMobile.ViewModels.Base;
+using nopCommerceMobile.Views.Catalog;
+using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views.Partial
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemViewTemplate : ContentView
     {
+        #region Fields
+
+        private IShoppingCartService _shoppingCartService;
+        private INavigationService _navigationService;
+
+        #endregion
+
         public ItemViewTemplate()
         {
             InitializeComponent();
+
+            if (_shoppingCartService == null)
+                _shoppingCartService = LocatorViewModel.Resolve<IShoppingCartService>();
+
+            if (_navigationService == null)
+                _navigationService = LocatorViewModel.Resolve<INavigationService>();
         }
 
         public bool ListViewModel { get; set; }
@@ -50,6 +67,14 @@ namespace nopCommerceMobile.Views.Partial
                     ListViewModelPancakeView.IsVisible = false;
                 }
             }
+        }
+
+        private async void AddToCart_OnClick(object sender, EventArgs e)
+        {
+            var label = (Label) sender;
+            var productModel = (ProductModel)label.BindingContext;
+
+            await _shoppingCartService.AddProductToCartAsync(productModel);
         }
     }
 }

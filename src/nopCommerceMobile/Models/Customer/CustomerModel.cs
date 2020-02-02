@@ -147,7 +147,6 @@ namespace nopCommerceMobile.Models.Customer
                 RaisePropertyChanged(()=> FullName);
             }
         }
-
         public string ViewMode { get; set; }
 
         #region Navigation properties
@@ -162,6 +161,7 @@ namespace nopCommerceMobile.Models.Customer
         /// </summary>
         public IList<ShoppingCartItemModel> ShoppingCartItems { get; set; }
 
+        public string CurrentLanguage { get; set; }
 
         #endregion
     }
@@ -298,7 +298,6 @@ namespace nopCommerceMobile.Models.Customer
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string ViewModel { get; set; }
 
         #region Navigation properties
 
@@ -316,5 +315,14 @@ namespace nopCommerceMobile.Models.Customer
 
 
         #endregion
+    }
+
+    public class CustomerSettings
+    {
+        [PrimaryKey]
+        public int Id { get; set; }
+
+        public string CurrentLanguage { get; set; }
+        public string ViewMode { get; set; }
     }
 }

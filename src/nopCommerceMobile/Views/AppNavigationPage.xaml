@@ -3,8 +3,16 @@
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
                           xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                          xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
                           x:Class="nopCommerceMobile.Views.AppNavigationPage"
                           NavigationPage.HasNavigationBar="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"></converters:GreaterThanZeroConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
@@ -80,7 +88,6 @@
 
                         <!--Cart-->
                         <StackLayout Grid.Column="4" Style="{StaticResource NavigationTabContainer}">
-                            <!--TODO make badge controller-->
                             <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center">
                                 <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
                                                        FontSize="30"
@@ -88,14 +95,17 @@
                                 <BoxView BackgroundColor="Red" 
                                          CornerRadius="10" 
                                          WidthRequest="18" 
+                                         IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
                                          HeightRequest="18" 
                                          Margin="17,0,0,0"/>
-                                <Label Text="4"
+                                <Label Text="{Binding CartCount}"
                                        Margin="22,0,0,0" 
+                                       IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
 
                             <Label Text="Cart" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <!--<helpers:ShoppingCart />-->
                         </StackLayout>
                     </Grid>
 

@@ -9,9 +9,12 @@ namespace nopCommerceMobile.Views.Catalog
     public abstract class ProductPageXaml : ModelBoundContentPage<ProductViewModel> { }
     public partial class ProductPage : ProductPageXaml
     {
+        public static ProductPage Page;
+
         public ProductPage()
         {
             InitializeComponent();
+            Page = this;
         }
 
         protected override async void OnAppearing()
@@ -133,6 +136,10 @@ namespace nopCommerceMobile.Views.Catalog
         private async void AddProductToCart_OnClicked(object sender, EventArgs e)
         {
             await ViewModel.AddProductToCartAsync();
+        }
+
+        public void RefreshToolbarItems()
+        {
         }
     }
 }

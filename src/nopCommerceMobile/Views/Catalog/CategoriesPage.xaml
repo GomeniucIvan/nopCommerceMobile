@@ -7,17 +7,28 @@
                     xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
                     xmlns:partial="clr-namespace:nopCommerceMobile.Views.Partial;assembly=nopCommerceMobile"
                     xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                    xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
                     mc:Ignorable="d"
                     NavigationPage.HasNavigationBar="False"
                     x:Class="nopCommerceMobile.Views.Catalog.CategoriesPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"></converters:GreaterThanZeroConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout VerticalOptions="FillAndExpand">
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="FillAndExpand">
 
             <helpers:ToolbarBackButton />
-
             <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+
+            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal" x:Name="ToolbarItems">
+                <!--<helpers:ShoppingCart />
+                <helpers:ToolbarMenuButton />-->
+            </StackLayout>
         </StackLayout>
 
         <StackLayout VerticalOptions="FillAndExpand">

@@ -65,6 +65,6 @@ namespace nopCommerceMobile.Models.Orders
     public class ShoppingCartItem : ShoppingCartItemModel
     {
         [PrimaryKey]
-        public int Id { get; set; }
+        public Guid ShoppingCartItemId { get; set; }
     }
 }

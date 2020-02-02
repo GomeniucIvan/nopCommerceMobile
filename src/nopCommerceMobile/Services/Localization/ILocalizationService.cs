@@ -7,5 +7,6 @@ namespace nopCommerceMobile.Services.Localization
     public interface ILocalizationService
     {
          Task<IList<LocaleResourceModel>> GetLocaleResourcesByLanguageCultureAsync(string languageCulture);
+         Task CreateOrUpdateLocales();
     }
 }

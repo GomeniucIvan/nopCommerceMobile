@@ -62,7 +62,8 @@ namespace nopCommerceMobile.ViewModels.Catalog
 
         public void UpdateViewMode(bool isList)
         {
-            _customerService.UpdateViewMode(isList);
+            App.CurrentCostumer.ViewMode = isList ? "list" : "grid";
+            _customerService.CreateOrUpdateCustomerSettings();
         }
     }
 }

@@ -81,7 +81,11 @@
                         <Label Text="{extensions:Translate ShoppingCart.AddToCart}" 
                                Style="{StaticResource CenteredLabel}" 
                                FontSize="16"
-                               Margin="0,10,0,8"/>
+                               Margin="0,10,0,8">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddToCart_OnClick" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
 
                     <BoxView Style="{ StaticResource ItemDetailsBoxView }" 

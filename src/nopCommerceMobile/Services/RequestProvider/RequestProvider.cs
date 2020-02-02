@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using nopCommerceMobile.Exceptions;
+using nopCommerceMobile.Extensions;
 using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -57,7 +58,7 @@ namespace nopCommerceMobile.Services.RequestProvider
             return result;
         }
 
-        public async void PostAsync<TModel>(string uri, TModel data)
+        public async Task PostAsync<TModel>(string uri, TModel data)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

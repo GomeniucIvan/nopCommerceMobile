@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using nopCommerceMobile.Models.Customer;
+using nopCommerceMobile.Services.Customer;
+using nopCommerceMobile.Services.Localization;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Navigation;
 using nopCommerceMobile.Views;
@@ -8,6 +12,18 @@ namespace nopCommerceMobile.ViewModels
 {
     public class AppNavigationBaseViewModel : BaseViewModel
     {
+        private ICustomerService _customerService;
+        private ILocalizationService _localizationService;
+
+        public AppNavigationBaseViewModel()
+        {
+            if (_customerService == null && App.CurrentCostumer == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
+
+            if (_localizationService == null)
+                _localizationService = LocatorViewModel.Resolve<ILocalizationService>();
+        }
+
         private bool _isRegisteredCustomer;
         public bool IsRegisteredCustomer
         {
@@ -54,11 +70,37 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private int _cartCount;
+        public int CartCount
+        {
+            get => _cartCount;
+            set
+            {
+                _cartCount = value;
+                RaisePropertyChanged(()=> CartCount);
+            }
+        }
+
         public async Task InitializeAsync()
         {
             IsBusy = true;
-            IsRegisteredCustomer = false; //to implement
+
+            if (!App.AppInitialized)
+            {
+                await InitializeDataBase();
+                App.AppInitialized = true;
+            }
+
+            IsRegisteredCustomer = App.CurrentCostumer.IsRegistered();
+            CartCount = App.CurrentCostumer == null ? 0 : App.CurrentCostumer.ShoppingCartItems.Where(v => v.ShoppingCartTypeId == 1).Sum(v => v.Quantity);
+
             IsBusy = false;
+        }
+
+        private async Task InitializeDataBase()
+        {
+            await _customerService.SetCurrentCustomer(true);
+            await _localizationService.CreateOrUpdateLocales();
         }
     }
 }

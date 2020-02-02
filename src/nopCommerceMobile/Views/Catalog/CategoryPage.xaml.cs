@@ -11,9 +11,12 @@ namespace nopCommerceMobile.Views.Catalog
     public abstract class CategoryPageXaml : ModelBoundContentPage<CategoryViewModel> { }
     public partial class CategoryPage : CategoryPageXaml
     {
+        public static CategoryPage Page;
+
         public CategoryPage()
         {
             InitializeComponent();
+            Page = this;
         }
 
         protected override void OnAppearing()
@@ -29,6 +32,7 @@ namespace nopCommerceMobile.Views.Catalog
             HideFrame();
 
             ViewModel.ListViewModel = App.CurrentCostumer.ViewMode == "list";
+            RefreshToolbarItems();
         }
 
         private async void Product_OnClick(object sender, EventArgs e)
@@ -173,6 +177,12 @@ namespace nopCommerceMobile.Views.Catalog
             App.CurrentCostumer.ViewMode = "list";
             ViewModel.ListViewModel = true;
             ViewModel.UpdateViewMode(true);
+        }
+
+        public void RefreshToolbarItems()
+        {
+            ToolbarItems.Children.Clear();
+            ToolbarItems.Children.Add(new ShoppingCart());
         }
     }
 }

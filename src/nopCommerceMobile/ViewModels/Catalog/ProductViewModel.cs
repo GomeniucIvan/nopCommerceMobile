@@ -11,8 +11,9 @@ namespace nopCommerceMobile.ViewModels.Catalog
     {
         #region Fields
 
-        private IProductService _productService;
-        private ICustomerService _customerService;
+        private readonly IProductService _productService;
+        private readonly IShoppingCartService _shoppingCartService;
+        private readonly ICustomerService _customerService;
 
         #endregion
 
@@ -22,6 +23,9 @@ namespace nopCommerceMobile.ViewModels.Catalog
         {
             if (_productService == null)
                 _productService = LocatorViewModel.Resolve<IProductService>();
+
+            if (_shoppingCartService == null)
+                _shoppingCartService = LocatorViewModel.Resolve<IShoppingCartService>();
 
             if (_customerService == null)
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
@@ -54,17 +58,6 @@ namespace nopCommerceMobile.ViewModels.Catalog
             }
         }
 
-        private int _cartCount;
-        public int CartCount
-        {
-            get => _cartCount;
-            set
-            {
-                _cartCount = value;
-                RaisePropertyChanged(()=> CartCount);
-            }
-        }
-
         public async Task InitializeAsync()
         {
             if (!IsDataLoaded)
@@ -72,7 +65,6 @@ namespace nopCommerceMobile.ViewModels.Catalog
                 IsBusy = true;
 
                 Product = await _productService.GetProductByIdAsync(ProductId);
-                CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity);
 
                 IsBusy = false;
                 IsDataLoaded = true;
@@ -83,16 +75,14 @@ namespace nopCommerceMobile.ViewModels.Catalog
         {
             IsBusy = true;
 
-            await _productService.AddProductToCartAsync(ProductId);
-            await RefreshCart();
+            var product = new ProductModel()
+            {
+                Id = Product.Id,
+                Name = Product.Name
+            };
+            await _shoppingCartService.AddProductToCartAsync(product);
 
             IsBusy = false;
-        }
-
-        private async Task RefreshCart()
-        {
-            await _customerService.SetCurrentCustomer(true);
-            CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity); CartCount = App.CurrentCostumer.ShoppingCartItems.Sum(v => v.Quantity);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using nopCommerceMobile.Components;
+﻿using System.Linq;
+using nopCommerceMobile.Components;
 using nopCommerceMobile.Services;
+using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.Services.Navigation;
 using Rg.Plugins.Popup.Services;
 
@@ -9,11 +11,13 @@ namespace nopCommerceMobile.ViewModels.Base
     {
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
+        protected readonly ICustomerService CustomerService;
 
         protected BaseViewModel()
         {
             DialogService = LocatorViewModel.Resolve<IDialogService>();
             NavigationService = LocatorViewModel.Resolve<INavigationService>();
+            CustomerService = LocatorViewModel.Resolve<ICustomerService>();
         }
 
         private bool _isDataLoaded;
