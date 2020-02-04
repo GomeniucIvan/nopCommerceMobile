@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Orders;
@@ -123,7 +122,7 @@ namespace nopCommerceMobile.Services.Customer
             }
         }
 
-        public async Task CreateOrUpdateCustomerSettings()
+        public async Task CreateOrUpdateCustomerSettings(bool updateTable = false)
         {
             var customerSettingsTable = await database.GetTableInfoAsync(nameof(CustomerSettings));
             if (customerSettingsTable.Count == 0)
@@ -141,15 +140,20 @@ namespace nopCommerceMobile.Services.Customer
             }
             else
             {
+                var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
+                App.CurrentCostumer.ViewMode = dbCustomerSettings.ViewMode;
+                App.CurrentCostumer.CurrentLanguage = dbCustomerSettings.CurrentLanguage;
+            }
+
+            if (updateTable)
+            {
                 await database.UpdateAsync(new CustomerSettings()
                 {
                     CurrentLanguage = App.CurrentCostumer.CurrentLanguage,
                     ViewMode = App.CurrentCostumer.ViewMode,
                 });
             }
-            var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
-            App.CurrentCostumer.ViewMode = dbCustomerSettings.ViewMode;
-            App.CurrentCostumer.CurrentLanguage = dbCustomerSettings.CurrentLanguage;
+
         }
 
         private async Task CreateOrUpdateCustomerRoles()
@@ -196,6 +200,14 @@ namespace nopCommerceMobile.Services.Customer
                     ShoppingCartItemId = Guid.NewGuid()
                 });
             }
+        }
+
+        public async Task RegisterAsync(RegisterModel model)
+        {
+            var uri = $"{ApiUrlBase}/register";
+
+            await _requestProvider.PostAsync<RegisterModel>(uri, model);
+            await SetCurrentCustomer(true);
         }
 
         private async Task DeleteCurrentCustomer()

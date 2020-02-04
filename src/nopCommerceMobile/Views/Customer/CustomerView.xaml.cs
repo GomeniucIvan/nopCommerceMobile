@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
@@ -47,7 +48,7 @@ namespace nopCommerceMobile.Views.Customer
 
         private void Register_OnClick(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new Xamarin.Forms.NavigationPage(new RegisterPage()));
         }
 
         private void MyAccount_OnTapped(object sender, EventArgs e)
@@ -87,6 +88,11 @@ namespace nopCommerceMobile.Views.Customer
             //add popup yes/no TODO
             _customerService.LogoutCustomer();
 
+            await ViewModel.InitializeAsync();
+        }
+
+        public async Task InitializeAsync()
+        {
             await ViewModel.InitializeAsync();
         }
     }

@@ -46,5 +46,10 @@ namespace nopCommerceMobile.ViewModels.Customer
                 IsDataLoaded = true;
             }
         }
+
+        public async Task RegisterCustomer()
+        {
+           await _customerService.RegisterAsync(RegisterModel);
+        }
     }
 }

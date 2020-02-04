@@ -12,7 +12,8 @@ namespace nopCommerceMobile.Services.Customer
         Task<CustomerModel> GetCurrentCustomerModelAsync();
         void LogoutCustomer();
         Task SetCurrentCustomer(bool refreshData = false);
-        Task CreateOrUpdateCustomerSettings();
+        Task CreateOrUpdateCustomerSettings(bool updateTable = false);
         Task CreateOrUpdateShoppingCartItems();
+        Task RegisterAsync(RegisterModel model);
     }
 }

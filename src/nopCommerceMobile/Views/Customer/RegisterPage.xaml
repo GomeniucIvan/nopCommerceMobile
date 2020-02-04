@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customer:RegisterPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                  xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
+                  xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
+                  xmlns:customer="clr-namespace:nopCommerceMobile.Views.Customer;assembly=nopCommerceMobile"
+                  mc:Ignorable="d"
+                  x:Class="nopCommerceMobile.Views.Customer.RegisterPage">
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.IosCloseRound }" FontSize="24" HorizontalTextAlignment="End">
+                <helpers:IoniconsLabel.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Close_OnTapped"/>
+                </helpers:IoniconsLabel.GestureRecognizers>
+            </helpers:IoniconsLabel>
+
+            <StackLayout Grid.Row="1" VerticalOptions="Center" Spacing="20">
+
+                <!-- add custom radiobuttons controller TODO-->
+                <!--Gender -->
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.FirstName}" 
+                                     IsRequired="True"
+                                     Text="{Binding RegisterModel.FirstName}" />
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.LastName}" 
+                                     IsRequired="True"
+                                     Text="{Binding RegisterModel.LastName}" />
+
+                <!--TODO add custom date picker controller -->
+                <!--DateOfBirth -->
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Email}" 
+                                     IsRequired="True"
+                                     Text="{Binding RegisterModel.Email}" />
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Company}" 
+                                     IsRequired="{Binding RegisterModel.CompanyRequired}"
+                                     Text="{Binding RegisterModel.Company}" />
+
+                <!-- Newsletter -->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding RegisterModel.Newsletter}" HorizontalOptions="Start"/>
+                    <Label Text="{extensions:Translate Account.Fields.Newsletter}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NewsletterLabel_OnTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Password}" 
+                                     IsPassword="True"
+                                     IsRequired="True"
+                                     Text="{Binding RegisterModel.Password}" />
+
+                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.ConfirmPassword}" 
+                                     IsPassword="True"
+                                     IsRequired="True"
+                                     Text="{Binding RegisterModel.ConfirmPassword}" />
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Spacing="14" VerticalOptions="End" Padding="0,20">
+                <!-- Register Button -->
+                <Button Text="{extensions:Translate Account.Register.Button}" 
+                        Clicked="Register_OnClicked"
+                        HorizontalOptions="FillAndExpand" 
+                        Style="{ StaticResource DarkGreenButtonStyle }" />
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</customer:RegisterPageXaml>

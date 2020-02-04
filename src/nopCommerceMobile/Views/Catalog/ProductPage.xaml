@@ -143,19 +143,23 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <StackLayout BackgroundColor="LightPink" VerticalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand">
                     <Button Text="{extensions:Translate ShoppingCart.AddToCart}"
                            VerticalOptions="CenterAndExpand"
                            Clicked="AddProductToCart_OnClicked"
                            TextColor="Red"
+                           BackgroundColor="LightPink"
                            BorderColor="Transparent"
                            Style="{StaticResource CenteredLabel}"
                            FontSize="{StaticResource BaseFontSize}"/>
                 </StackLayout>
 
-                <StackLayout Grid.Column="1" BackgroundColor="Red">
-                    <Label Text="ShopCart"
+                <StackLayout Grid.Column="1">
+                    <Button Text="{extensions:Translate Account.ShoppingCart}"
                            TextColor="White"
+                           BackgroundColor="Red"
+                           BorderColor="Transparent"
+                           Clicked="ShoppingCart_OnClicked"
                            VerticalOptions="CenterAndExpand"
                            Style="{StaticResource CenteredLabel}"
                            FontSize="{StaticResource BaseFontSize}"/>
@@ -184,11 +188,7 @@
 
             <helpers:ToolbarBackButton />
 
-            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                <helpers:ShoppingCart />
-
-                <helpers:ToolbarMenuButton />
-            </StackLayout>
+            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal" x:Name="ToolbarItems"/>
         </StackLayout>
     </AbsoluteLayout>
 

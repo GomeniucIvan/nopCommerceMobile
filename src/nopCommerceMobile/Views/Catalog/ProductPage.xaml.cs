@@ -29,6 +29,7 @@ namespace nopCommerceMobile.Views.Catalog
             };
             AppearingFrame.Content = mainStackLayout;
             HideFrame();
+            RefreshToolbarItems();
         }
 
         private async void ProductSpec_OnTapped(object sender, EventArgs e)
@@ -139,6 +140,13 @@ namespace nopCommerceMobile.Views.Catalog
         }
 
         public void RefreshToolbarItems()
+        {
+            ToolbarItems.Children.Clear();
+            ToolbarItems.Children.Add(new ShoppingCart());
+            ToolbarItems.Children.Add(new ToolbarMenuButton());
+        }
+
+        private void ShoppingCart_OnClicked(object sender, EventArgs e)
         {
         }
     }
