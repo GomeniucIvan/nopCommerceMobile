@@ -73,7 +73,6 @@
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Mobile.Categories}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
-                <!--//TODO find a way to implement ItemTapped event-->
                 <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="0" >
                     <components:ItemsViewGrid.ItemTemplate>
                         <DataTemplate>

@@ -9,6 +9,7 @@ using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Common;
 using nopCommerceMobile.ViewModels.Customer;
+using nopCommerceMobile.ViewModels.Navigation;
 using nopCommerceMobile.Views.Common;
 using SQLite;
 
@@ -43,6 +44,9 @@ namespace nopCommerceMobile.Views.Customer
         protected override async void OnParentSet()
         {
             base.OnParentSet();
+            if (AppNavigationPage.Vm.SelectedNavigationPage != NavigationPageEnum.Account)
+                return;
+
             await ViewModel.InitializeAsync();
         }
 

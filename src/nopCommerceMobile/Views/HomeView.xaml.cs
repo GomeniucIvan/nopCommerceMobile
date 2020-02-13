@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using FFImageLoading.Forms;
-using nopCommerceMobile.Components;
 using nopCommerceMobile.Models.Catalog;
+using nopCommerceMobile.Models.News;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Catalog;
+using nopCommerceMobile.ViewModels.Navigation;
+using nopCommerceMobile.ViewModels.News;
 using nopCommerceMobile.Views.Catalog;
+using nopCommerceMobile.Views.News;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Views
@@ -27,6 +28,9 @@ namespace nopCommerceMobile.Views
         protected override async void OnParentSet()
         {
             base.OnParentSet();
+            if (AppNavigationPage.Vm.SelectedNavigationPage != NavigationPageEnum.Home)
+                return;
+
             await ViewModel.InitializeAsync();
         }
 
@@ -56,7 +60,6 @@ namespace nopCommerceMobile.Views
                 {
                     var categoryPage = new CategoryPage()
                     {
-                        Title = category.Name,
                         BindingContext = new CategoryViewModel()
                         {
                             Category = category,
@@ -80,7 +83,6 @@ namespace nopCommerceMobile.Views
 
             var productPage = new ProductPage()
             {
-                Title = selectedProduct.Name,
                 BindingContext = new ProductViewModel()
                 {
                     ProductId = selectedProduct.Id
@@ -90,9 +92,21 @@ namespace nopCommerceMobile.Views
             await Navigation.PushAsync(productPage);
         }
 
-        private void News_OnClick(object sender, EventArgs e)
+        private async void News_OnClick(object sender, EventArgs e)
         {
-           
+            var view = (View)sender;
+            var selectedNewsItem = (NewsItemModel)view.BindingContext;
+
+            var newsPage = new NewsPage()
+            {
+                BindingContext = new NewsViewModel()
+                {
+                    NewsItem = selectedNewsItem,
+                    Title = selectedNewsItem.Title
+                }
+            };
+
+            await Navigation.PushAsync(newsPage);
         }
 
         private void Slider_OnClick(object sender, EventArgs e)

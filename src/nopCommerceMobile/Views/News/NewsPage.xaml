@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<news:NewsPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:news="clr-namespace:nopCommerceMobile.Views.News;assembly=nopCommerceMobile"
+              xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+              mc:Ignorable="d"
+              NavigationPage.HasNavigationBar="False"
+              x:Class="nopCommerceMobile.Views.News.NewsPage">
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <helpers:ToolbarBackButton />
+                <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+            </StackLayout>
+
+            <Label Margin="10" Text="{Binding NewsItem.Full}" TextType="Html" FontSize="{StaticResource BaseFontSize}" />
+        </StackLayout>
+    </ContentPage.Content>
+</news:NewsPageXaml>

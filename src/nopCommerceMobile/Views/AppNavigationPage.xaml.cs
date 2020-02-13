@@ -11,6 +11,7 @@ namespace nopCommerceMobile.Views
     public partial class AppNavigationPage : NavigationPageXaml
     {
         public static AppNavigationPage Page;
+        public static AppNavigationBaseViewModel Vm;
 
         public AppNavigationPage()
         {
@@ -23,6 +24,7 @@ namespace nopCommerceMobile.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            Vm = ViewModel;
 
             await ViewModel.InitializeAsync();
 
