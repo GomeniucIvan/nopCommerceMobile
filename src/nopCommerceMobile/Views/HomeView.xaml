@@ -70,7 +70,7 @@
 
             <!--Categories -->
             <StackLayout IsVisible="{Binding Categories, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
-                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Categories}"></Label>
+                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Mobile.Categories}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
                 <!--//TODO find a way to implement ItemTapped event-->
@@ -89,7 +89,7 @@
 
             <!--Products -->
             <StackLayout IsVisible="{Binding Products, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
-                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Products}"></Label>
+                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Mobile.Products}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
                 <components:ItemsViewGrid Source="{ Binding Products }" Padding="5,0,5,0" RowSpacing="5">
@@ -107,7 +107,7 @@
 
             <!--Bestsellers -->
             <StackLayout IsVisible="{Binding BestSellers, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
-                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Bestsellers}"></Label>
+                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Mobile.Bestsellers}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
                 <components:ItemsViewGrid Source="{ Binding BestSellers }" Padding="5,0,5,0" RowSpacing="5">
@@ -125,7 +125,7 @@
 
             <!--News -->
             <StackLayout IsVisible="{Binding News, Converter={StaticResource AnyItemInListConverter}}" Padding="0,15,0,0">
-                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate News}"></Label>
+                <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Mobile.News}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
                 <ScrollView Orientation="Horizontal" HorizontalOptions="Fill" HorizontalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">

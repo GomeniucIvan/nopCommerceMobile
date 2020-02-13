@@ -60,7 +60,7 @@ namespace nopCommerceMobile.Components
             _stackLayout.Orientation = StackOrientation.Horizontal;
             _stackLayout.Spacing = 3;
 
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var nextRating = i + 1;
 

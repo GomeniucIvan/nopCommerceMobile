@@ -30,41 +30,41 @@
                 <!-- add custom radiobuttons controller TODO-->
                 <!--Gender -->
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.FirstName}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.FirstName}" 
                                      IsRequired="True"
                                      Text="{Binding RegisterModel.FirstName}" />
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.LastName}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.LastName}" 
                                      IsRequired="True"
                                      Text="{Binding RegisterModel.LastName}" />
 
                 <!--TODO add custom date picker controller -->
                 <!--DateOfBirth -->
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Email}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.Email}" 
                                      IsRequired="True"
                                      Text="{Binding RegisterModel.Email}" />
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Company}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.Company}" 
                                      IsRequired="{Binding RegisterModel.CompanyRequired}"
                                      Text="{Binding RegisterModel.Company}" />
 
                 <!-- Newsletter -->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding RegisterModel.Newsletter}" HorizontalOptions="Start"/>
-                    <Label Text="{extensions:Translate Account.Fields.Newsletter}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
+                    <Label Text="{extensions:Translate Mobile.Fields.Newsletter}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="NewsletterLabel_OnTapped"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.Password}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.Password}" 
                                      IsPassword="True"
                                      IsRequired="True"
                                      Text="{Binding RegisterModel.Password}" />
 
-                <components:AppEntry Placeholder="{extensions:Translate Account.Fields.ConfirmPassword}" 
+                <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.ConfirmPassword}" 
                                      IsPassword="True"
                                      IsRequired="True"
                                      Text="{Binding RegisterModel.ConfirmPassword}" />
@@ -73,7 +73,7 @@
 
             <StackLayout Grid.Row="2" Spacing="14" VerticalOptions="End" Padding="0,20">
                 <!-- Register Button -->
-                <Button Text="{extensions:Translate Account.Register.Button}" 
+                <Button Text="{extensions:Translate Mobile.Register}" 
                         Clicked="Register_OnClicked"
                         HorizontalOptions="FillAndExpand" 
                         Style="{ StaticResource DarkGreenButtonStyle }" />

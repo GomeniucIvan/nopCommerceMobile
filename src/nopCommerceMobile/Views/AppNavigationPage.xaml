@@ -41,7 +41,7 @@
                                                    FontSize="30"
                                                    TextColor="{Binding HomePageTabColor}"
                                                    Text="{x:Static helpers:IoniconsIcon.Home}"/>
-                            <Label Text="{extensions:Translate Common.Home}" Style="{StaticResource CenteredLabel}" TextColor="{Binding HomePageTabColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Home}" Style="{StaticResource CenteredLabel}" TextColor="{Binding HomePageTabColor}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="HomePageTabTapped"/>
                             </StackLayout.GestureRecognizers>
@@ -52,7 +52,7 @@
                             <helpers:FontAwesomeLabel Style="{StaticResource CenteredLabel}"
                                                       FontSize="30"
                                                       Text="{x:Static helpers:Icon.FaBars}"/>
-                            <Label Text="{extensions:Translate Admin.Catalog}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Catalog}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
                         <!--Account-->
@@ -61,7 +61,7 @@
                                                    FontSize="30"
                                                    TextColor="{Binding AccountTabColor}"
                                                    Text="{x:Static helpers:IoniconsIcon.Person}"/>
-                            <Label Text="{extensions:Translate PageTitle.Account}" Style="{StaticResource CenteredLabel}" TextColor="{Binding AccountTabColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Account}" Style="{StaticResource CenteredLabel}" TextColor="{Binding AccountTabColor}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="AccountTabTapped"/>
                             </StackLayout.GestureRecognizers>
@@ -84,7 +84,7 @@
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
 
-                            <Label Text="{extensions:Translate PageTitle.Wishlist}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Wishlist}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
                         <!--Cart-->
@@ -105,7 +105,7 @@
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
 
-                            <Label Text="{extensions:Translate Checkout.Progress.Cart}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Cart}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                             <!--<helpers:ShoppingCart />-->
                         </StackLayout>
                     </Grid>

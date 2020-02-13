@@ -68,7 +68,7 @@ namespace nopCommerceMobile.Services.Catalog
             {
                 var viewModel = mainPage.CurrentPage.BindingContext;
                 var castModel = viewModel as BaseViewModel;
-                castModel?.DisplayPopupNotification(TranslateExtension.Translate("Admin.Catalog.Products.Added"));
+                castModel?.DisplayPopupNotification(TranslateExtension.Translate("Mobile.Products.Added"));
             }
         }
     }

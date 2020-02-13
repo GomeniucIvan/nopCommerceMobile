@@ -101,7 +101,7 @@
                             <StackLayout Padding="0,20,0,20">
 
                                 <!--Spec-->
-                                <Label Text="{extensions:Translate Products.Specs}" 
+                                <Label Text="{extensions:Translate Mobile.Products.Specs}" 
                                    FontSize="{StaticResource BaseFontSize}" 
                                    IsVisible="{Binding Product.SpecificationAttributeModels, Converter={StaticResource AnyItemInListConverter}}"
                                    Padding="5"
@@ -117,7 +117,7 @@
                                      HeightRequest="1"/>
 
                                 <!--Description-->
-                                <Label Text="{extensions:Translate Account.VendorInfo.Description}" 
+                                <Label Text="{extensions:Translate Mobile.Products.Description}" 
                                        FontSize="{StaticResource BaseFontSize}" 
                                        IsVisible="{Binding Product.FullDescription, Converter={StaticResource NotEmptyStringConverter}}"
                                        Padding="5"
@@ -144,7 +144,7 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <StackLayout VerticalOptions="FillAndExpand">
-                    <Button Text="{extensions:Translate ShoppingCart.AddToCart}"
+                    <Button Text="{extensions:Translate Mobile.ShoppingCart.AddToCart}"
                            VerticalOptions="CenterAndExpand"
                            Clicked="AddProductToCart_OnClicked"
                            TextColor="Red"
@@ -155,7 +155,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1">
-                    <Button Text="{extensions:Translate Account.ShoppingCart}"
+                    <Button Text="{extensions:Translate Mobile.ShoppingCart}"
                            TextColor="White"
                            BackgroundColor="Red"
                            BorderColor="Transparent"

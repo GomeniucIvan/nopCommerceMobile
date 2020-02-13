@@ -118,7 +118,7 @@ namespace nopCommerceMobile.Views.Customer
             {
                 BindingContext = new SelectListViewModel()
                 {
-                    Title = TranslateExtension.Translate("Admin.Configuration.Languages"),
+                    Title = TranslateExtension.Translate("Mobile.Languages"),
                     SelectList = selectingList,
                     SelectListPage = SelectListPageEnum.Languages
                 }

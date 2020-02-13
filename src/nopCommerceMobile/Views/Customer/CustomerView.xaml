@@ -37,7 +37,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label HorizontalTextAlignment="End"
-                       Text="{extensions:Translate Account.Login}" 
+                       Text="{extensions:Translate Mobile.Login}" 
                        Style="{StaticResource BoldLabel}"
                        FontSize="{StaticResource LargeFontSize}">
                     <Label.GestureRecognizers>
@@ -53,7 +53,7 @@
 
                 <Label Grid.Column="2" 
                        HorizontalTextAlignment="Start"
-                       Text="{extensions:Translate Account.Register}" 
+                       Text="{extensions:Translate Mobile.Register}" 
                        Style="{StaticResource BoldLabel}"
                        FontSize="{StaticResource LargeFontSize}">
                     <Label.GestureRecognizers>
@@ -183,40 +183,40 @@
                 <StackLayout Spacing="0">
                     <StackLayout Orientation="Horizontal" Padding="10">
                         <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.SettingsOutline}" FontSize="26"/>
-                        <Label FontSize="{StaticResource LargeFontSize}" Text="{extensions:Translate Footer.CustomerService}"/>
+                        <Label FontSize="{StaticResource LargeFontSize}" Text="{extensions:Translate Mobile.CustomerService}"/>
                     </StackLayout>
                     <BoxView BackgroundColor="Gainsboro" Margin="20,0,20,0" HeightRequest="1"/>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate News}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.News}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="News_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Blog}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Blog}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Blog_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Products.RecentlyViewedProducts}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Products.RecentlyViewedProducts}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RecentlyViewedProducts_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10" IsVisible="{Binding Languages, Converter={StaticResource ListContainsMoreThanOneConverter}}">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Languages}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Languages}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Languages_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Account.Logout}"/>
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Logout}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="Logout_OnTapped"/>
                         </StackLayout.GestureRecognizers>

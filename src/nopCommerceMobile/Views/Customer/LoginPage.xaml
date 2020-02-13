@@ -51,7 +51,7 @@
                 <!-- Remember me? -->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding LoginModel.RememberMe}" HorizontalOptions="Start"/>
-                    <Label Text="{extensions:Translate Account.Login.Fields.RememberMe}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
+                    <Label Text="{extensions:Translate Mobile.RememberMe}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RememberMeLabel_OnTapped"/>
                         </Label.GestureRecognizers>
@@ -62,7 +62,7 @@
 
             <StackLayout Grid.Row="3" Spacing="14" VerticalOptions="End" Padding="0,20">
                 <!-- Login Button -->
-                <Button Text="{extensions:Translate Account.Login.LoginButton}" 
+                <Button Text="{extensions:Translate Mobile.Login}" 
                         Clicked="Login_OnClicked"
                         HorizontalOptions="FillAndExpand" 
                         Style="{ StaticResource DarkGreenButtonStyle }" />

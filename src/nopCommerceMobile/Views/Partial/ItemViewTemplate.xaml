@@ -78,7 +78,7 @@
 
 
                     <StackLayout Grid.Column="0">
-                        <Label Text="{extensions:Translate ShoppingCart.AddToCart}" 
+                        <Label Text="{extensions:Translate Mobile.ShoppingCart.AddToCart}" 
                                Style="{StaticResource CenteredLabel}" 
                                FontSize="16"
                                Margin="0,10,0,8">
@@ -97,7 +97,7 @@
                              HorizontalOptions="EndAndExpand"/>
 
                     <StackLayout Grid.Column="1">
-                        <Label Text="{extensions:Translate ShoppingCart.AddToWishlist}" 
+                        <Label Text="{extensions:Translate Mobile.ShoppingCart.AddToWishlist}" 
                                Style="{StaticResource CenteredLabel}" 
                                FontSize="16"
                                Margin="0,10,0,8"/>
@@ -112,7 +112,7 @@
                              HorizontalOptions="StartAndExpand"/>
 
                     <StackLayout Grid.Column="2">
-                        <Label Text="{extensions:Translate Admin.Common.Preview}"
+                        <Label Text="{extensions:Translate Mobile.Preview}"
                                Style="{StaticResource CenteredLabel}" 
                                FontSize="16"
                                Margin="0,10,0,8"/>

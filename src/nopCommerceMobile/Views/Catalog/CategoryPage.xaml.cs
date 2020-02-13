@@ -97,7 +97,7 @@ namespace nopCommerceMobile.Views.Catalog
 
             var resetLabel = new Label()
             {
-                Text = TranslateExtension.Translate("Reset"),
+                Text = TranslateExtension.Translate("Mobile.Reset"),
                 BackgroundColor = Color.LightPink,
                 TextColor = Color.Red,
                 FontSize = 18,
@@ -115,7 +115,7 @@ namespace nopCommerceMobile.Views.Catalog
 
             var filterLabel = new Label()
             {
-                Text = TranslateExtension.Translate("Filter"),
+                Text = TranslateExtension.Translate("Mobile.Filter"),
                 BackgroundColor = Color.Red,
                 TextColor = Color.White,
                 FontSize = 18,
