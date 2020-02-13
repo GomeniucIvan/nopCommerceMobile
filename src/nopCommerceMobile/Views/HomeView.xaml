@@ -28,8 +28,6 @@
                                Color="{StaticResource PrimaryColor}" IsRunning="True"/>
 
         <StackLayout IsVisible="{Binding IsDataLoaded}">
-            <!--Add web slider functionality TODO-->
-
             <!--Slider -->
             <StackLayout IsVisible="{Binding Sliders, Converter={StaticResource AnyItemInListConverter}}">
                 <Grid>
@@ -76,7 +74,7 @@
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
                 <!--//TODO find a way to implement ItemTapped event-->
-                <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="0">
+                <components:ItemsViewGrid Source="{ Binding Categories }" Padding="5,0,5,0" RowSpacing="0" >
                     <components:ItemsViewGrid.ItemTemplate>
                         <DataTemplate>
                             <partial:ItemViewTemplate IsProduct="False">
@@ -94,7 +92,6 @@
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Homepage.Products}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
-                <!--//TODO find a way to implement ItemTapped event-->
                 <components:ItemsViewGrid Source="{ Binding Products }" Padding="5,0,5,0" RowSpacing="5">
                     <components:ItemsViewGrid.ItemTemplate>
                         <DataTemplate>
@@ -113,7 +110,6 @@
                 <Label Style="{StaticResource ContainerLabel}" Text="{extensions:Translate Bestsellers}"></Label>
                 <BoxView Style="{ StaticResource ContainerBoxView }"/>
 
-                <!--//TODO find a way to implement ItemTapped event-->
                 <components:ItemsViewGrid Source="{ Binding BestSellers }" Padding="5,0,5,0" RowSpacing="5">
                     <components:ItemsViewGrid.ItemTemplate>
                         <DataTemplate>

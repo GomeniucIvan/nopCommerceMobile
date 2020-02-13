@@ -53,7 +53,7 @@
                     <CheckBox IsChecked="{Binding LoginModel.RememberMe}" HorizontalOptions="Start"/>
                     <Label Text="{extensions:Translate Account.Login.Fields.RememberMe}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="RememberMeLabel_OnTapped" NumberOfTapsRequired="1" />
+                            <TapGestureRecognizer Tapped="RememberMeLabel_OnTapped"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

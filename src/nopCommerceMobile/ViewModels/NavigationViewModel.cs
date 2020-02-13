@@ -13,15 +13,11 @@ namespace nopCommerceMobile.ViewModels
     public class AppNavigationBaseViewModel : BaseViewModel
     {
         private ICustomerService _customerService;
-        private ILocalizationService _localizationService;
 
         public AppNavigationBaseViewModel()
         {
             if (_customerService == null && App.CurrentCostumer == null)
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
-
-            if (_localizationService == null)
-                _localizationService = LocatorViewModel.Resolve<ILocalizationService>();
         }
 
         private bool _isRegisteredCustomer;
@@ -85,22 +81,10 @@ namespace nopCommerceMobile.ViewModels
         {
             IsBusy = true;
 
-            if (!App.AppInitialized)
-            {
-                await InitializeDataBase();
-                App.AppInitialized = true;
-            }
-
             IsRegisteredCustomer = App.CurrentCostumer.IsRegistered();
             CartCount = App.CurrentCostumer == null ? 0 : App.CurrentCostumer.ShoppingCartItems.Where(v => v.ShoppingCartTypeId == 1).Sum(v => v.Quantity);
 
             IsBusy = false;
-        }
-
-        private async Task InitializeDataBase()
-        {
-            await _customerService.SetCurrentCustomer(true);
-            await _localizationService.CreateOrUpdateLocales();
         }
     }
 }

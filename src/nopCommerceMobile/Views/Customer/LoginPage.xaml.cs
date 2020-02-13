@@ -35,10 +35,18 @@ namespace nopCommerceMobile.Views.Customer
             if (!ViewModel.IsBusy)
             {
                 ViewModel.IsBusy = true;
-                var response = await ViewModel.LoginCustomer();
+                var genericLoginModel = await ViewModel.LoginCustomer();
 
-                //add popup with success message
-                await Navigation.PopModalAsync();
+                if (!genericLoginModel.IsSuccessStatusCode)
+                    ViewModel.DisplayPopupNotification(genericLoginModel.ErrorMessage, NotificationTypeEnum.Warning);
+
+                else
+                {
+                    App.CurrentCostumer.CustomerGuid = genericLoginModel.Data;
+                    await ViewModel.SetCurrentCustomer();
+
+                    await Navigation.PopModalAsync();
+                }
             }
         }
 

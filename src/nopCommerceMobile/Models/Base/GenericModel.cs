@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace nopCommerceMobile.Models.Base
+﻿namespace nopCommerceMobile.Models.Base
 {
-    class GenericModel
+    public class GenericModel<T>
     {
+        public bool IsSuccessStatusCode { get; set; }
+        public string ErrorMessage { get; set; }
+        public T Data { get; set; }
     }
 }

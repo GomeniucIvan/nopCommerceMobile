@@ -10,7 +10,8 @@ namespace nopCommerceMobile.Components
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(ItemsViewGrid), null, BindingMode.Default);
         public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(IEnumerable<object>), typeof(ItemsViewGrid), null, BindingMode.Default, null, OnSourceChanged);
         public static readonly BindableProperty IsProductProperty = BindableProperty.Create(nameof(IsProduct), typeof(bool), typeof(ItemsViewGrid), false, BindingMode.Default);
-        
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(TapGestureRecognizer), null);
+
         public IEnumerable<object> Source
 		{
 			get => (IEnumerable<object>)GetValue(SourceProperty);
@@ -28,6 +29,14 @@ namespace nopCommerceMobile.Components
             get => (bool)GetValue(IsProductProperty);
             set => SetValue(IsProductProperty, value);
         }
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
+        public event EventHandler<ItemTappedEventArgs> ItemTapped;
 
         private void ReloadSource()
 		{
@@ -55,6 +64,8 @@ namespace nopCommerceMobile.Components
             SetRow(view, row);
             SetColumn(view, 2 - column - 1);
 
+            //Tapped?.Invoke(view, new TappedEventArgs(CommandParameter));
+
             return view;
         }
 
@@ -77,23 +88,6 @@ namespace nopCommerceMobile.Components
 		{
 			ReloadSource();
 		}
-
-        #region Need to fix
-
-        public event EventHandler ItemTapped; // ToDO find a way to access event
-        //public event EventHandler ItemTapped = (e, a) =>
-        //{
-
-        //};
-
-        internal virtual void OnItemTapped(EventArgs args)
-        {
-            if (!IsEnabled) // just ensure if is enabled
-                return;
-            ItemTapped?.Invoke(this, args); // call event
-        }
-
-        #endregion
     }
 
     public class ItemsViewList : StackLayout

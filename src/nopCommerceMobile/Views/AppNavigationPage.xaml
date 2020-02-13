@@ -4,6 +4,7 @@
                           xmlns:views="clr-namespace:nopCommerceMobile.Views;assembly=nopCommerceMobile"
                           xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
                           xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+                          xmlns:extensions="clr-namespace:nopCommerceMobile.Extensions;assembly=nopCommerceMobile"
                           x:Class="nopCommerceMobile.Views.AppNavigationPage"
                           NavigationPage.HasNavigationBar="False">
 
@@ -40,7 +41,7 @@
                                                    FontSize="30"
                                                    TextColor="{Binding HomePageTabColor}"
                                                    Text="{x:Static helpers:IoniconsIcon.Home}"/>
-                            <Label Text="Home" Style="{StaticResource CenteredLabel}" TextColor="{Binding HomePageTabColor}"/>
+                            <Label Text="{extensions:Translate Common.Home}" Style="{StaticResource CenteredLabel}" TextColor="{Binding HomePageTabColor}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="HomePageTabTapped"/>
                             </StackLayout.GestureRecognizers>
@@ -51,7 +52,7 @@
                             <helpers:FontAwesomeLabel Style="{StaticResource CenteredLabel}"
                                                       FontSize="30"
                                                       Text="{x:Static helpers:Icon.FaBars}"/>
-                            <Label Text="Catalog" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Admin.Catalog}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
                         <!--Account-->
@@ -60,7 +61,7 @@
                                                    FontSize="30"
                                                    TextColor="{Binding AccountTabColor}"
                                                    Text="{x:Static helpers:IoniconsIcon.Person}"/>
-                            <Label Text="Account" Style="{StaticResource CenteredLabel}" TextColor="{Binding AccountTabColor}"/>
+                            <Label Text="{extensions:Translate PageTitle.Account}" Style="{StaticResource CenteredLabel}" TextColor="{Binding AccountTabColor}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="AccountTabTapped"/>
                             </StackLayout.GestureRecognizers>
@@ -83,7 +84,7 @@
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
 
-                            <Label Text="Wish List" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate PageTitle.Wishlist}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                         </StackLayout>
 
                         <!--Cart-->
@@ -104,7 +105,7 @@
                                        TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
                             </AbsoluteLayout>
 
-                            <Label Text="Cart" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Checkout.Progress.Cart}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
                             <!--<helpers:ShoppingCart />-->
                         </StackLayout>
                     </Grid>

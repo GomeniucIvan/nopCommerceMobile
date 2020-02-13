@@ -12,7 +12,6 @@ namespace nopCommerceMobile.Extensions
     public class TranslateExtension : IMarkupExtension<Binding>, IMarkupExtension
     {
         public string Key { get; set; }
-        public static string DefaultCultureName = "en-US";
 
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
         {
@@ -29,15 +28,8 @@ namespace nopCommerceMobile.Extensions
             if (Key == null)
                 return null;
 
-            var cultureName = DefaultCultureName;
-
-            if (App.CurrentCostumer != null && !App.CurrentCostumer.CurrentLanguage.IsNullOrEmpty())
-            {
-                cultureName = App.CurrentCostumer.CurrentLanguage;
-            }
-
             var resourceManager = new ResourceManager(typeof(LocaleResourceModel));
-            BindingSource bindingSource = new BindingSource(resourceManager, Key, cultureName);
+            BindingSource bindingSource = new BindingSource(resourceManager, Key);
 
             Binding binding = new Binding
             {
@@ -52,19 +44,17 @@ namespace nopCommerceMobile.Extensions
         {
             private readonly ResourceManager _manager;
             private readonly string _key;
-            private readonly string _currentCulture;
             public event PropertyChangedEventHandler PropertyChanged;
 
-            public BindingSource(ResourceManager manager, string key, string currentCulture)
+            public BindingSource(ResourceManager manager, string key)
             {
                 _manager = manager;
                 _key = key;
-                _currentCulture = currentCulture;
             }
 
-            public string Text => GetStringValue(_key, _currentCulture).ToString();
+            public string Text => GetStringValue(_key);
 
-            private string GetStringValue(string key, string languageCulture)
+            private string GetStringValue(string key)
             {
                 var result = key;
 

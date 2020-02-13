@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"></converters:InverseBooleanConverter>
             <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"></converters:AnyItemInListConverter>
+            <converters:ListContainsMoreThanOneConverter x:Key="ListContainsMoreThanOneConverter"></converters:ListContainsMoreThanOneConverter>
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -182,7 +183,7 @@
                 <StackLayout Spacing="0">
                     <StackLayout Orientation="Horizontal" Padding="10">
                         <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.SettingsOutline}" FontSize="26"/>
-                        <Label FontSize="{StaticResource LargeFontSize}" Text="Customer Service"/>
+                        <Label FontSize="{StaticResource LargeFontSize}" Text="{extensions:Translate Footer.CustomerService}"/>
                     </StackLayout>
                     <BoxView BackgroundColor="Gainsboro" Margin="20,0,20,0" HeightRequest="1"/>
 
@@ -204,6 +205,13 @@
                         <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Products.RecentlyViewedProducts}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RecentlyViewedProducts_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="10" IsVisible="{Binding Languages, Converter={StaticResource ListContainsMoreThanOneConverter}}">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Languages}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Languages_OnTapped"/>
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 

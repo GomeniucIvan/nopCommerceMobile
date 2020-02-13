@@ -25,9 +25,9 @@ namespace nopCommerceMobile.Services.Localization
             _requestProvider = requestProvider;
         }
 
-        public async Task<IList<LocaleResourceModel>> GetLocaleResourcesByLanguageCultureAsync(string languageCulture)
+        public async Task<IList<LocaleResourceModel>> GetLocaleResourcesByIdAsync(int languageId)
         {
-            var uri = $"{ApiUrlBase}/{languageCulture}";
+            var uri = $"{ApiUrlBase}/{languageId}";
 
            var localeResources = await _requestProvider.GetAsync<List<LocaleResourceModel>>(uri);
 
@@ -37,37 +37,56 @@ namespace nopCommerceMobile.Services.Localization
             return new List<LocaleResourceModel>();
         }
 
-        public async Task CreateOrUpdateLocales()
+        public void CreateOrUpdateLocales(bool updateTable = false)
         {
-            var localeResourceTable = await database.GetTableInfoAsync(nameof(LocaleResource));
-            if (localeResourceTable.Count == 0)
-            {
-                await database.CreateTableAsync<LocaleResource>();
-            }
-            var anyLocaleResource = await database.Table<LocaleResource>().CountAsync();
-            if (anyLocaleResource == 0)
-            {
-                App.LocaleResources = await GetLocaleResourcesByLanguageCultureAsync("en-US");
-                foreach (var localeResource in App.LocaleResources)
+            Task responseTask = Task.Run( async () => {
+                if (updateTable)
                 {
-                    await database.InsertAsync(new LocaleResource()
+                    App.LocaleResources = await GetLocaleResourcesByIdAsync(App.CurrentCostumerSettings.LanguageId);
+                    foreach (var localeResource in App.LocaleResources)
                     {
-                        LanguageId = localeResource.LanguageId,
-                        ResourceName = localeResource.ResourceName,
-                        ResourceValue = localeResource.ResourceValue
-                    });
+                        await database.InsertAsync(new LocaleResource()
+                        {
+                            LanguageId = localeResource.LanguageId,
+                            ResourceName = localeResource.ResourceName,
+                            ResourceValue = localeResource.ResourceValue
+                        });
+                    }
                 }
-            }
-            else
-            {
-                var dbLocaleResources = await database.Table<LocaleResource>().ToListAsync().ConfigureAwait(true);
-                App.LocaleResources = dbLocaleResources.Select(v => new LocaleResourceModel()
+                else
                 {
-                    LanguageId = v.LanguageId,
-                    ResourceName = v.ResourceName,
-                    ResourceValue = v.ResourceValue
-                }).ToList();
-            }
+                    var localeResourceTable = await database.GetTableInfoAsync(nameof(LocaleResource));
+                    if (localeResourceTable.Count == 0)
+                    {
+                        await database.CreateTableAsync<LocaleResource>();
+                    }
+                    var anyLocaleResource = await database.Table<LocaleResource>().CountAsync();
+                    if (anyLocaleResource == 0)
+                    {
+                        App.LocaleResources = await GetLocaleResourcesByIdAsync(App.CurrentCostumerSettings.LanguageId);
+                        foreach (var localeResource in App.LocaleResources)
+                        {
+                            await database.InsertAsync(new LocaleResource()
+                            {
+                                LanguageId = localeResource.LanguageId,
+                                ResourceName = localeResource.ResourceName,
+                                ResourceValue = localeResource.ResourceValue
+                            });
+                        }
+                    }
+                    else
+                    {
+                        var dbLocaleResources = await database.Table<LocaleResource>().ToListAsync().ConfigureAwait(true);
+                        App.LocaleResources = dbLocaleResources.Select(v => new LocaleResourceModel()
+                        {
+                            LanguageId = v.LanguageId,
+                            ResourceName = v.ResourceName,
+                            ResourceValue = v.ResourceValue
+                        }).ToList();
+                    }
+                }
+            });
+            responseTask.Wait();
         }
     }
 }

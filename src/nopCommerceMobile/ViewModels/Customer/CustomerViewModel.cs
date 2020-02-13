@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using nopCommerceMobile.Models.Common;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
@@ -34,6 +36,17 @@ namespace nopCommerceMobile.ViewModels.Customer
             }
         }
 
+        private ObservableCollection<LanguageModel> _languages;
+        public ObservableCollection<LanguageModel> Languages
+        {
+            get => _languages;
+            set
+            {
+                _languages = value;
+                RaisePropertyChanged(() => Languages);
+            }
+        }
+
         private bool _isRegistered;
         public bool IsRegistered
         {
@@ -41,7 +54,7 @@ namespace nopCommerceMobile.ViewModels.Customer
             set
             {
                 _isRegistered = value;
-                RaisePropertyChanged(() => IsRegistered);
+                RaisePropertyChanged(()=> IsRegistered);
             }
         }
 
@@ -51,6 +64,8 @@ namespace nopCommerceMobile.ViewModels.Customer
 
             CustomerModel = App.CurrentCostumer;
             IsRegistered = CustomerModel.IsRegistered();
+
+            Languages = await _customerService.GetLanguagesAsync();
 
             IsBusy = false;
             IsDataLoaded = true;

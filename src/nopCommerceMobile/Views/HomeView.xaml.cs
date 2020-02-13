@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FFImageLoading.Forms;
+using nopCommerceMobile.Components;
 using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
@@ -98,14 +99,6 @@ namespace nopCommerceMobile.Views
         {
 
         }
-
-        //private void SliderView_OnCurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        //{
-        //    var view = (CarouselView)sender;
-        //    var slider = (SliderModel)view.CurrentItem;
-
-        //    SliderBackground.Source = slider.Image;
-        //}
     }
 
 }

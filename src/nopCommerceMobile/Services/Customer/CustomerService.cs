@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using nopCommerceMobile.Extensions;
+using nopCommerceMobile.Models.Base;
+using nopCommerceMobile.Models.Common;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Orders;
 using nopCommerceMobile.Services.RequestProvider;
@@ -12,41 +17,31 @@ namespace nopCommerceMobile.Services.Customer
     {
         #region Fields
 
-        private static readonly string ApiUrlBase = $"{GlobalSettings.DefaultEndpoint}/api/customer";
         private readonly IRequestProvider _requestProvider;
 
+        private static readonly string ApiUrlBase = $"{GlobalSettings.DefaultEndpoint}/api/customer";
         private static string databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "nopCommerce.db");
         private SQLiteAsyncConnection database = new SQLiteAsyncConnection(databasePath);
 
         #endregion
 
-        public CustomerService(IRequestProvider requestProvider)
+        public CustomerService(
+            IRequestProvider requestProvider)
         {
             _requestProvider = requestProvider;
         }
 
-        public async Task<LoginModel> GetLoginModelAsync()
+        public async Task<GenericModel<LoginModel>> GetLoginModelAsync()
         {
             var uri = $"{ApiUrlBase}/login";
 
-            var loginModel = await _requestProvider.GetAsync<LoginModel>(uri);
-
-            if (loginModel != null)
-                return loginModel;
-
-            return new LoginModel();
+            return await _requestProvider.GetAsync<GenericModel<LoginModel>>(uri);
         }
 
-        public async Task<CustomerModel> GetCurrentCustomerModelAsync()
+        private async Task<CustomerModel> GetCurrentCustomerModelAsync()
         {
             var uri = $"{ApiUrlBase}/currentcustomer";
-
-            var customerModel = await _requestProvider.GetAsync<CustomerModel>(uri);
-
-            if (customerModel != null)
-                return customerModel;
-
-            return new CustomerModel();
+            return await _requestProvider.GetAsync<CustomerModel>(uri);
         }
 
         public async Task<RegisterModel> GetRegisterModelAsync()
@@ -61,39 +56,37 @@ namespace nopCommerceMobile.Services.Customer
             return new RegisterModel();
         }
 
-        public async Task<CustomerModel> LoginAsync(LoginModel model)
+        public async Task<GenericModel<Guid>> LoginAsync(LoginModel model)
         {
             var uri = $"{ApiUrlBase}/login";
-
-            var result = await _requestProvider.PostAsync<CustomerModel,LoginModel>(uri, model);
-            await SetCurrentCustomer(true);
-            return result;
+            return await _requestProvider.PostAsync<GenericModel<Guid>,LoginModel>(uri, model);
         }
 
         public async void LogoutCustomer()
         {
             var uri = $"{ApiUrlBase}/logout";
-           await _requestProvider.PostAsync<CustomerModel>(uri, App.CurrentCostumer);
 
             await DeleteCurrentCustomer();
-            await SetCurrentCustomer(true);
+            App.CurrentCostumer = new CustomerModel();
+            App.CurrentCostumerSettings = new CustomerSettingModel();
+            SetCurrentCustomer(true);
+
+            await _requestProvider.PostAsync<CustomerModel>(uri, App.CurrentCostumer);
         }
 
-        public async Task SetCurrentCustomer(bool refreshData = false)
+        public void SetCurrentCustomer(bool refreshData = false)
         {
-            await CreateOrUpdateCustomer(refreshData);
-            await CreateOrUpdateCustomerSettings();
-            await CreateOrUpdateCustomerRoles();
-            await CreateOrUpdateShoppingCartItems();
+            Task responseTask = Task.Run(async () => {
+                await CreateOrUpdateCustomer(refreshData);
+                await CreateOrUpdateCustomerSettings();
+                await CreateOrUpdateCustomerRoles();
+                await CreateOrUpdateShoppingCartItems();
+            });
+            responseTask.Wait();
         }
 
         private async Task CreateOrUpdateCustomer(bool refreshData = false)
         {
-            if (refreshData)
-            {
-                App.CurrentCostumer = await GetCurrentCustomerModelAsync();
-            }
-
             var customerTable = await database.GetTableInfoAsync(nameof(Models.Customer.Customer));
             if (customerTable.Count == 0)
             {
@@ -102,6 +95,9 @@ namespace nopCommerceMobile.Services.Customer
             var customer = await database.Table<Models.Customer.Customer>().CountAsync();
             if (customer == 0)
             {
+                if (refreshData)
+                    App.CurrentCostumer = await GetCurrentCustomerModelAsync();
+
                 await database.InsertAsync(new Models.Customer.Customer()
                 {
                     CustomerGuid = App.CurrentCostumer.CustomerGuid,
@@ -112,6 +108,9 @@ namespace nopCommerceMobile.Services.Customer
             }
             else
             {
+                if (refreshData)
+                    App.CurrentCostumer = await GetCurrentCustomerModelAsync();
+
                 await database.UpdateAsync(new Models.Customer.Customer()
                 {
                     CustomerGuid = App.CurrentCostumer.CustomerGuid,
@@ -122,38 +121,65 @@ namespace nopCommerceMobile.Services.Customer
             }
         }
 
-        public async Task CreateOrUpdateCustomerSettings(bool updateTable = false)
+        private async Task<string> CreateToken()
         {
-            var customerSettingsTable = await database.GetTableInfoAsync(nameof(CustomerSettings));
-            if (customerSettingsTable.Count == 0)
+            var uri = $"{ApiUrlBase}/token";
+
+            var tokenFilter = new GenerateTokenFilter()
             {
-                await database.CreateTableAsync<CustomerSettings>();
-            }
-            var customerSettings = await database.Table<CustomerSettings>().CountAsync();
-            if (customerSettings == 0)
-            {
-                await database.InsertAsync(new CustomerSettings()
-                {
-                    CurrentLanguage = "en-US",
-                    ViewMode = "grid"
-                });
-            }
-            else
-            {
-                var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
-                App.CurrentCostumer.ViewMode = dbCustomerSettings.ViewMode;
-                App.CurrentCostumer.CurrentLanguage = dbCustomerSettings.CurrentLanguage;
-            }
+                CustomerGuid = App.CurrentCostumer.CustomerGuid
+            };
+
+            var tokenGenericModel = await _requestProvider.PostAsyncAnonymous<GenericModel<string>, GenerateTokenFilter>(uri, tokenFilter);
+
+            if (!tokenGenericModel.IsSuccessStatusCode)
+                return tokenGenericModel.ErrorMessage;
+
+            return tokenGenericModel.Data;
+        }
+
+        public async Task CreateOrUpdateCustomerSettings(bool updateTable = false, bool generateNewToken = false)
+        {
+            if (generateNewToken)
+                App.CurrentCostumerSettings.Token = await CreateToken();
 
             if (updateTable)
             {
                 await database.UpdateAsync(new CustomerSettings()
                 {
-                    CurrentLanguage = App.CurrentCostumer.CurrentLanguage,
-                    ViewMode = App.CurrentCostumer.ViewMode,
+                    LanguageId = App.CurrentCostumerSettings.LanguageId,
+                    ViewMode = App.CurrentCostumerSettings.ViewMode,
+                    Token = App.CurrentCostumerSettings.Token
                 });
             }
-
+            else
+            {
+                var customerSettingsTable = await database.GetTableInfoAsync(nameof(CustomerSettings));
+                if (customerSettingsTable.Count == 0)
+                {
+                    await database.CreateTableAsync<CustomerSettings>();
+                }
+                var customerSettings = await database.Table<CustomerSettings>().CountAsync();
+                if (customerSettings == 0)
+                {
+                    var token = CreateToken().GetAwaiter().GetResult();
+                    await database.InsertAsync(new CustomerSettings()
+                    {
+                        LanguageId = GlobalSettings.DefaultLanguageId,
+                        ViewMode = "grid",
+                        Token = token
+                    });
+                    App.CurrentCostumerSettings.LanguageId = GlobalSettings.DefaultLanguageId;
+                    App.CurrentCostumerSettings.Token = token;
+                }
+                else
+                {
+                    var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
+                    App.CurrentCostumerSettings.ViewMode = dbCustomerSettings.ViewMode;
+                    App.CurrentCostumerSettings.LanguageId = dbCustomerSettings.LanguageId;
+                    App.CurrentCostumerSettings.Token = dbCustomerSettings.Token;
+                }
+            }
         }
 
         private async Task CreateOrUpdateCustomerRoles()
@@ -207,14 +233,28 @@ namespace nopCommerceMobile.Services.Customer
             var uri = $"{ApiUrlBase}/register";
 
             await _requestProvider.PostAsync<RegisterModel>(uri, model);
-            await SetCurrentCustomer(true);
+            SetCurrentCustomer(true);
+        }
+
+        public async Task<ObservableCollection<LanguageModel>> GetLanguagesAsync()
+        {
+            var uri = $"{ApiUrlBase}/languages";
+
+            var languages = await _requestProvider.GetAsync<List<LanguageModel>>(uri);
+
+            if (languages != null)
+                return languages.ToObservableCollection();
+
+            else
+                return new ObservableCollection<LanguageModel>();
         }
 
         private async Task DeleteCurrentCustomer()
         {
-            await database.DeleteAllAsync<Models.Customer.Customer>();
-            await database.DeleteAllAsync<CustomerRole>();
-            await database.DeleteAllAsync<ShoppingCartItem>();
+            await database.DropTableAsync<Models.Customer.Customer>();
+            await database.DropTableAsync<CustomerRole>();
+            await database.DropTableAsync<ShoppingCartItem>();
+            await database.DropTableAsync<CustomerSettings>();
         }
     }
 }

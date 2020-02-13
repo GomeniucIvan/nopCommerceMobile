@@ -1,10 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using nopCommerceMobile.Extensions;
+using nopCommerceMobile.Helpers;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
+using nopCommerceMobile.ViewModels.Common;
 using nopCommerceMobile.ViewModels.Customer;
+using nopCommerceMobile.Views.Common;
 using SQLite;
 
 namespace nopCommerceMobile.Views.Customer
@@ -94,6 +99,32 @@ namespace nopCommerceMobile.Views.Customer
         public async Task InitializeAsync()
         {
             await ViewModel.InitializeAsync();
+        }
+
+        private async void Languages_OnTapped(object sender, EventArgs e)
+        {
+            if (ViewModel.Languages.Count < 2)
+                return;
+
+            var selectingList = ViewModel.Languages.Select(v => new SelectListItemViewModel()
+            {
+                Id = v.Id,
+                Name = v.Name,
+                IsSelected = v.Id == App.CurrentCostumerSettings.LanguageId,
+                DefaultIsSelected = v.Id == App.CurrentCostumerSettings.LanguageId
+            }).ToObservableCollection();
+
+            var selectListPage = new SelectListPage()
+            {
+                BindingContext = new SelectListViewModel()
+                {
+                    Title = TranslateExtension.Translate("Admin.Configuration.Languages"),
+                    SelectList = selectingList,
+                    SelectListPage = SelectListPageEnum.Languages
+                }
+            };
+
+            await Navigation.PushAsync(selectListPage);
         }
     }
 }

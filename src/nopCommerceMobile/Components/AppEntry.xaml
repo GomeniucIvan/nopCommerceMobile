@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+             xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+             mc:Ignorable="d"
+             x:Name="Root"
+             x:Class="nopCommerceMobile.Components.AppEntry">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:NotEmptyStringConverter x:Key="NotEmptyStringConverter"></converters:NotEmptyStringConverter>
+            <converters:EmptyStringConverter x:Key="EmptyStringConverter"></converters:EmptyStringConverter>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <pancakeView:PancakeView BorderColor="{ Binding BorderColor, Source={x:Reference Root}}" 
+                                 CornerRadius="{ Binding BorderCornerRadius, Source={x:Reference Root}}"
+                                 BorderThickness="1">
+
+            <StackLayout>
+                <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding Icon, Source={x:Reference Root}, Converter={StaticResource NotEmptyStringConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="26"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <helpers:IoniconsLabel TextColor="{ Binding IconColor, Source={x:Reference Root}}" 
+                                       Text="{ Binding Icon, Source={x:Reference Root}}"
+                                       FontSize="{ Binding IconSize, Source={x:Reference Root}}"
+                                       Grid.Column="0"
+                                       VerticalOptions="Center"
+                                       VerticalTextAlignment="Center"
+                                       Margin="10,0,0,0"
+                                       x:Name="IoniconsFontFamily">
+                        <helpers:IoniconsLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Icon_Tapped"/>
+                        </helpers:IoniconsLabel.GestureRecognizers>
+                    </helpers:IoniconsLabel>
+
+                    <helpers:FontAwesomeLabel TextColor="{ Binding IconColor, Source={x:Reference Root}}" 
+                                              Text="{ Binding Icon, Source={x:Reference Root}}"
+                                              FontSize="{ Binding IconSize, Source={x:Reference Root}}"
+                                              Grid.Column="0"
+                                              VerticalOptions="Center"
+                                              VerticalTextAlignment="Center"
+                                              Margin="10,0,0,0"
+                                              x:Name="FontAwesomeFontFamily">
+                        <helpers:FontAwesomeLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Icon_Tapped"/>
+                        </helpers:FontAwesomeLabel.GestureRecognizers>
+                    </helpers:FontAwesomeLabel>
+
+                    <Entry PlaceholderColor="Gray" 
+                           Placeholder="{ Binding Placeholder, Source={x:Reference Root}}"
+                           Grid.Column="1"
+                           HorizontalOptions="FillAndExpand"
+                           x:Name="Entry"
+                           Text="{ Binding Text, Source={x:Reference Root}}"
+                           IsPassword="{ Binding IsPassword, Source={x:Reference Root}}"/>
+
+                    <helpers:IoniconsLabel TextColor="Red" 
+                                           Grid.Column="2"
+                                           Text="{x:Static helpers:IoniconsIcon.Alert}"
+                                           FontSize="16"
+                                           VerticalOptions="Center"
+                                           VerticalTextAlignment="Center"
+                                           Margin="0,0,10,0"
+                                           IsVisible="{ Binding IsRequiredIconVisible, Source={x:Reference Root}}"/>
+                </Grid>
+
+                <Grid HorizontalOptions="FillAndExpand" IsVisible="{Binding Icon, Source={x:Reference Root}, Converter={StaticResource EmptyStringConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Entry PlaceholderColor="Gray" 
+                           Placeholder="{ Binding Placeholder, Source={x:Reference Root}}"
+                           Grid.Column="1"
+                           HorizontalOptions="FillAndExpand"
+                           Text="{ Binding Text, Source={x:Reference Root}}"
+                           IsPassword="{ Binding IsPassword, Source={x:Reference Root}}"/>
+
+                    <helpers:IoniconsLabel TextColor="Red" 
+                                           Grid.Column="1"
+                                           Text="{x:Static helpers:IoniconsIcon.Alert}"
+                                           FontSize="16"
+                                           VerticalOptions="Center"
+                                           VerticalTextAlignment="Center"
+                                           Margin="0,0,10,0"
+                                           IsVisible="{ Binding IsRequiredIconVisible, Source={x:Reference Root}}"/>
+                </Grid>
+            </StackLayout>
+        </pancakeView:PancakeView>
+  </ContentView.Content>
+</ContentView>

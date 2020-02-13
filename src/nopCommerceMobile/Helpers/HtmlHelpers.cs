@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using nopCommerceMobile.Extensions;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Helpers
@@ -138,6 +139,19 @@ namespace nopCommerceMobile.Helpers
 
                 _absoluteLayout.Children.Add(label);
             }
+        }
+    }
+
+    public static class Helpers
+    {
+        public static string GetValueOrDefault(this string str, string defaultValue)
+        {
+            if (str.IsNullOrEmpty())
+            {
+                return defaultValue;
+            }
+
+            return str;
         }
     }
 }

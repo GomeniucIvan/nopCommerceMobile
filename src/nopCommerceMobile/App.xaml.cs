@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Localization;
 using nopCommerceMobile.Services.Customer;
@@ -10,7 +6,8 @@ using nopCommerceMobile.Services.Localization;
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.Views;
-using SQLite;
+using nopCommerceMobile.Views.Common;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile
@@ -18,10 +15,8 @@ namespace nopCommerceMobile
     //fix translator on first loading TODO
     //add default image(for CachedImage plugin) TODO
     //add web slider functionality TODO
-    //implement baerer auth TODO
     //implement pagination TODO
     //add web locale resources version (when value is updated or added update mobile db) TODO
-    //add web customer claims based on email/password TODO
     //in cs files use styles/variables from app.xaml TODO
     //change popup notification - stack layout to absolute layout, to be able to scroll behind content TODO
 
@@ -29,9 +24,11 @@ namespace nopCommerceMobile
     {
         #region Fields
 
+        private readonly ILocalizationService _localizationService;
+        private readonly ICustomerService _customerService;
         public static CustomerModel CurrentCostumer;
         public static IList<LocaleResourceModel> LocaleResources;
-        public static bool AppInitialized;
+        public static CustomerSettingModel CurrentCostumerSettings;
 
         #endregion
 
@@ -41,6 +38,25 @@ namespace nopCommerceMobile
         {
             InitializeComponent();
 
+            //check if device is connected to internet
+            //https://docs.microsoft.com/en-us/xamarin/essentials/connectivity?context=xamarin%2Fxamarin-forms&tabs=ios
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                MainPage = new NoInternetPage();
+                return;
+            }
+
+            if (_localizationService == null)
+                _localizationService = LocatorViewModel.Resolve<ILocalizationService>();
+
+            if (_customerService == null)
+                _customerService = LocatorViewModel.Resolve<ICustomerService>();
+
+            CurrentCostumerSettings = new CustomerSettingModel();
+            _customerService.SetCurrentCustomer(true);
+            _localizationService.CreateOrUpdateLocales();
+
             InitApp();
         }
 
@@ -49,6 +65,11 @@ namespace nopCommerceMobile
         private void InitApp()
         {
             MainPage = GetMainPage();
+        }
+
+        public static void SetMainPage()
+        {
+            (Application.Current).MainPage = GetMainPage();
         }
 
         public static Page GetMainPage()

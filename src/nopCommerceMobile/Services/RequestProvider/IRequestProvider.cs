@@ -1,5 +1,4 @@
-﻿using nopCommerceMobile.Models.Customer;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace nopCommerceMobile.Services.RequestProvider
 {
@@ -7,6 +6,7 @@ namespace nopCommerceMobile.Services.RequestProvider
     {
         Task<TResult> GetAsync<TResult>(string uri);
         Task<TResult> PostAsync<TResult, TModel>(string uri, TModel data);
+        Task<TResult> PostAsyncAnonymous<TResult, TModel>(string uri, TModel data);
         Task PostAsync<TModel>(string uri, TModel data);
     }
 }

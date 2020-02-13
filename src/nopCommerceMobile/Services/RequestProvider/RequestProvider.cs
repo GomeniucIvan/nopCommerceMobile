@@ -1,13 +1,14 @@
-﻿using System.Linq;
+﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using nopCommerceMobile.Exceptions;
-using nopCommerceMobile.Extensions;
 using nopCommerceMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -30,7 +31,7 @@ namespace nopCommerceMobile.Services.RequestProvider
 
         public async Task<TResult> GetAsync<TResult>(string uri)
         {
-            HttpClient httpClient = new HttpClient();
+            HttpClient httpClient = CreateHttpClient();
             HttpResponseMessage response = await httpClient.GetAsync(uri);
 
             await HandleResponse(response);
@@ -41,8 +42,7 @@ namespace nopCommerceMobile.Services.RequestProvider
 
         public async Task<TResult> PostAsync<TResult, TModel>(string uri, TModel data)
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpClient httpClient = CreateHttpClient();
 
             var content = new StringContent(JsonConvert.SerializeObject(data));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -58,15 +58,45 @@ namespace nopCommerceMobile.Services.RequestProvider
             return result;
         }
 
-        public async Task PostAsync<TModel>(string uri, TModel data)
+        public async Task<TResult> PostAsyncAnonymous<TResult, TModel>(string uri, TModel data)
         {
-            HttpClient httpClient = new HttpClient();
+
+            var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var content = new StringContent(JsonConvert.SerializeObject(data));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
+            HttpResponseMessage response = httpClient.PostAsync(uri, content).Result;
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            TResult result = JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings);
+
+            return result;
+        }
+
+        public async Task PostAsync<TModel>(string uri, TModel data)
+        {
+            HttpClient httpClient = CreateHttpClient();
+
+            var content = new StringContent(JsonConvert.SerializeObject(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             await httpClient.PostAsync(uri, content);
+        }
+
+        private HttpClient CreateHttpClient()
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            if (App.CurrentCostumerSettings!= null && !string.IsNullOrEmpty(App.CurrentCostumerSettings.Token))
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.CurrentCostumerSettings.Token);
+            }
+            return httpClient;
         }
 
         private async Task HandleResponse(HttpResponseMessage response)

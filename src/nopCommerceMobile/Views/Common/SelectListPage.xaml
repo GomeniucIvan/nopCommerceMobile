@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<common:SelectListPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:common="clr-namespace:nopCommerceMobile.Views.Common;assembly=nopCommerceMobile"
+                    xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                    xmlns:components="clr-namespace:nopCommerceMobile.Components;assembly=nopCommerceMobile"
+                    mc:Ignorable="d"
+                    NavigationPage.HasNavigationBar="False"
+                    x:Class="nopCommerceMobile.Views.Common.SelectListPage">
+
+<ScrollView>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <helpers:ToolbarBackButton />
+                <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+            </StackLayout>
+            <BoxView HeightRequest="1" Color="LightGray"/>
+
+            <StackLayout BindableLayout.ItemsSource="{Binding SelectList}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="10,8,10,8" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center" FontSize="{StaticResource BaseFontSize}"/>
+
+                                <components:AppCheckBox IsChecked="{Binding IsSelected}" VerticalOptions="Center" ChildAdded="Item_OnChange" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                            <BoxView HeightRequest="1" Margin="2,0,2,0" Color="LightGray" />
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</common:SelectListPageXaml>

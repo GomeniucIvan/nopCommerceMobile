@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using nopCommerceMobile.Models.Base;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Topics;
 using nopCommerceMobile.Services.Customer;
@@ -57,7 +59,13 @@ namespace nopCommerceMobile.ViewModels.Customer
             {
                 IsBusy = true;
 
-                LoginModel = await _customerService.GetLoginModelAsync();
+                var genericLoginModel = await _customerService.GetLoginModelAsync();
+                if (!genericLoginModel.IsSuccessStatusCode)
+                    DisplayPopupNotification(genericLoginModel.ErrorMessage, NotificationTypeEnum.Warning);
+
+                else
+                    LoginModel = genericLoginModel.Data;
+
                 LoginRegistrationInfo = await _topicService.GetModelBySystemNameAsync("LoginRegistrationInfo");
 
                 IsBusy = false;
@@ -65,9 +73,15 @@ namespace nopCommerceMobile.ViewModels.Customer
             }
         }
 
-        public Task<CustomerModel> LoginCustomer()
+        public async Task<GenericModel<Guid>> LoginCustomer()
+        { 
+           return await _customerService.LoginAsync(LoginModel);
+        }
+
+        public async Task SetCurrentCustomer()
         {
-            return _customerService.LoginAsync(LoginModel);
+            await _customerService.CreateOrUpdateCustomerSettings(true, true);
+            _customerService.SetCurrentCustomer(true);
         }
     }
 }
