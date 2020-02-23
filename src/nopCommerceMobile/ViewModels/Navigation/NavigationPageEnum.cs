@@ -3,6 +3,7 @@
     public enum NavigationPageEnum
     {
         Home,
-        Account
+        Account,
+        CategoryNavigation //catalog
     }
 }

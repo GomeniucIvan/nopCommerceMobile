@@ -79,6 +79,17 @@ namespace nopCommerceMobile.Services.Catalog
             return _requestProvider.GetAsync<CategoryModel>(uri);
         }
 
+        public async Task<ObservableCollection<CategorySimpleModel>> PrepareCategoryNavigationModel(int currentCategoryId = 0, int currentProductId = 0)
+        {
+            var uri = $"{ApiUrlBase}/navigation?currentCategoryId={currentCategoryId}&currentProductId={currentProductId}";
 
+            var categoryModel = await _requestProvider.GetAsync<CategoryNavigationModel>(uri);
+
+            if (categoryModel.Categories != null)
+                return categoryModel.Categories.ToObservableCollection();
+
+            else
+                return new ObservableCollection<CategorySimpleModel>();
+        }
     }
 }

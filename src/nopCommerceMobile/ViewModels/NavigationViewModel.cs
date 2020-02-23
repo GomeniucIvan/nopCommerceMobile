@@ -53,6 +53,17 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private Color _categoryNavigationTabColor;
+        public Color CategoryNavigationTabColor
+        {
+            get => _categoryNavigationTabColor;
+            set
+            {
+                _categoryNavigationTabColor = value;
+                RaisePropertyChanged(() => CategoryNavigationTabColor);
+            }
+        }
+
         private NavigationPageEnum? _selectedNavigationPage;
         public NavigationPageEnum? SelectedNavigationPage
         {

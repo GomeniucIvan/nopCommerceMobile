@@ -81,5 +81,6 @@ namespace nopCommerceMobile.Helpers
         public static string IonIosSettingsStrong = "\uf4a6";
         public static string IonGrid = "\uf13f";
         public static string IonIosListOutline = "\uf453";
+        public static string IonChevronRight = "\uf125";
     }
 }

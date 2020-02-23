@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<catalog:CategoryNavigationPageXaml xmlns="http://xamarin.com/schemas/2014/forms"
+                                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                    xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+                                    xmlns:helpers="clr-namespace:nopCommerceMobile.Helpers;assembly=nopCommerceMobile"
+                                    xmlns:catalog="clr-namespace:nopCommerceMobile.Views.Catalog;assembly=nopCommerceMobile"
+                                    mc:Ignorable="d"
+                                    NavigationPage.HasNavigationBar="False"
+                                    x:Class="nopCommerceMobile.Views.Catalog.CategoryNavigationPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:AnyItemInListConverter x:Key="AnyItemInListConverter"/>
+            <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+
+                    <helpers:ToolbarBackButton />
+                    <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+                </StackLayout>
+
+                <StackLayout BindableLayout.ItemsSource="{Binding Categories}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal" Padding="5,10,5,10">
+                                    <Label Text="{Binding Name}" FontSize="{StaticResource LargeFontSize}" VerticalOptions="Center"/>
+
+                                    <Label Text="{Binding NumberOfProducts}" 
+                                           IsVisible="{Binding NumberOfProducts, Converter={StaticResource GreaterThanZeroConverter}}"
+                                           HorizontalOptions="EndAndExpand"
+                                           Padding="0,0,5,0"
+                                           FontSize="{StaticResource LargeFontSize}"
+                                           VerticalOptions="Center"/>
+
+                                    <helpers:IoniconsLabel Text="{x:Static helpers:IoniconsIcon.IonChevronRight}" 
+                                                           HorizontalOptions="EndAndExpand"
+                                                           IsVisible="{Binding SubCategories, Converter={StaticResource AnyItemInListConverter}}"
+                                                           FontSize="{StaticResource BaseFontSize}" 
+                                                           VerticalOptions="Center"/>
+
+                                </StackLayout>
+                                <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Category_OnClick" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</catalog:CategoryNavigationPageXaml>

@@ -26,6 +26,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.en.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Catalog\CategoryNavigationView.xaml.cs">
+      <DependentUpon>CategoryNavigationView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Customer\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -49,6 +52,9 @@
       <LastGenOutput>AppResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Catalog\CategoriesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Catalog\CategoryNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Catalog\CategoryPage.xaml">
@@ -76,6 +82,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AppNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Catalog\CategoryNavigationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\News\NewsPage.xaml">

@@ -208,6 +208,13 @@
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
+                    <StackLayout Orientation="Horizontal" Padding="10" IsVisible="{Binding Currencies, Converter={StaticResource ListContainsMoreThanOneConverter}}">
+                        <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Currencies}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Currencies_OnTapped"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal" Padding="10" IsVisible="{Binding Languages, Converter={StaticResource ListContainsMoreThanOneConverter}}">
                         <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Languages}"/>
                         <StackLayout.GestureRecognizers>

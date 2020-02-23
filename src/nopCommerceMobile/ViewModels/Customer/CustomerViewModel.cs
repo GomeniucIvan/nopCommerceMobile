@@ -47,6 +47,17 @@ namespace nopCommerceMobile.ViewModels.Customer
             }
         }
 
+        private ObservableCollection<CurrencyModel> _currencies;
+        public ObservableCollection<CurrencyModel> Currencies
+        {
+            get => _currencies;
+            set
+            {
+                _currencies = value;
+                RaisePropertyChanged(() => Currencies);
+            }
+        }
+
         private bool _isRegistered;
         public bool IsRegistered
         {
@@ -66,6 +77,7 @@ namespace nopCommerceMobile.ViewModels.Customer
             IsRegistered = CustomerModel.IsRegistered();
 
             Languages = await _customerService.GetLanguagesAsync();
+            Currencies = await _customerService.GetCurrenciesAsync();
 
             IsBusy = false;
             IsDataLoaded = true;

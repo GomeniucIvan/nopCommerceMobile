@@ -318,6 +318,8 @@ namespace nopCommerceMobile.Models.Customer
     public class GenerateTokenFilter
     {
         public Guid? CustomerGuid { get; set; }
+        public int LanguageId { get; set; }
+        public int CurrencyId { get; set; }
     }
 
     public class CustomerSettings
@@ -329,6 +331,7 @@ namespace nopCommerceMobile.Models.Customer
         public string ViewMode { get; set; }
 
         public string Token { get; set; }
+        public int CurrencyId { get; set; }
     }
 
     public class CustomerSettingModel
@@ -337,5 +340,6 @@ namespace nopCommerceMobile.Models.Customer
         public string ViewMode { get; set; }
 
         public string Token { get; set; }
+        public int CurrencyId { get; set; }
     }
 }

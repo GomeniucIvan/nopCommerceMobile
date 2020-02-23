@@ -35,10 +35,8 @@ namespace nopCommerceMobile.Views.Common
 
         #endregion
 
-
-        private void Item_OnChange(object sender, ElementEventArgs e)
+        private async void Item_OnChange(object sender, ElementEventArgs e)
         {
-
             var checkbox = (AppCheckBox)sender;
             var selectedItem = ((SelectListItemViewModel)checkbox.BindingContext);
             if (checkbox.IsChecked == selectedItem.DefaultIsSelected && !selectedItem.CustomerTap)
@@ -49,11 +47,19 @@ namespace nopCommerceMobile.Views.Common
             if (ViewModel.SelectListPage == SelectListPageEnum.Languages)
             {
                 App.CurrentCostumerSettings.LanguageId = selectedItem.Id;
-                _customerService.CreateOrUpdateCustomerSettings(true);
+                await _customerService.CreateOrUpdateCustomerSettings(true, true);
                 App.LocaleResources = new List<LocaleResourceModel>();
                 _localizationService.CreateOrUpdateLocales(true);
                 App.SetMainPage();
             }
+
+            if (ViewModel.SelectListPage == SelectListPageEnum.Currencies)
+            {
+                App.CurrentCostumerSettings.CurrencyId = selectedItem.Id;
+                await _customerService.CreateOrUpdateCustomerSettings(true, true);
+                await Navigation.PopAsync();
+            }
+
         }
     }
 }

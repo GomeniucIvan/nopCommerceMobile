@@ -130,5 +130,31 @@ namespace nopCommerceMobile.Views.Customer
 
             await Navigation.PushAsync(selectListPage);
         }
+
+        private async void Currencies_OnTapped(object sender, EventArgs e)
+        {
+            if (ViewModel.Currencies.Count < 2)
+                return;
+
+            var selectingList = ViewModel.Currencies.Select(v => new SelectListItemViewModel()
+            {
+                Id = v.Id,
+                Name = v.Name,
+                IsSelected = v.Id == App.CurrentCostumerSettings.CurrencyId,
+                DefaultIsSelected = v.Id == App.CurrentCostumerSettings.CurrencyId
+            }).ToObservableCollection();
+
+            var selectListPage = new SelectListPage()
+            {
+                BindingContext = new SelectListViewModel()
+                {
+                    Title = TranslateExtension.Translate("Mobile.Currencies"),
+                    SelectList = selectingList,
+                    SelectListPage = SelectListPageEnum.Currencies
+                }
+            };
+
+            await Navigation.PushAsync(selectListPage);
+        }
     }
 }

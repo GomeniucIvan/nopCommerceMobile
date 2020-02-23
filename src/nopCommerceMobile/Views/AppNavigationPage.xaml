@@ -51,8 +51,12 @@
                         <StackLayout Grid.Column="1" Style="{StaticResource NavigationTabContainer}">
                             <helpers:FontAwesomeLabel Style="{StaticResource CenteredLabel}"
                                                       FontSize="30"
+                                                      TextColor="{Binding CategoryNavigationTabColor}"
                                                       Text="{x:Static helpers:Icon.FaBars}"/>
-                            <Label Text="{extensions:Translate Mobile.Catalog}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                            <Label Text="{extensions:Translate Mobile.Catalog}" Style="{StaticResource CenteredLabel}" TextColor="{Binding CategoryNavigationTabColor}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CatalogTab_Tapped"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <!--Account-->

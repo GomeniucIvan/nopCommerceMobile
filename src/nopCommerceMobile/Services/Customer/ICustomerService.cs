@@ -18,5 +18,6 @@ namespace nopCommerceMobile.Services.Customer
         Task CreateOrUpdateShoppingCartItems();
         Task RegisterAsync(RegisterModel model);
         Task<ObservableCollection<LanguageModel>> GetLanguagesAsync();
+        Task<ObservableCollection<CurrencyModel>> GetCurrenciesAsync();
     }
 }

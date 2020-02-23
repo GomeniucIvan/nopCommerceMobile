@@ -2,6 +2,7 @@
 using nopCommerceMobile.ViewModels;
 using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Navigation;
+using nopCommerceMobile.Views.Catalog;
 using nopCommerceMobile.Views.Customer;
 using Xamarin.Forms;
 
@@ -47,12 +48,16 @@ namespace nopCommerceMobile.Views
             //set selected/unselected colors
             ViewModel.HomePageTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Home ? primaryColor : Color.Default;
             ViewModel.AccountTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Account ? primaryColor : Color.Default;
+            ViewModel.CategoryNavigationTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.CategoryNavigation ? primaryColor : Color.Default;
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Home)
                 PageContainer.Content = new HomeView();
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Account)
                 PageContainer.Content = new CustomerView();
+
+            if (ViewModel.SelectedNavigationPage == NavigationPageEnum.CategoryNavigation)
+                PageContainer.Content = new CategoryNavigationView();
         }
 
         private void HomePageTabTapped(object sender, EventArgs e)
@@ -63,6 +68,11 @@ namespace nopCommerceMobile.Views
         private void AccountTabTapped(object sender, EventArgs e)
         {
             ViewModel.SelectedNavigationPage = NavigationPageEnum.Account;
+        }
+
+        private void CatalogTab_Tapped(object sender, EventArgs e)
+        {
+            ViewModel.SelectedNavigationPage = NavigationPageEnum.CategoryNavigation;
         }
     }
 }

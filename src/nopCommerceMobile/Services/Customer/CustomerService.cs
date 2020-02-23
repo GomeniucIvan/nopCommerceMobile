@@ -125,9 +125,12 @@ namespace nopCommerceMobile.Services.Customer
         {
             var uri = $"{ApiUrlBase}/token";
 
+            //Get language id and currency id when insert guest TODO
             var tokenFilter = new GenerateTokenFilter()
             {
-                CustomerGuid = App.CurrentCostumer.CustomerGuid
+                CustomerGuid = App.CurrentCostumer.CustomerGuid,
+                LanguageId = App.CurrentCostumerSettings.LanguageId,
+                CurrencyId = App.CurrentCostumerSettings.CurrencyId
             };
 
             var tokenGenericModel = await _requestProvider.PostAsyncAnonymous<GenericModel<string>, GenerateTokenFilter>(uri, tokenFilter);
@@ -148,6 +151,7 @@ namespace nopCommerceMobile.Services.Customer
                 await database.UpdateAsync(new CustomerSettings()
                 {
                     LanguageId = App.CurrentCostumerSettings.LanguageId,
+                    CurrencyId = App.CurrentCostumerSettings.CurrencyId,
                     ViewMode = App.CurrentCostumerSettings.ViewMode,
                     Token = App.CurrentCostumerSettings.Token
                 });
@@ -170,6 +174,7 @@ namespace nopCommerceMobile.Services.Customer
                         Token = token
                     });
                     App.CurrentCostumerSettings.LanguageId = GlobalSettings.DefaultLanguageId;
+                    App.CurrentCostumerSettings.CurrencyId = GlobalSettings.DefaultCurrencyId;
                     App.CurrentCostumerSettings.Token = token;
                 }
                 else
@@ -177,6 +182,7 @@ namespace nopCommerceMobile.Services.Customer
                     var dbCustomerSettings = await database.Table<CustomerSettings>().FirstOrDefaultAsync();
                     App.CurrentCostumerSettings.ViewMode = dbCustomerSettings.ViewMode;
                     App.CurrentCostumerSettings.LanguageId = dbCustomerSettings.LanguageId;
+                    App.CurrentCostumerSettings.CurrencyId = dbCustomerSettings.CurrencyId;
                     App.CurrentCostumerSettings.Token = dbCustomerSettings.Token;
                 }
             }
@@ -249,6 +255,18 @@ namespace nopCommerceMobile.Services.Customer
                 return new ObservableCollection<LanguageModel>();
         }
 
+        public async Task<ObservableCollection<CurrencyModel>> GetCurrenciesAsync()
+        {
+            var uri = $"{ApiUrlBase}/currencies";
+
+            var languages = await _requestProvider.GetAsync<List<CurrencyModel>>(uri);
+
+            if (languages != null)
+                return languages.ToObservableCollection();
+
+            else
+                return new ObservableCollection<CurrencyModel>();
+        }
         private async Task DeleteCurrentCustomer()
         {
             await database.DropTableAsync<Models.Customer.Customer>();

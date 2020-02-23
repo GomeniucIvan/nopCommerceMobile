@@ -2,6 +2,7 @@
 {
     public enum SelectListPageEnum
     {
-        Languages
+        Languages,
+        Currencies
     }
 }

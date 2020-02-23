@@ -86,6 +86,8 @@ namespace nopCommerceMobile.Views.Catalog
 
             #endregion
 
+
+
             #region Bottom buttons
 
             var bottomButtonsStackLayout = new Grid()
@@ -112,7 +114,6 @@ namespace nopCommerceMobile.Views.Catalog
             resetTapGestureRecognizer.Tapped += (s, ea) => { ResetFilter(); };
             resetLabel.GestureRecognizers.Add(resetTapGestureRecognizer);
 
-
             var filterLabel = new Label()
             {
                 Text = TranslateExtension.Translate("Mobile.Filter"),
@@ -125,7 +126,6 @@ namespace nopCommerceMobile.Views.Catalog
                 VerticalTextAlignment = TextAlignment.Center,
                 HeightRequest = 50
             };
-
 
             var filterTapGestureRecognizer = new TapGestureRecognizer();
             filterTapGestureRecognizer.Tapped += (s, ea) => { Filter(); };
