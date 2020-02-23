@@ -13,5 +13,6 @@ namespace nopCommerceMobile.Services.Catalog
         Task<ObservableCollection<NewsItemModel>> GetHomeNewsAsync();
         Task<CategoryModel> GetCategoryByIdAsync(int categoryId);
         Task<ObservableCollection<CategorySimpleModel>> PrepareCategoryNavigationModel(int currentCategoryId = 0, int currentProductId = 0);
+        Task<ObservableCollection<ProductModel>> GetRecentlyViewedProductsAsync();
     }
 }

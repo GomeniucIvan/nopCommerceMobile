@@ -81,6 +81,17 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private ObservableCollection<ProductModel> _recentlyViewedProducts;
+        public ObservableCollection<ProductModel> RecentlyViewedProducts
+        {
+            get => _recentlyViewedProducts;
+            set
+            {
+                _recentlyViewedProducts = value;
+                RaisePropertyChanged(() => RecentlyViewedProducts);
+            }
+        }
+
         public async Task InitializeAsync()
         {
             IsBusy = true;
@@ -89,6 +100,7 @@ namespace nopCommerceMobile.ViewModels
             Products = await _catalogService.GetHomeProductsAsync();
             BestSellers = await _catalogService.GetHomeBestSellersAsync();
             News = await _catalogService.GetHomeNewsAsync();
+            RecentlyViewedProducts = await _catalogService.GetRecentlyViewedProductsAsync();
 
             Sliders = new ObservableCollection<SliderModel>()
             {

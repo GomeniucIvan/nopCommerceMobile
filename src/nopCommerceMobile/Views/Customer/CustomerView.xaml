@@ -201,7 +201,7 @@
                         </StackLayout.GestureRecognizers>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Padding="10">
+                    <StackLayout Orientation="Horizontal" Padding="10" IsVisible="{Binding RecentlyViewedProducts, Converter={StaticResource AnyItemInListConverter}}">
                         <Label FontSize="{StaticResource BaseFontSize}" Text="{extensions:Translate Mobile.Products.RecentlyViewedProducts}"/>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RecentlyViewedProducts_OnTapped"/>

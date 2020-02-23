@@ -91,5 +91,18 @@ namespace nopCommerceMobile.Services.Catalog
             else
                 return new ObservableCollection<CategorySimpleModel>();
         }
+
+        public async Task<ObservableCollection<ProductModel>> GetRecentlyViewedProductsAsync()
+        {
+            var uri = $"{ApiUrlBase}/recentlyviewedproducts";
+
+            var products = await _requestProvider.GetAsync<List<ProductModel>>(uri);
+
+            if (products != null)
+                return products.ToObservableCollection();
+
+            else
+                return new ObservableCollection<ProductModel>();
+        }
     }
 }

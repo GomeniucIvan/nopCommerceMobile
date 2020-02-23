@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using nopCommerceMobile.Models.Catalog;
 using nopCommerceMobile.Models.Common;
 using nopCommerceMobile.Models.Customer;
+using nopCommerceMobile.Services.Catalog;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
 
@@ -12,6 +14,7 @@ namespace nopCommerceMobile.ViewModels.Customer
         #region Fields
 
         private ICustomerService _customerService;
+        private ICatalogService _catalogService;
 
         #endregion
 
@@ -21,6 +24,9 @@ namespace nopCommerceMobile.ViewModels.Customer
         {
             if (_customerService == null)
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
+
+            if (_catalogService == null)
+                _catalogService = LocatorViewModel.Resolve<ICustomerService>();
         }
 
         #endregion
@@ -58,6 +64,17 @@ namespace nopCommerceMobile.ViewModels.Customer
             }
         }
 
+        private ObservableCollection<ProductModel> _recentlyViewedProducts;
+        public ObservableCollection<ProductModel> RecentlyViewedProducts
+        {
+            get => _recentlyViewedProducts;
+            set
+            {
+                _recentlyViewedProducts = value;
+                RaisePropertyChanged(() => RecentlyViewedProducts);
+            }
+        }
+
         private bool _isRegistered;
         public bool IsRegistered
         {
@@ -78,6 +95,7 @@ namespace nopCommerceMobile.ViewModels.Customer
 
             Languages = await _customerService.GetLanguagesAsync();
             Currencies = await _customerService.GetCurrenciesAsync();
+            RecentlyViewedProducts = await _catalogService.GetRecentlyViewedProductsAsync();
 
             IsBusy = false;
             IsDataLoaded = true;
