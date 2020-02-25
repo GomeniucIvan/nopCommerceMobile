@@ -54,7 +54,8 @@ namespace nopCommerceMobile
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
 
             CurrentCostumerSettings = new CustomerSettingModel();
-            _customerService.SetCurrentCustomer(true);
+
+            _customerService.SetCurrentCustomer(true, true);
             _localizationService.CreateOrUpdateLocales();
 
             InitApp();

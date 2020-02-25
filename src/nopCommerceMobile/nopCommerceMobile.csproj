@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resx\AppResource.en.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AppResource.en.resx</DependentUpon>
-    </Compile>
     <Compile Update="Views\Catalog\CategoryNavigationView.xaml.cs">
       <DependentUpon>CategoryNavigationView.xaml</DependentUpon>
     </Compile>
@@ -46,10 +41,6 @@
   <ItemGroup>
     <EmbeddedResource Update="Components\AppEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resx\AppResource.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Catalog\CategoriesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -94,6 +85,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Partial\NewsViewTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShoppingCart\CartView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

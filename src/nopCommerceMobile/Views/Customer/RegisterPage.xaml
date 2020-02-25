@@ -43,6 +43,7 @@
 
                 <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.Email}" 
                                      IsRequired="True"
+                                     Type="Email"
                                      Text="{Binding RegisterModel.Email}" />
 
                 <components:AppEntry Placeholder="{extensions:Translate Mobile.Fields.Company}" 

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<shoppingCart:CartViewXaml xmlns="http://xamarin.com/schemas/2014/forms" 
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:shoppingCart="clr-namespace:nopCommerceMobile.Views.ShoppingCart;assembly=nopCommerceMobile"
+              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:converters="clr-namespace:nopCommerceMobile.Converters;assembly=nopCommerceMobile"
+              mc:Ignorable="d"
+              x:Class="nopCommerceMobile.Views.ShoppingCart.CartView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ReplaceBreakWithSeparatorConverter x:Key="ReplaceBreakWithSeparatorConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal"
+                             Padding="10,0,0,0"
+                         HorizontalOptions="FillAndExpand">
+
+                    <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
+
+                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal" x:Name="ToolbarItems">
+                        <!--remove icon TODO-->
+                    </StackLayout>
+                </StackLayout>
+                <BoxView BackgroundColor="Gainsboro" 
+                         HeightRequest="1" 
+                         Margin="0,2,0,10"
+                         VerticalOptions="EndAndExpand"/>
+
+                <!--increase image(imageurl) width todo-->
+                <StackLayout BindableLayout.ItemsSource="{Binding ShoppingCartModel.Items}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="80"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox CheckedChanged="Remove_OnCheckedChanged" Grid.Row="0" Grid.Column="0" Margin="5,0,5,0"/>
+
+                                <forms:CachedImage Grid.Column="1" 
+                                               Grid.Row="0" 
+                                               Margin="0,0,5,0"
+                                               Source="{ Binding Picture.ImageUrl }" 
+                                               Aspect="AspectFit" 
+                                               FadeAnimationEnabled="true"/>
+
+                                <StackLayout Grid.Row="0" Grid.Column="2">
+                                    <Label Text="{Binding ProductName}" LineBreakMode="TailTruncation" FontSize="{StaticResource BaseFontSize}"/>
+                                    <Label Text="{Binding UnitPrice}" FontAttributes="Bold" FontSize="{StaticResource BaseFontSize}"/>
+                                    <Label Text="{Binding AttributeInfo, Converter={StaticResource ReplaceBreakWithSeparatorConverter}}" FontSize="{StaticResource BaseFontSize}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                                    <!--shipping cost todo-->
+                                </StackLayout>
+
+                                <BoxView BackgroundColor="Gainsboro" 
+                                     Grid.Row="1" 
+                                     Grid.Column="0" 
+                                     Grid.ColumnSpan="3" 
+                                     HeightRequest="1" 
+                                     VerticalOptions="EndAndExpand"/>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
+    </ContentView.Content>
+</shoppingCart:CartViewXaml>

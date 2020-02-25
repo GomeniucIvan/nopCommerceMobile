@@ -26,7 +26,7 @@ namespace nopCommerceMobile.ViewModels.Customer
                 _customerService = LocatorViewModel.Resolve<ICustomerService>();
 
             if (_catalogService == null)
-                _catalogService = LocatorViewModel.Resolve<ICustomerService>();
+                _catalogService = LocatorViewModel.Resolve<ICatalogService>();
         }
 
         #endregion

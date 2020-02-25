@@ -49,4 +49,22 @@ namespace nopCommerceMobile.Converters
             return value;
         }
     }
+
+    public class ReplaceBreakWithSeparatorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return null;
+
+            if (((string) value).IsNullOrEmpty())
+                return null;
+
+            return ((string) value).Replace("<br />", ", ");
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+    }
 }

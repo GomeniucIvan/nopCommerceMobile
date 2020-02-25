@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using nopCommerceMobile.Models.Base;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Services.Customer;
 using nopCommerceMobile.ViewModels.Base;
@@ -47,9 +49,15 @@ namespace nopCommerceMobile.ViewModels.Customer
             }
         }
 
-        public async Task RegisterCustomer()
+        public async Task<GenericModel<Guid>> RegisterCustomer()
         {
-           await _customerService.RegisterAsync(RegisterModel);
+           return await _customerService.RegisterAsync(RegisterModel);
+        }
+
+        public async Task SetCurrentCustomer()
+        {
+            await _customerService.CreateOrUpdateCustomerSettings(true, true);
+            _customerService.SetCurrentCustomer(true);
         }
     }
 }

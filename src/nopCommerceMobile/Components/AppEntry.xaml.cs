@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using nopCommerceMobile.Extensions;
+using nopCommerceMobile.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +13,8 @@ namespace nopCommerceMobile.Components
     {
         public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(string), typeof(AppEntry), string.Empty, BindingMode.Default);
         public static readonly BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(AppEntry), Color.FromHex("1e5474"), BindingMode.Default);
-        public static readonly BindableProperty IconSizeProperty = BindableProperty.Create(nameof(IconSize), typeof(int), typeof(AppEntry), 40, BindingMode.Default);
-        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(AppEntry), "Ionicons", BindingMode.Default, propertyChanged: (bindable, oldValue, newValue) =>
+        public static readonly BindableProperty IconSizeProperty = BindableProperty.Create(nameof(IconSize), typeof(int), typeof(AppEntry), 22, BindingMode.Default);
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(IconFontFamilyEnum), typeof(AppEntry), IconFontFamilyEnum.Ionics, BindingMode.Default, propertyChanged: (bindable, oldValue, newValue) =>
         {
             var entry = (AppEntry)bindable;
 
@@ -27,7 +29,6 @@ namespace nopCommerceMobile.Components
                 entry.IoniconsFontFamily.IsVisible = true;
             }
         });
-
         public static readonly BindableProperty IconColorProperty = BindableProperty.Create(nameof(IconColor), typeof(Color), typeof(AppEntry), Color.FromHex("1e5474"), BindingMode.Default);
         public static readonly BindableProperty BorderCornerRadiusProperty = BindableProperty.Create(nameof(BorderCornerRadius), typeof(float), typeof(AppEntry), 8f, BindingMode.Default);
         public static readonly BindableProperty IsRequiredProperty = BindableProperty.Create(nameof(IsRequired), typeof(bool), typeof(AppEntry), false, BindingMode.Default, propertyChanged: (bindable, oldValue, newValue) =>
@@ -47,6 +48,7 @@ namespace nopCommerceMobile.Components
         });
         public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(AppEntry), string.Empty, BindingMode.Default);
         public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(AppEntry), false, BindingMode.Default);
+        public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(EntryTypeEnum), typeof(AppEntry), EntryTypeEnum.Default, BindingMode.Default);
 
         public Color BorderColor
         {
@@ -66,9 +68,9 @@ namespace nopCommerceMobile.Components
             set => SetValue(IconProperty, value);
         }
 
-        public string IconFontFamily
+        public IconFontFamilyEnum IconFontFamily
         {
-            get => (string)GetValue(IconFontFamilyProperty);
+            get => (IconFontFamilyEnum)GetValue(IconFontFamilyProperty);
             set => SetValue(IconFontFamilyProperty, value);
         }
 
@@ -116,19 +118,15 @@ namespace nopCommerceMobile.Components
 
         public AppEntry()
         {
+            InitializeComponent();
+            FontAwesomeFontFamily.IsVisible = IconFontFamily == IconFontFamilyEnum.FontAwesome;
+            IoniconsFontFamily.IsVisible = IconFontFamily == IconFontFamilyEnum.Ionics;
+        }
 
-            //add validator (text type - email, password), than remove try block Todo
-            try
-            {
-                InitializeComponent();
-                FontAwesomeFontFamily.IsVisible = IconFontFamily == "FontAwesome";
-                IoniconsFontFamily.IsVisible = IconFontFamily != "FontAwesome";
-            }
-            catch (Exception e)
-            {
-
-            }
-
+        public EntryTypeEnum Type
+        {
+            get => (EntryTypeEnum)GetValue(TypeProperty);
+            set => SetValue(TypeProperty, value);
         }
 
         private void Icon_Tapped(object sender, EventArgs e)
@@ -138,7 +136,16 @@ namespace nopCommerceMobile.Components
 
         private void UpdateRequiredIcon()
         {
-            IsRequiredIconVisible = IsRequired && Text.IsNullOrEmpty();
+            if (Type == EntryTypeEnum.Email)
+            {
+                //https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression?rq=1
+                //add email validation to display required field TODO
+                IsRequiredIconVisible = IsRequired && Text.IsNullOrEmpty();
+            }
+            else
+            {
+                IsRequiredIconVisible = IsRequired && Text.IsNullOrEmpty();
+            }
         }
     }
 }

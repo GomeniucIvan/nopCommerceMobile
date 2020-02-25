@@ -8,6 +8,7 @@ using nopCommerceMobile.Models.Base;
 using nopCommerceMobile.Models.Common;
 using nopCommerceMobile.Models.Customer;
 using nopCommerceMobile.Models.Orders;
+using nopCommerceMobile.Models.ShoppingCart;
 using nopCommerceMobile.Services.RequestProvider;
 using SQLite;
 
@@ -74,11 +75,20 @@ namespace nopCommerceMobile.Services.Customer
             await _requestProvider.PostAsync<CustomerModel>(uri, App.CurrentCostumer);
         }
 
-        public void SetCurrentCustomer(bool refreshData = false)
+        public void SetCurrentCustomer(bool refreshData = false, bool firstInit = false)
         {
+            //add all required settings than edit todo
             Task responseTask = Task.Run(async () => {
+                var customerSettingsTable = await database.GetTableInfoAsync(nameof(CustomerSettings));
+
+                if (firstInit && customerSettingsTable.Count > 0)
+                    await CreateOrUpdateCustomerSettings();
+
                 await CreateOrUpdateCustomer(refreshData);
-                await CreateOrUpdateCustomerSettings();
+
+                if (!firstInit || customerSettingsTable.Count == 0)
+                    await CreateOrUpdateCustomerSettings();
+
                 await CreateOrUpdateCustomerRoles();
                 await CreateOrUpdateShoppingCartItems();
             });
@@ -125,12 +135,11 @@ namespace nopCommerceMobile.Services.Customer
         {
             var uri = $"{ApiUrlBase}/token";
 
-            //Get language id and currency id when insert guest TODO
             var tokenFilter = new GenerateTokenFilter()
             {
                 CustomerGuid = App.CurrentCostumer.CustomerGuid,
                 LanguageId = App.CurrentCostumerSettings.LanguageId,
-                CurrencyId = App.CurrentCostumerSettings.CurrencyId
+                CurrencyId = App.CurrentCostumerSettings.CurrencyId,
             };
 
             var tokenGenericModel = await _requestProvider.PostAsyncAnonymous<GenericModel<string>, GenerateTokenFilter>(uri, tokenFilter);
@@ -170,11 +179,13 @@ namespace nopCommerceMobile.Services.Customer
                     await database.InsertAsync(new CustomerSettings()
                     {
                         LanguageId = GlobalSettings.DefaultLanguageId,
+                        CurrencyId = GlobalSettings.DefaultCurrencyId,
                         ViewMode = "grid",
                         Token = token
                     });
                     App.CurrentCostumerSettings.LanguageId = GlobalSettings.DefaultLanguageId;
                     App.CurrentCostumerSettings.CurrencyId = GlobalSettings.DefaultCurrencyId;
+                    App.CurrentCostumerSettings.ViewMode = "grid";
                     App.CurrentCostumerSettings.Token = token;
                 }
                 else
@@ -234,12 +245,11 @@ namespace nopCommerceMobile.Services.Customer
             }
         }
 
-        public async Task RegisterAsync(RegisterModel model)
+        public async Task<GenericModel<Guid>> RegisterAsync(RegisterModel model)
         {
             var uri = $"{ApiUrlBase}/register";
 
-            await _requestProvider.PostAsync<RegisterModel>(uri, model);
-            SetCurrentCustomer(true);
+            return await _requestProvider.PostAsync<GenericModel<Guid>, RegisterModel>(uri, model);
         }
 
         public async Task<ObservableCollection<LanguageModel>> GetLanguagesAsync()
@@ -267,6 +277,14 @@ namespace nopCommerceMobile.Services.Customer
             else
                 return new ObservableCollection<CurrencyModel>();
         }
+
+        public async Task<ShoppingCartModel> GetCartAsync()
+        {
+            var uri = $"{ApiUrlBase}/cart";
+
+            return await _requestProvider.GetAsync<ShoppingCartModel>(uri);
+        }
+
         private async Task DeleteCurrentCustomer()
         {
             await database.DropTableAsync<Models.Customer.Customer>();

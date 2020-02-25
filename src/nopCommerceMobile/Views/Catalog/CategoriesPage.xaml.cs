@@ -70,7 +70,7 @@ namespace nopCommerceMobile.Views.Catalog
         public void RefreshToolbarItems()
         {
             ToolbarItems.Children.Clear();
-            ToolbarItems.Children.Add(new ShoppingCart());
+            ToolbarItems.Children.Add(new Helpers.ShoppingCart());
             ToolbarItems.Children.Add(new ToolbarMenuButton());
         }
     }

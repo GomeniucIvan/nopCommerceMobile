@@ -4,6 +4,7 @@
     {
         Home,
         Account,
-        CategoryNavigation //catalog
+        CategoryNavigation, //catalog
+        ShoppingCart
     }
 }

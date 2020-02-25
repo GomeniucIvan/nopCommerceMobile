@@ -64,6 +64,17 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private Color _cartTabColor;
+        public Color CartTabColor
+        {
+            get => _cartTabColor;
+            set
+            {
+                _cartTabColor = value;
+                RaisePropertyChanged(() => CartTabColor);
+            }
+        }
+
         private NavigationPageEnum? _selectedNavigationPage;
         public NavigationPageEnum? SelectedNavigationPage
         {

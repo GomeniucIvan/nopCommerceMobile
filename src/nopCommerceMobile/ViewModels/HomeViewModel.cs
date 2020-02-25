@@ -12,7 +12,7 @@ namespace nopCommerceMobile.ViewModels
     {
         #region Fields
 
-        private ICatalogService _catalogService;
+        private readonly ICatalogService _catalogService;
 
         #endregion
 

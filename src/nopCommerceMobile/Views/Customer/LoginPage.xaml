@@ -32,31 +32,26 @@
             <StackLayout Grid.Row="2" VerticalOptions="Center" Spacing="20">
                 <!-- Email -->
                 <components:AppEntry Placeholder="Email" 
-                                     IconFontFamily="Ionicons"
                                      Icon="{x:Static helpers:IoniconsIcon.IosEmailOutline }"
-                                     IconSize="22"
+                                     Type="Email"
                                      IsRequired="True"
-                                     BorderCornerRadius="10"
                                      Text="{Binding LoginModel.Email}" />
 
                 <components:AppEntry Placeholder="Password" 
-                                     IconFontFamily="Ionicons"
                                      Icon="{x:Static helpers:IoniconsIcon.IosLockedOutline }"
-                                     IconSize="22"
                                      IsRequired="True"
                                      IsPassword="True"
-                                     BorderCornerRadius="10"
                                      Text="{Binding LoginModel.Password}" />
 
                 <!-- Remember me? -->
-                <StackLayout Orientation="Horizontal">
+                <!--<StackLayout Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding LoginModel.RememberMe}" HorizontalOptions="Start"/>
                     <Label Text="{extensions:Translate Mobile.RememberMe}" VerticalOptions="Center" FontSize="{StaticResource BaseFontSize}" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="RememberMeLabel_OnTapped"/>
                         </Label.GestureRecognizers>
                     </Label>
-                </StackLayout>
+                </StackLayout>-->
 
             </StackLayout>
 

@@ -35,11 +35,18 @@ namespace nopCommerceMobile.Views.Customer
             if (!ViewModel.IsBusy)
             {
                 ViewModel.IsBusy = true;
-                await ViewModel.RegisterCustomer();
-                await CustomerView.View.InitializeAsync();
+               var registerResult = await ViewModel.RegisterCustomer();
 
-                //add popup with success message
-                await Navigation.PopModalAsync();
+               if (!registerResult.IsSuccessStatusCode)
+                   ViewModel.DisplayPopupNotification(registerResult.ErrorMessage, NotificationTypeEnum.Warning);
+
+               else
+               {
+                   App.CurrentCostumer.CustomerGuid = registerResult.Data;
+                   await ViewModel.SetCurrentCustomer();
+
+                   await Navigation.PopModalAsync();
+               }
             }
         }
     }

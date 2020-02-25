@@ -64,6 +64,12 @@
             </Style>
             <Style TargetType="Label" ApplyToDerivedTypes="true">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegularFont}" />
+
+                <Style.Triggers>
+                    <Trigger TargetType="Label" Property="FontAttributes" Value="Bold">
+                        <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBoldFont}" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
             <Style TargetType="Button" ApplyToDerivedTypes="true">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegularFont}" />

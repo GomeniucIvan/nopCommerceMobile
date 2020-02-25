@@ -4,7 +4,11 @@ using nopCommerceMobile.ViewModels.Base;
 using nopCommerceMobile.ViewModels.Navigation;
 using nopCommerceMobile.Views.Catalog;
 using nopCommerceMobile.Views.Customer;
+using nopCommerceMobile.Views.ShoppingCart;
 using Xamarin.Forms;
+
+//https://camo.githubusercontent.com/55ac2d5716d72391b2b125a6608cb081f2be6063/68747470733a2f2f666c75747465722e67736b696e6e65722e636f6d2f70726576696577732f6c69717569645f6e61765f6564697465645f736d2e6769663f
+//TODO
 
 namespace nopCommerceMobile.Views
 {
@@ -49,6 +53,7 @@ namespace nopCommerceMobile.Views
             ViewModel.HomePageTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Home ? primaryColor : Color.Default;
             ViewModel.AccountTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Account ? primaryColor : Color.Default;
             ViewModel.CategoryNavigationTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.CategoryNavigation ? primaryColor : Color.Default;
+            ViewModel.CartTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.ShoppingCart ? primaryColor : Color.Default;
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Home)
                 PageContainer.Content = new HomeView();
@@ -58,6 +63,9 @@ namespace nopCommerceMobile.Views
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.CategoryNavigation)
                 PageContainer.Content = new CategoryNavigationView();
+
+            if (ViewModel.SelectedNavigationPage == NavigationPageEnum.ShoppingCart)
+                PageContainer.Content = new CartView();
         }
 
         private void HomePageTabTapped(object sender, EventArgs e)
@@ -73,6 +81,11 @@ namespace nopCommerceMobile.Views
         private void CatalogTab_Tapped(object sender, EventArgs e)
         {
             ViewModel.SelectedNavigationPage = NavigationPageEnum.CategoryNavigation;
+        }
+
+        private void ShoppingCart_Tapped(object sender, EventArgs e)
+        {
+            ViewModel.SelectedNavigationPage = NavigationPageEnum.ShoppingCart;
         }
     }
 }
