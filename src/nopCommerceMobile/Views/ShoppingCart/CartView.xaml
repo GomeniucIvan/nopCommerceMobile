@@ -8,13 +8,12 @@
               mc:Ignorable="d"
               x:Class="nopCommerceMobile.Views.ShoppingCart.CartView">
 
-
     <ContentView.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal"
                              Padding="10,0,0,10"
-                         HorizontalOptions="FillAndExpand">
+                             HorizontalOptions="FillAndExpand">
 
                     <Label Text="{Binding Title}" Style="{StaticResource PageTitleLabel}"/>
 

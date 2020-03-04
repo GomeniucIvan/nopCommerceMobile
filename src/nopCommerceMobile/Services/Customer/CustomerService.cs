@@ -292,5 +292,12 @@ namespace nopCommerceMobile.Services.Customer
             await database.DropTableAsync<ShoppingCartItem>();
             await database.DropTableAsync<CustomerSettings>();
         }
+
+        public async Task<WishlistModel> GetWishListAsync()
+        {
+            var uri = $"{ApiUrlBase}/wishlist";
+
+            return await _requestProvider.GetAsync<WishlistModel>(uri);
+        }
     }
 }

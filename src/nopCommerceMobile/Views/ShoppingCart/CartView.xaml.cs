@@ -19,10 +19,15 @@ namespace nopCommerceMobile.Views.ShoppingCart
         protected override async void OnParentSet()
         {
             base.OnParentSet();
-            if (AppNavigationPage.Vm.SelectedNavigationPage != NavigationPageEnum.ShoppingCart)
+
+            if (AppNavigationPage.Vm.SelectedNavigationPage != NavigationPageEnum.ShoppingCart || AppNavigationPage.Vm.SelectedNavigationPage != NavigationPageEnum.WishList)
                 return;
 
-            await ViewModel.InitializeAsync();
+            if (AppNavigationPage.Vm.SelectedNavigationPage == NavigationPageEnum.ShoppingCart)
+                await ViewModel.InitializeCartAsync();
+
+            else if (AppNavigationPage.Vm.SelectedNavigationPage == NavigationPageEnum.WishList)
+                await ViewModel.InitializeWishListAsync();
         }
 
         private void Remove_OnCheckedChanged(object sender, CheckedChangedEventArgs e)

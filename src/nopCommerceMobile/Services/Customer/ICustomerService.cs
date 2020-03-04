@@ -21,5 +21,6 @@ namespace nopCommerceMobile.Services.Customer
         Task<ObservableCollection<LanguageModel>> GetLanguagesAsync();
         Task<ObservableCollection<CurrencyModel>> GetCurrenciesAsync();
         Task<ShoppingCartModel> GetCartAsync();
+        Task<WishlistModel> GetWishListAsync();
     }
 }
