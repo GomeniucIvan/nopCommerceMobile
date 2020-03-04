@@ -73,22 +73,30 @@
 
                         <!--Hearth-->
                         <StackLayout Grid.Column="3" Style="{StaticResource NavigationTabContainer}">
-                            <!--TODO make badge controller-->
                             <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="Center">
                                 <helpers:IoniconsLabel Style="{StaticResource CenteredLabel}"
                                                        FontSize="30"
+                                                       TextColor="{Binding WishListTabColor}"
                                                        Text="{x:Static helpers:IoniconsIcon.Hearth}"/>
-                                <BoxView BackgroundColor="Red" 
-                                         CornerRadius="10" 
-                                         WidthRequest="18" 
-                                         HeightRequest="18" 
-                                         Margin="17,0,0,0"/>
-                                <Label Text="1"
-                                       Margin="22,0,0,0" 
-                                       TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
-                            </AbsoluteLayout>
 
-                            <Label Text="{extensions:Translate Mobile.Wishlist}" Style="{StaticResource CenteredLabel}" TextColor="{StaticResource TextColor}"/>
+                                <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="EndAndExpand" Margin="15,0,0,0">
+                                    <BoxView BackgroundColor="Red" 
+                                             CornerRadius="10" 
+                                             HorizontalOptions="CenterAndExpand"
+                                             WidthRequest="18" 
+                                             HeightRequest="18"/>
+                                    <Label Text="1"
+                                           HorizontalTextAlignment="Center"
+                                           HorizontalOptions="Center"
+                                           WidthRequest="18"
+                                           TextColor="White" />
+                                </AbsoluteLayout>
+                            </AbsoluteLayout>
+                            <Label Text="{extensions:Translate Mobile.Wishlist}" Style="{StaticResource CenteredLabel}" TextColor="{Binding WishListTabColor}"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="WishList_Tapped"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <!--Cart-->
@@ -98,16 +106,21 @@
                                                        FontSize="30"
                                                        TextColor="{Binding CartTabColor}"
                                                        Text="{x:Static helpers:IoniconsIcon.Cart}"/>
-                                <BoxView BackgroundColor="Red" 
-                                         CornerRadius="10" 
-                                         WidthRequest="18" 
-                                         IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
-                                         HeightRequest="18" 
-                                         Margin="17,0,0,0"/>
-                                <Label Text="{Binding CartCount}"
-                                       Margin="22,0,0,0" 
-                                       IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
-                                       TextColor="White" Padding="0" Style="{StaticResource CenteredLabel}" HorizontalOptions="End"/>
+
+                                <AbsoluteLayout AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="EndAndExpand" Margin="15,0,0,0">
+                                    <BoxView BackgroundColor="Red" 
+                                             CornerRadius="10" 
+                                             HorizontalOptions="CenterAndExpand"
+                                             WidthRequest="18" 
+                                             HeightRequest="18"
+                                             IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"/>
+                                    <Label Text="{Binding CartCount}"
+                                           HorizontalTextAlignment="Center"
+                                           HorizontalOptions="Center"
+                                           WidthRequest="18"
+                                           IsVisible="{Binding CartCount, Converter={StaticResource GreaterThanZeroConverter}}"
+                                           TextColor="White" />
+                                </AbsoluteLayout>
                             </AbsoluteLayout>
 
                             <Label Text="{extensions:Translate Mobile.Cart}" Style="{StaticResource CenteredLabel}" TextColor="{Binding CartTabColor}"/>

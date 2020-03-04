@@ -75,6 +75,17 @@ namespace nopCommerceMobile.ViewModels
             }
         }
 
+        private Color _wishListTabColor;
+        public Color WishListTabColor
+        {
+            get => _wishListTabColor;
+            set
+            {
+                _wishListTabColor = value;
+                RaisePropertyChanged(() => WishListTabColor);
+            }
+        }
+
         private NavigationPageEnum? _selectedNavigationPage;
         public NavigationPageEnum? SelectedNavigationPage
         {

@@ -54,6 +54,7 @@ namespace nopCommerceMobile.Views
             ViewModel.AccountTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.Account ? primaryColor : Color.Default;
             ViewModel.CategoryNavigationTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.CategoryNavigation ? primaryColor : Color.Default;
             ViewModel.CartTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.ShoppingCart ? primaryColor : Color.Default;
+            ViewModel.WishListTabColor = ViewModel.SelectedNavigationPage == NavigationPageEnum.WishList ? primaryColor : Color.Default;
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.Home)
                 PageContainer.Content = new HomeView();
@@ -65,6 +66,9 @@ namespace nopCommerceMobile.Views
                 PageContainer.Content = new CategoryNavigationView();
 
             if (ViewModel.SelectedNavigationPage == NavigationPageEnum.ShoppingCart)
+                PageContainer.Content = new CartView();
+
+            if (ViewModel.SelectedNavigationPage == NavigationPageEnum.WishList)
                 PageContainer.Content = new CartView();
         }
 
@@ -86,6 +90,11 @@ namespace nopCommerceMobile.Views
         private void ShoppingCart_Tapped(object sender, EventArgs e)
         {
             ViewModel.SelectedNavigationPage = NavigationPageEnum.ShoppingCart;
+        }
+
+        private void WishList_Tapped(object sender, EventArgs e)
+        {
+            ViewModel.SelectedNavigationPage = NavigationPageEnum.WishList;
         }
     }
 }

@@ -88,7 +88,6 @@ namespace nopCommerceMobile.Components
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-
             var icon = new Label()
             {
                 TextColor = IconColor,

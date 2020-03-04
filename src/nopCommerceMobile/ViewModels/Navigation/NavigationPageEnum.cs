@@ -5,6 +5,7 @@
         Home,
         Account,
         CategoryNavigation, //catalog
-        ShoppingCart
+        ShoppingCart,
+        WishList,
     }
 }
