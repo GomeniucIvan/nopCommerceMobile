@@ -118,7 +118,7 @@ namespace nopCommerceMobile.Services.RequestProvider
                     {
                         var viewModel = mainPage.CurrentPage.BindingContext;
                         var castModel = viewModel as BaseViewModel;
-                        castModel?.DisplayPopupNotification(content, NotificationTypeEnum.Danger);
+                        castModel?.DisplayToastNotification(content, NotificationTypeEnum.Danger);
                     }
                 }
 

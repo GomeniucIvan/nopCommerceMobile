@@ -1,23 +1,17 @@
-﻿using System.Linq;
-using nopCommerceMobile.Components;
-using nopCommerceMobile.Services;
-using nopCommerceMobile.Services.Customer;
-using nopCommerceMobile.Services.Navigation;
-using Rg.Plugins.Popup.Services;
+﻿using nopCommerceMobile.Services.Common;
+using nopCommerceMobile.Services.Dependency;
 
 namespace nopCommerceMobile.ViewModels.Base
 {
     public abstract class BaseViewModel : ExtendedBindableObject
     {
-        protected readonly IDialogService DialogService;
-        protected readonly INavigationService NavigationService;
-        protected readonly ICustomerService CustomerService;
+        protected readonly IDependencyService DependencyService;
+        private readonly IToastPopUpService _toastPopUp;
 
         protected BaseViewModel()
         {
-            DialogService = LocatorViewModel.Resolve<IDialogService>();
-            NavigationService = LocatorViewModel.Resolve<INavigationService>();
-            CustomerService = LocatorViewModel.Resolve<ICustomerService>();
+            DependencyService = LocatorViewModel.Resolve<IDependencyService>();
+            _toastPopUp = DependencyService.Get<IToastPopUpService>();
         }
 
         private bool _isDataLoaded;
@@ -44,12 +38,6 @@ namespace nopCommerceMobile.ViewModels.Base
             }
         }
 
-        public async void DisplayPopupNotification(string message, NotificationTypeEnum messageType = NotificationTypeEnum.Success)
-        {
-            var dialog = new PopupNotification { Text = message, MessageType = messageType };
-            await PopupNavigation.Instance.PushAsync(dialog);
-        }
-
         private string _title;
         public string Title
         {
@@ -59,6 +47,11 @@ namespace nopCommerceMobile.ViewModels.Base
                 _title = value;
                 RaisePropertyChanged(()=> Title);
             }
+        }
+
+        public void DisplayToastNotification(string message, NotificationTypeEnum messageType = NotificationTypeEnum.Success)
+        {
+            _toastPopUp.ShowToastMessage(message, messageType);
         }
     }
 }

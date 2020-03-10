@@ -1,15 +1,11 @@
 ﻿using System.Threading.Tasks;
 using nopCommerceMobile.Helpers;
 using nopCommerceMobile.ViewModels.Base;
-using Rg.Plugins.Popup.Animations;
-using Rg.Plugins.Popup.Enums;
-using Rg.Plugins.Popup.Pages;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Components
 {
-    public class PopupNotification : PopupPage
+    public class PopupNotification : Page
     {
         public string Text { get; set; }
 
@@ -21,12 +17,12 @@ namespace nopCommerceMobile.Components
 
         public PopupNotification()
         {
-            Animation = new MoveAnimation(MoveAnimationOptions.Top, MoveAnimationOptions.Top);
+            //Animation = new MoveAnimation(MoveAnimationOptions.Top, MoveAnimationOptions.Top);
         }
 
-        protected override void OnAppearing()
+        protected override void OnParentSet()
         {
-            base.OnAppearing();
+            base.OnParentSet();
 
             if (MessageType == NotificationTypeEnum.Success)
             {
@@ -109,15 +105,13 @@ namespace nopCommerceMobile.Components
             grid.Children.Add(text, 1, 0);
 
             frame.Content = grid;
-            Content = frame;
+            frame.TranslateTo(0, -300);
+            Parent = frame;
         }
 
         private void ClosePopup()
         {
-            if (PopupNavigation.Instance == null)
-                return;
-
-            PopupNavigation.Instance.PopAsync();
+            //this.Remove
         }
 
     }

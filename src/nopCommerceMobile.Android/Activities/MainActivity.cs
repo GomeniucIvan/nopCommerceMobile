@@ -25,7 +25,6 @@ namespace nopCommerceMobile.Droid.Activities
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(null);
 
             Forms.SetFlags("IndicatorView_Experimental");
-            Rg.Plugins.Popup.Popup.Init(this, bundle);
 
             Forms.Init(this, bundle);
 

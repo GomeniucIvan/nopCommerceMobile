@@ -38,7 +38,7 @@ namespace nopCommerceMobile.Views.Customer
                var registerResult = await ViewModel.RegisterCustomer();
 
                if (!registerResult.IsSuccessStatusCode)
-                   ViewModel.DisplayPopupNotification(registerResult.ErrorMessage, NotificationTypeEnum.Warning);
+                   ViewModel.DisplayToastNotification(registerResult.ErrorMessage, NotificationTypeEnum.Warning);
 
                else
                {

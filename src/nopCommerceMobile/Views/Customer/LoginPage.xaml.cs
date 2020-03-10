@@ -38,7 +38,7 @@ namespace nopCommerceMobile.Views.Customer
                 var genericLoginModel = await ViewModel.LoginCustomer();
 
                 if (!genericLoginModel.IsSuccessStatusCode)
-                    ViewModel.DisplayPopupNotification(genericLoginModel.ErrorMessage, NotificationTypeEnum.Warning);
+                    ViewModel.DisplayToastNotification(genericLoginModel.ErrorMessage, NotificationTypeEnum.Warning);
 
                 else
                 {

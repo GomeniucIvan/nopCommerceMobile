@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using nopCommerceMobile.ViewModels.Base;
-using nopCommerceMobile.Views.Catalog;
 using Xamarin.Forms;
 
 namespace nopCommerceMobile.Services.Navigation
